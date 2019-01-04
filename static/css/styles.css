@@ -12,7 +12,6 @@ body {
    box-sizing: border-box; 
 }
 
-
 header ul {
     list-style-type: none;
     text-transform: uppercase;
@@ -44,5 +43,29 @@ header ul li a:hover {
 }
 
 a.active, a.active:hover {
- color: #004BA6;
+    color: #004BA6;
+}
+
+.nav-nav {
+    padding-top: 50px;
+}
+
+.nav-nav li:first-child{
+    margin-left: 25%;
+}
+
+nav-nav li:last-child{
+    position: absolute;
+    right: 20px;
+}
+
+.qlogo {
+    width: 150px;
+    height: auto;
+}
+
+.qlogo img {
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
