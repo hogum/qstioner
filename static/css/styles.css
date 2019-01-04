@@ -329,9 +329,10 @@ header ul li a#sign-in:hover {
 .wrapper .pane {
     float: left;
     background-color: #fff;
+    background-color: #F5F5F5;
     border: 1px solid grey;
     height: 500px;
-    margin-left: 1%;             /* clear*/
+    margin-left: 0.5%;             /* clear*/
 }
 
 .wrapper .main-pane {
@@ -340,6 +341,7 @@ header ul li a#sign-in:hover {
 
 .wrapper .side-pane {
     width: 24%;             /* clear*/
+    margin-right: 1px;        /* clear */
 }
 
 @media screen and (max-width: 667px) {
@@ -348,4 +350,87 @@ header ul li a#sign-in:hover {
         margin-top: 15vw;      
     }
 
+}
+
+/* Side Card*/
+
+.side-container {
+    width: 100%;
+    text-align: center;
+}
+
+/* Shadows */
+
+.card-side {
+    width: 90%;
+    margin-left: 9px;
+}
+
+.card-side {
+        -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                    transition: all .7s ease;
+    position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.card-side:before, .card-side:after {
+    content:"";
+    position:absolute;
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:10px;
+    bottom:10px;
+    left:0;
+    right:0;
+    -moz-border-radius:100px / 10px;
+    border-radius:100px / 10px;
+}
+
+.card-side:after {
+    right:10px;
+    left:auto;
+    -webkit-transform:skew(8deg) rotate(3deg);
+       -moz-transform:skew(8deg) rotate(3deg);
+        -ms-transform:skew(8deg) rotate(3deg);
+         -o-transform:skew(8deg) rotate(3deg);
+            transform:skew(8deg) rotate(3deg);
+}
+
+.card-side:hover {
+    cursor: pointer;
+    background-color: #EAEAEA;
+      box-shadow: 0 8px 10px 0 rgba(0,0,0,0.2);
+}
+
+.card-side img {
+    height: auto;
+    padding-bottom: 40px;
+    width: 100%;
+    font-size: 11px;
+    border-radius: 3px;
+}
+
+.card-side #card-img-side {
+    min-height: 18vw;               /* clear*/
+    border-bottom: 1px solid grey;
+    background-color: #EFEFEF;
+    border-radius: 4px;
+}
+.card-detail {
+    padding: 2px;
+    font-size: 12px;
+}
+
+@media screen and (max-width: 767px) {
+    .card-detail {
+        padding: 2px;
+        font-size: 1.5vw;
+    }   
 }
