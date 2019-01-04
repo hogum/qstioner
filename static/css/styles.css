@@ -6,6 +6,7 @@ body {
     font-weight: 400;
     line-height: 1.6em;
     color: #656565;
+    overflow-x: hidden;
 }
 
 h1,h2, h3, h4, h5, h6 {
@@ -59,6 +60,10 @@ header ul li a:hover {
 
 a.active, a.active:hover {
     color: #004BA6;
+}
+
+header {
+    background-color: #fff;
 }
 
 
@@ -222,3 +227,75 @@ header ul li a#sign-in:hover {
   }
 }
 
+/*
+ =========================
+ Call Action
+ =========================  */
+
+ body {
+    border: 2px solid grey;
+    width: 100%;
+    height: auto;
+    background-image: -webkit-linear-gradient(left, #434343 0%, black 100%);
+    background-image: -o-linear-gradient(left, #434343 0%, black 100%);
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+ }
+
+ .attention-text {
+    animation-duration: 19.99s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    position: absolute;
+    display: block;
+    font-size: 1.5em;
+    width: 60%;
+    line-height: normal;
+    color: #fff;
+    text-align: center;
+ }
+
+@media screen and (max-width: 767px) {
+
+.attention-text {
+    font-size: 1.2em;
+}
+@media screen and (max-width: 430px) {
+
+.attention-text {
+    font-size: 4.5vw;
+}
+body {
+    align-content: center;
+}
+}
+}
+
+.parag-1 {
+    animation-name: parag-1;
+}
+
+.parag-2 {
+    animation-name: parag-2;
+}
+
+.parag-3 {
+    animation-name: parag-3;
+}
+
+@keyframes parag-1 {
+    0%, 8.3% { left: -100%; opacity: 0; }
+    8.3%,25% { left: 25%; opacity: 1; }
+    33.33%, 100% { left: 110%; opacity: 0; }
+}
+
+@keyframes parag-2 {
+    0%, 33.33% { left: -100%; opacity: 0; }
+    41.63%, 58.29% { left: 25%; opacity: 1; }
+    66.66%, 100% { left: 110%; opacity: 0; }
+}
+
+@keyframes parag-3 {
+    0%, 66.66% { left: -100%; opacity: 0; }
+    74.96%, 91.62% { left: 25%; opacity: 1; }
+    100% { left: 110%; opacity: 0; }
+}
