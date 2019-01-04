@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-body {
+.wrapper {
     font-family: 'Open Sans', Lato, Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.6em;
     color: #656565;
+    overflow-x: hidden;
+}
+
+html {
     overflow-x: hidden;
 }
 
@@ -21,7 +25,10 @@ h1,h2, h3, h4, h5, h6 {
    box-sizing: border-box; 
 }
 
-/* Header */
+
+/* ================
+    Header 
+ ====================*/
 
 header ul {
     list-style-type: none;
@@ -256,17 +263,24 @@ header ul li a#sign-in:hover {
 
 @media screen and (max-width: 767px) {
 
-.attention-text {
-    font-size: 1.2em;
-}
-@media screen and (max-width: 430px) {
+    .attention-text {
+        font-size: 1.2em;
+    }
+    @media screen and (max-width: 440px) {
 
-.attention-text {
-    font-size: 4.5vw;
-}
-body {
-    align-content: center;
-}
+        .attention-text {
+            font-size: 4.0vw;
+        }
+    }
+    @media screen and (max-width: 420px) {
+
+    .attention-text {
+        font-size: 4.2vw;
+    }
+
+    body {
+        align-content: center;
+    }
 }
 }
 
@@ -298,4 +312,40 @@ body {
     0%, 66.66% { left: -100%; opacity: 0; }
     74.96%, 91.62% { left: 25%; opacity: 1; }
     100% { left: 110%; opacity: 0; }
+}
+
+
+/*===============
+   Content
+ ==================
+ */
+
+.wrapper .content {
+    overflow: hidden;
+    border: 1px solid #000;
+    margin-top: 150px;
+}
+
+.wrapper .pane {
+    float: left;
+    background-color: #fff;
+    border: 1px solid grey;
+    height: 500px;
+    margin-left: 1%;             /* clear*/
+}
+
+.wrapper .main-pane {
+    width: 74%;             /* clear*/
+}
+
+.wrapper .side-pane {
+    width: 24%;             /* clear*/
+}
+
+@media screen and (max-width: 667px) {
+
+    .wrapper .contents {
+        margin-top: 15vw;      
+    }
+
 }

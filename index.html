@@ -10,45 +10,50 @@
     <script src="static/js/application.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-    <header id="header" class="header-nav">
-          <ul>
-            <div class="qlogo">
+    <div class="wrapper">
+        <header id="header" class="header-nav">
+              <ul>
+                <div class="qlogo">
 
-                <li>
-                    <a href="#"><img src="static/images/logoab" alt="Questioner"></a>
-                </li>
+                    <li>
+                        <a href="#"><img src="static/images/logoab" alt="Questioner"></a>
+                    </li>
+                </div>
+                <div class="nav-nav" id="navbar">        
+                    
+                    <li><a class="active" href="#">meet-ups</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">trending</a></li>
+                    <li class="sgnin">
+                        <a id="sign-in" href="#">Sign in</a>
+                    </li>
+                    <li class="icon">
+                        <a href="javascript:void(0);" class="icona" onclick="showNav()">
+        <i class="icon-button">&#9778</i>
+      </a>
+                    </li>
+                </div>    
+            </ul>
+
+        </header><!-- /header -->
+        <div class="attention">
+            <div class="attention-slides">
+                <p class="attention-text parag-1">This is your last chance. After this, even the conference foods won't be as sweet as the discussions.</p>
             </div>
-            <div class="nav-nav" id="navbar">        
-                
-                <li><a class="active" href="#">meet-ups</a></li>
-                <li><a href="#">Community</a></li>
-                <li><a href="#">trending</a></li>
-                <li class="sgnin">
-                    <a id="sign-in" href="#">Sign in</a>
-                </li>
-                <li class="icon">
-                    <a href="javascript:void(0);" class="icona" onclick="showNav()">
-    <i class="icon-button">&#9778</i>
-  </a>
-                </li>
-            </div>    
-        </ul>
-        
-    </header><!-- /header -->
-    <div class="attention">
-        <div class="attention-slides">
-            <p class="attention-text parag-1">This is your last chance. After this, even the conference foods won't be as sweet as the discussions.</p>
-        </div>
-        <div class="attention-slides">
-            <p class="attention-text parag-2">Questioner is transforming how we interact at meetups. You take some morning juice. You stand on stage, and everyone is smiling.</p>
-        </div>
-        <div class="attention-slides">
-            <p class="attention-text parag-3">We let you know what everyone is scratching their head about. Then you can scratch it for them</p>
-        </div>
-    </div><!-- attention-->
+            <div class="attention-slides">
+                <p class="attention-text parag-2">Questioner is transforming how we interact at meetups. You take some morning juice. You stand on stage, and everyone is smiling.</p>
+            </div>
+            <div class="attention-slides">
+                <p class="attention-text parag-3">We let you know what everyone is scratching their head about. Then you can scratch it for them</p>
+            </div>
+        </div><!-- attention-->
 
-    <div>
-        
-    </div>
+        <div class="content container-content">
+            <div class="main-pane pane">
+                
+            </div>
+            <div class="side-pane pane"></div>
+        </div><!-- content -->
+    </div><!-- wrapper -->
 </body>
 </html>
