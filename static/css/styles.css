@@ -32,6 +32,11 @@ header ul li a {
     display: block;
     padding: 10px 12px;
     text-align: center;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                   transition: all .7s ease;
 }
 
 header ul li a:hover {
@@ -50,13 +55,19 @@ a.active, a.active:hover {
     padding-top: 50px;
 }
 
+.nav-nav li a {
+    margin-right: 20px;
+    padding-left: 0;
+    padding-right: 0;
+}
 .nav-nav li:first-child{
     margin-left: 25%;
 }
 
-nav-nav li:last-child{
+.nav-nav li:last-child{
     position: absolute;
-    right: 20px;
+    right: 10%;
+    margin-right: 0;
 }
 
 .qlogo {
@@ -68,4 +79,29 @@ nav-nav li:last-child{
     width: 100%;
     padding: 0;
     margin: 0;
+}
+
+header ul li a#sign-in {
+    border: 1.2px solid #34D55B;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #ff8C00;
+    padding: 8px 12px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                    transition: all .7s ease;
+}
+
+header ul li a#sign-in:hover {
+    background-color: #79D534;
+    color: #fff;
+}
+
+@media screen and (max-width: 870px) {
+
+    .nav-nav li:last-child{
+        position: inherit;
+    }
 }
