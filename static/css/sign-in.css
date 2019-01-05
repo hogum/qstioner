@@ -24,6 +24,11 @@ header {
 
 }
 
+.nav-nav li:nth-child(3) {
+    position: absolute;
+    right: 18vw;
+}
+
 /*Over-ride responses*/
 
 @media screen and (max-width: 767px) {
@@ -158,6 +163,9 @@ input.sign-button {
     .action-sign h4 {
         font-size: 2.7vw;
     }
+    .nav-nav li:nth-child(3) {
+        right: 20vw;
+        }
 
     @media screen and (max-width: 450px) {
 
@@ -168,6 +176,10 @@ input.sign-button {
         li.enquire {
             display: none;
         }
+        .nav-nav li:nth-child(3) {
+        right: 32vw;
+        font-size: 12.5px;
+}
     }
 
 }
