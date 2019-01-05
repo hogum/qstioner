@@ -434,3 +434,57 @@ header ul li a#sign-in:hover {
         font-size: 1.5vw;
     }   
 }
+
+@media screen and (max-width: 695px) {
+
+    .card-detail {
+        background-color: none;
+    }
+
+    .wrapper .pane {
+        float: none;
+        width: 100%;
+        margin: 0;
+        
+    }
+
+    .card-side {
+        overflow: hidden;
+    }
+    .card-side #card-img-side {
+        min-height: 20vw;               /* clear*/
+        border-right: 1px solid grey;
+        background-color: #efefef;
+        border-radius: 4px;
+        float: left;
+        width: 30%;
+        border-bottom: none;
+    }
+    .card-side .card-detail {
+        float: left;
+        padding-left: 1vw;
+        width: 70%;
+        line-height: normal;
+        text-align: justify;
+        font-size: 1.8vw;
+    }
+    .card-side {
+        width: 95%;
+        margin-left: 2.6vw;
+    }
+    .card-side .card-detail h4 {
+        margin-bottom: 0;
+        float: left;
+        margin-right: 4vw;
+    }
+    @media screen and (max-width: 475px) {
+        .card-side .card-detail {
+            font-size: 2.2vw;
+        }
+        .card-side .card-detail h4 > p {
+            float: right;
+            padding-left: 16vw;
+        }
+    }
+
+}
