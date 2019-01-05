@@ -68,7 +68,7 @@ header {
     width: 100%;
     display: block;
     max-width: 500px;
-    height: 340px;
+    height: auto;
     padding: 20px;
     padding-bottom: 20px;
     background-color: #fff;
