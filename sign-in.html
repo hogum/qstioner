@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Questioner Sign-in</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="static/css/sign-in.css">
+    <link rel="shortcut icon" type="image/png" href="static/images/fav.jpeg"/>
+</head>
+<body>
+    <div class="wrapper">
+        <header id="header" class="header-nav">
+              <ul>
+                <div class="qlogo">
+
+                    <li>
+                        <a href="#"><img src="static/images/logoab" alt="Questioner"></a>
+                    </li>
+                </div>
+                <div class="nav-nav" id="navbar">        
+                    
+                    <li><a class="active" href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li class="sgnin">
+                        <a id="sign-in" href="#">Upgrade</a>
+                    </li>
+                    <li class="icon">
+                        <a href="javascript:void(0);" class="icona" onclick="showNav()">
+        <i class="icon-button">&#9778</i>
+      </a>
+                    </li>
+                </div>    
+            </ul>
+
+        </header><!-- /header -->
+        <div class="action-sign">
+            <h4>Let's Get started. It's Fun</h4>
+        </div>
+        <div class="wrapper-sign-in">
+            <div id="container-sign-in">       
+                <form action="" method="post">
+                    <label for="username">Username or email:</label>
+                    <input type="text" id="username" name="username" minlength="5" required="required" title="Name should have at least 5 letters">
+                    <label for="password">Password:</label>
+                    <input type="password" id="pass" name="password" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Password must contain at least one digit, one uppercase, one lowercase letter, and at least 6 characters"`>
+                    <div id="bottom">
+                        <input type="checkbox" name="sign-checkbox" value="true" checked=checked><label class="check"for="checkbox">Keep me signed in</label>
+                        <a class="bottom-right pass-reset" href="#">Forgot password</a><br/>
+                        <input class="sign-button" type="submit" value="Sign in">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+</body>
+</html>
