@@ -838,11 +838,13 @@ h3:after {
     width: 99%;
     font-size: 12px;
     padding: 10px;
+   font-family:'Open Sans', Lato, Helvetica, Arial, sans-serif;
     color: #F4F4F4;
     background-image: -webkit-linear-gradient(left, #434343 0%, black 100%);
     background-image: -o-linear-gradient(left, #434343 0%, black 100%);
     background-image: linear-gradient(to right, #434343 0%, black 100%);
  }
+ 
  footer a {
     color: #fff;
  }
