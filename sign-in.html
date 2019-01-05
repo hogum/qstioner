@@ -36,16 +36,17 @@
 
         </header><!-- /header -->
         <div class="wrapper-sign-in">
-            <div id="container">       
+            <div id="container-sign-in">       
                 <form>
                     <label for="username">Username or email:</label>
                     <input type="text" id="username" name="username" minlength="5" required="required" title="Name should have at least 5 letters">
                     <label for="password">Password:</label>
                     <input type="password" id="pass" name="password" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Password must contain at least one digit, one uppercase, one lowercase letter, and at least 6 characters">
                     <div id="bottom">
-                        <input type="checkbox"><label class="check"for="checkbox">Keep me signed in</label><br/>
                         <input class="sign-button" type="submit" value="Sign in">
-                        <a class="bottom-right" href="default.html">Forgot password</a>
+                        <br>
+                        <input type="checkbox"><label class="check"for="checkbox" value="checked"><p class="check text-keep-in last in">Keep me signed in</p></label><br/>
+                        <p class="last-in"><a class="bottom-right" href="#">Forgot password</a></p>
                     </div>
                 </form>
             </div>
