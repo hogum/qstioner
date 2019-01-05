@@ -14,6 +14,16 @@ header {
     border-radius: 3px;
 }
 
+.nav-nav .sgnin {
+    float: right;
+    position: static;
+    margin-right: 4vw;
+}
+.nav-nav li a {
+    margin-right: 0px;
+
+}
+
 /*Over-ride responses*/
 
 @media screen and (max-width: 767px) {
@@ -24,15 +34,11 @@ header {
     float: right;
     display: none;
   }
+    .nav-nav .sgnin {
+        float: right;
+        margin-right: 0;
+    }
 }
-
-.nav-nav .sgnin {
-    position: absolute;
-    right: 5vw;
-    top: 5vw;
-    margin-right: 0;
-}
-
 /*
 ====================
     Content
@@ -159,6 +165,14 @@ input.sign-button {
             width: 80%;
             margin: 0 10%;
         }
+        li.enquire {
+            display: none;
+        }
     }
 
+}
+
+footer {
+    margin-top: 8vw;
+    margin-bottom: 0;
 }
