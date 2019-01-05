@@ -13,3 +13,22 @@ header {
     width: 100%;
     border-radius: 3px;
 }
+
+/*Over-ride responses*/
+
+@media screen and (max-width: 767px) {
+  .header-nav .nav-nav li:not(:last-child) {
+    display: block;
+}
+  .header-nav .nav-nav li.icon {
+    float: right;
+    display: none;
+  }
+}
+
+.nav-nav .sgnin {
+    position: absolute;
+    right: 5vw;
+    top: 5vw;
+    margin-right: 0;
+}
