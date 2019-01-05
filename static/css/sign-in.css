@@ -53,7 +53,6 @@ header {
     box-sizing: border-box;
     justify-content: center;
     display: flex;
-    margin-top: 5%;
     width: 60%;
     margin-left: 15%;
     margin-right: 15%;
@@ -136,4 +135,30 @@ input.sign-button {
 .pass-reset {
     float: right;
     right: 2vw;
+}
+
+.action-sign h4 {
+    font-size: 18.5px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.action-sign {
+    width: 60%;
+    margin: 0 15%;
+}
+
+@media screen and (max-width: 600px) {
+    .action-sign h4 {
+        font-size: 2.7vw;
+    }
+
+    @media screen and (max-width: 450px) {
+
+        .wrapper-sign-in {
+            width: 80%;
+            margin: 0 10%;
+        }
+    }
+
 }
