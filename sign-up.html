@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Questioner New Account</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="static/css/sign-in.css">
+    <link rel="shortcut icon" type="image/png" href="static/images/fav.jpeg"/>
+</head>
+<body>
+    <div class="wrapper">
+        <header id="header" class="header-nav">
+              <ul>
+                <div class="qlogo">
+
+                    <li>
+                        <a href="#"><img src="static/images/logoab" alt="Questioner"></a>
+                    </li>
+                </div>
+                <div class="nav-nav" id="navbar">        
+                    
+                    <li><a class="active" href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li class="enquire"><a href="#">Have an account?</a></li>
+                    <li class="sgnin">
+                        <a id="sign-in" href="#">sign in</a>
+                    </li>
+                    <li class="icon">
+                        <a href="javascript:void(0);" class="icona" onclick="showNav()">
+        <i class="icon-button">&#9778</i>
+      </a>
+                    </li>
+                </div>    
+            </ul>
+
+        </header><!-- /header -->
+         <div class="action-sign">
+            <h4>Let's get started. It's Fun</h4>
+        </div>
+        <div class="wrapper-sign-in">
+            <div id="container-sign-in">       
+                <form action="" method="post">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" minlength="5" required="required" title="Name should have at least 5 letters">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Ooops! Email format not invented yet">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required="required" pattern="[a-zA-Z0-9]{5,10}" title="username should have 5 - 10 letters with no special characters">
+                    <label for="password">Password:</label>
+                    <input type="password" id="pass" name="password" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Password must contain at least one digit, one uppercase, one lowercase letter, and at least 6 characters">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-pass" name="confirm-password" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Passwords should be the same">
+                    <div id="bottom">
+                        <input class="sign-button" id="sign-up-button" type="submit" value="Sign Up">           
+                        <a class="bottom-right" href="default.html">Terms of use and agreement</a>
+                    </div>
+                </form>
+            </div><!-- /wrapper-sign-in-->
+        </div>
+    </body>
+    <footer>
+        <div class="footer-text">
+            &#169; <span class="year">2019</span>
+            <p>We just discovered <a href="#">what's sweeter than cookies.</a> Come share with us</p>
+        </div>
+    </footer>
+</html>
