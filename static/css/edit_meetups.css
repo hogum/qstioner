@@ -1,0 +1,26 @@
+
+/*===================
+    1. Override
+===================== */
+
+.container-admin {
+ margin-top: 0;   
+}
+
+
+
+/*=================
+   2. Content
+=================== */
+
+.call-action-delete {
+    text-align: center;
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+@media screen and (max-width: 500px) {
+    .call-action-delete {
+        font-size: 3.3vw;
+    }
+}
