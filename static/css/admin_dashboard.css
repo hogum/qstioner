@@ -69,12 +69,32 @@ a.active {
     2. Contents
 ========================*/
 
+#create-meetup {
+     border: 1.2px solid #34D55B;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #ff8C00;
+    color: #fff;
+    padding: 8px 12px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                    transition: all .7s ease;
+}
+
+#create-meetup:hover {
+    background-color: #79D534;
+    color: #fff;
+}
+
 .container-admin {
     border: 1px solid black;
     width: 70vw;
     margin-left: 15vw;
     margin-right: 15vw;
     padding: 12px;
+    margin-top: 12px;
 }
 
 
@@ -100,6 +120,8 @@ a.active {
     flex-flow: row wrap;
         -webkit-flex-flow: row wrap;
     justify-content: space-around;
+    overflow: auto;
+
 }
 
 
@@ -107,7 +129,55 @@ a.active {
     Display Cards
 ====================== */
 
+.admin-card-card {
+    border: 1px solid #efefef;
+    color: #000;
+    background-color: #fff;
+    height: 200px;
+    text-align: center;
+    margin-top: 5vw;
+    border-radius: 14px;
+}
+
 .admin-card-card .acard-text p {
     float: left;
-    padding: 0 10px;
+    padding: 0 20px;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+.admin-card-card .acard-text p:last-child {
+    float: right;
+}
+
+.admin-card-card .acard-text p a {
+    text-decoration: none;
+}
+
+.admin-card-card .acard-text {
+    border-bottom: 1px solid black;
+    overflow: hidden;
+}
+
+.admin-card-card .acard-center img {
+    width: 100%;
+    font-size: 12px;
+    max-width: 300px;
+
+}
+
+.admin-card-card .acard-center {
+    width: 100%;
+    max-height: 150px;
+    text-align: center;
+}
+
+.admin-cards {
+}
+
+@media screen and (max-width: 500px) {
+    .admin-card-card .acard-text p {
+        font-size: 3vw;
+    }
 }
