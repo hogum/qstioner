@@ -24,10 +24,20 @@ header {
 
 .user-profile .profile-admin p {
     position: absolute;
+    text-transform: uppercase;
     right: 12px;
     top: 0px;
     font-weight: bolder;
     font-size: 12px;
+}
+
+.user-profile .profile-admin p a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.user-profile .profile-admin p a:hover {
+    text-decoration: underline;
 }
 
 .nav-nav.responsive li.icon {
@@ -37,3 +47,14 @@ header {
     margin-top: 14px;
   }
 
+header ul li a#sign-in {
+    display: none;
+}
+
+a.active {
+    color: #3336FF !important;
+}
+
+header li {
+    
+}
