@@ -75,10 +75,16 @@ a {
 
 .create-mbutton {
     width: 100%;
+    margin: 40px;
+    text-align: right;
+    padding: 10px 30px;
+    overflow: hidden;
 }
 
 #create-meetup {
-     border: 1.2px solid #34D55B;
+    float: right;
+    margin-right: 15vw;
+    border: 1.2px solid #34D55B;
     border-radius: 4px;
     background-color: #fff;
     background-color: #0D9D03;
