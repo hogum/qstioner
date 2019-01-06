@@ -145,6 +145,11 @@ input.sign-button {
 
 }
 
+/*
+==================
+    Footer
+================== */
+
 footer {
     margin-top: 5vw;
     margin-bottom: 0;
@@ -167,6 +172,11 @@ footer p {
 input.sign-button {
     background-color: red;
 }
+
+/*
+=======================
+    Submit Button
+======================= */
 
 input.sign-button {
     border: 1.2px solid #009756;
