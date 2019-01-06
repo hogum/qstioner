@@ -27,6 +27,7 @@
 
 .delete-ups {
     overflow: hidden;
+    border: 1px solid black;
 
 }
 
@@ -37,5 +38,43 @@
 
 .delete-ups p:last-child {
     float: right;
-    padding-right: 0;
+}
+
+.delete-ups .del-text-display {
+    font-weight: bolder;
+    color: #544;
+}
+
+.delete-ups p:last-child a {
+     border: 1.2px solid #34D55B;
+    border-radius: 4px;
+    font-weight: 900;
+    background-color: #fff;
+    background-color: #0DB102;
+    color: #ff8C00;
+    color: #fff;
+    padding: 7px 14px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                    transition: all .7s ease;
+}
+
+.delete-ups p:last-child a:hover {
+    background-color: #79D534;
+    background-color: #10C803;
+    color: #fff;
+}
+
+@media screen and (max-width: 767px) {
+    .delete-ups p {
+        padding: 6px 13px;
+    }
+}
+
+@media screen and (max-width: 507px) {
+    .delete-ups p {
+        font-size: 3vw;
+    }
 }
