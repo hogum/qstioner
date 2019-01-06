@@ -1,0 +1,81 @@
+
+/*===================
+    1. Override
+===================== */
+
+.container-admin {
+ margin-top: 0;   
+}
+
+
+
+/*=================
+   2. Content
+=================== */
+
+.call-action-delete {
+    text-align: center;
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+@media screen and (max-width: 500px) {
+    .call-action-delete {
+        font-size: 3.3vw;
+    }
+}
+
+.delete-ups {
+    overflow: hidden;
+    border: 2px solid #fff;
+    border-radius: 3px;
+
+}
+
+.delete-ups p {
+    float: left;
+    padding: 10px 30px;
+}
+
+.delete-ups p:last-child {
+    float: right;
+}
+
+.delete-ups .del-text-display {
+    font-weight: bolder;
+    color: #544;
+}
+
+.delete-ups p:last-child a {
+    border: 1.2px solid #FF5733;
+    border-radius: 4px;
+    font-weight: 900;
+    background-color: #D70000;
+    color: #ff8C00;
+    color: #fff;
+    padding: 7px 14px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                    transition: all .7s ease;
+}
+
+.delete-ups p:last-child a:hover {
+    background-color: #79D534;
+    background-color: #F82B2B;
+    border-color: #000;
+    color: #fff;
+}
+
+@media screen and (max-width: 767px) {
+    .delete-ups p {
+        padding: 6px 13px;
+    }
+}
+
+@media screen and (max-width: 507px) {
+    .delete-ups p {
+        font-size: 3vw;
+    }
+}
