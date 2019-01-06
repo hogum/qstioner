@@ -14,7 +14,7 @@ header {
 .user-profile {
     padding: 0px;
     width: 100%;
-    height: 33px;
+    height: 23px;
     margin: 0;
     background: red;
     color: #111;
@@ -22,19 +22,17 @@ header {
     margin-bottom: 0;
 }
 
-.user-profile .profile-admin {
-    margin: 0;
-    position: relative;
-    right: 4vw;
+.user-profile .profile-admin p {
+    position: absolute;
+    right: 12px;
+    top: 0px;
+    font-weight: bolder;
+    font-size: 12px;
 }
 
-.profile-admin p a {
-    padding: 0px;
+.nav-nav.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 7.6vw;
+  }
 
-}
-
-.profile-admin p {
-    padding: 0px;
-    float: right;
-
-}
