@@ -24,3 +24,18 @@
         font-size: 3.3vw;
     }
 }
+
+.delete-ups {
+    overflow: hidden;
+
+}
+
+.delete-ups p {
+    float: left;
+    padding: 10px 30px;
+}
+
+.delete-ups p:last-child {
+    float: right;
+    padding-right: 0;
+}
