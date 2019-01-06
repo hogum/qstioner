@@ -27,7 +27,8 @@
 
 .delete-ups {
     overflow: hidden;
-    border: 1px solid black;
+    border: 2px solid #fff;
+    border-radius: 3px;
 
 }
 
@@ -46,11 +47,10 @@
 }
 
 .delete-ups p:last-child a {
-     border: 1.2px solid #34D55B;
+    border: 1.2px solid #FF5733;
     border-radius: 4px;
     font-weight: 900;
-    background-color: #fff;
-    background-color: #0DB102;
+    background-color: #D70000;
     color: #ff8C00;
     color: #fff;
     padding: 7px 14px;
@@ -63,7 +63,8 @@
 
 .delete-ups p:last-child a:hover {
     background-color: #79D534;
-    background-color: #10C803;
+    background-color: #F82B2B;
+    border-color: #000;
     color: #fff;
 }
 
