@@ -10,3 +10,31 @@ header {
     width: 100%;
     border-radius: 3px;
 }
+
+.user-profile {
+    padding: 0px;
+    width: 100%;
+    height: 33px;
+    margin: 0;
+    background: red;
+    color: #111;
+    font-size: 10px;
+    margin-bottom: 0;
+}
+
+.user-profile .profile-admin {
+    margin: 0;
+    position: relative;
+    right: 4vw;
+}
+
+.profile-admin p a {
+    padding: 0px;
+
+}
+
+.profile-admin p {
+    padding: 0px;
+    float: right;
+
+}
