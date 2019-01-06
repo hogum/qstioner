@@ -71,13 +71,24 @@ a.active {
 
 .container-admin {
     border: 1px solid black;
-    width: 70%;
-    margin-left: 15%;
-    margin-right: 15%;
+    width: 70vw;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    padding: 12px;
 }
 
-.search-meet-ups {
+
+.container-admin .search-meetups {
     width: 100%;
+    margin: 12px 0;
+}
+
+.search-meetups input {
+    width: 100%;
+    padding: 8px;
+    background-color: #fff;
+    color: #111;
+    border: 0.5px solid #000;
 }
 
 .container-admin .meet-up-contents {
@@ -89,7 +100,14 @@ a.active {
     flex-flow: row wrap;
         -webkit-flex-flow: row wrap;
     justify-content: space-around;
-    overflow: scroll;
 }
 
 
+/*====================
+    Display Cards
+====================== */
+
+.admin-card-card .acard-text p {
+    float: left;
+    padding: 0 10px;
+}
