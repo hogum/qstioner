@@ -50,21 +50,16 @@
                 <form action="" method="post">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" minlength="3" required="required" 
-                    pattern="[a-zA-Z0-9]{5,10}" title="Call your meet-up something cool">
+                    pattern="[a-zA-Z0-9]{3,20}" title="Call your meet-up something cool">
                     <label for="date">Date of Event:</label>
                     <input type="datetime-local" id="email" name="date" required="required" 
                     title="And what's your lucky day?">
-                    <label for="image">Username:</label>
+                    <label for="image">Image:</label>
                     <input type="image" id="username" name="image" placeholder="Add an event-image" title="Having a picture is always cool">
-                    <label for="location">Password:</label>
-                    <input type="password" id="pass" name="password" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Password must contain at least one digit, one uppercase, one lowercase letter, and at least 6 characters">
-                    <label for="confirm-password">Confirm Password:</label>
-                    <input type="password" id="confirm-pass" name="confirm-password" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Passwords should be the same">
-                    <div id="bottom">
-                        <input class="sign-button" id="sign-up-button" type="submit" value="Sign Up">           
-                        <a class="bottom-right" href="default.html">Terms of use and agreement</a>
-                    </div>
-                    <<input type="datetime-local" name="" value="" placeholder="">
+                    <label for="location">Location of Meet-up:</label>
+                    <input type="text" id="pass" name="location" required="required" pattern="[a-zA-Z0-9]" placeholder="e.g Kivuli gardens, Nairobi">
+                    <label for="tag">Add Tags(Make finding your event easier):</label>
+                    <input type="text" id="confirm-pass" name="tag" required="required" pattern=[a-z0-9,_%+-] title="Tags make finding your event easier" placeholder="e.g Soap, Health, Fast-cars">
                 </form>
             </div><!-- /wrapper-sign-in-->
         </div>
