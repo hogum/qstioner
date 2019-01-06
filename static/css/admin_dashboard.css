@@ -4,6 +4,14 @@ body {
     background: #F0F0F0;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+/*========================
+    1. Header
+========================= */
+
 header {
     border: 1px solid black;
     padding: 0;
@@ -55,6 +63,33 @@ a.active {
     color: #3336FF !important;
 }
 
-header li {
-    
+
+
+/*======================
+    2. Contents
+========================*/
+
+.container-admin {
+    border: 1px solid black;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
+
+.search-meet-ups {
+    width: 100%;
+}
+
+.container-admin .meet-up-contents {
+    display: -webkit-box;
+          display: -moz-box;
+            display: -ms-flexbox;
+                display: -webkit-flex;
+    
+    flex-flow: row wrap;
+        -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+    overflow: scroll;
+}
+
+
