@@ -79,3 +79,24 @@
         font-size: 3vw;
     }
 }
+
+footer {
+    margin-top: 5vw;
+    margin-bottom: 0;
+    height: 45px;
+    padding-top: 0;
+    padding-bottom: 0;
+    position: absolute;
+    bottom: 0;
+}
+
+footer p {
+    float: left;
+    padding-top: 0;
+    padding: 0 10px;
+}
+
+.footer-text {
+    margin-top: 0;
+    padding: 0;
+}
