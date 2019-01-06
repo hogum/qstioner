@@ -49,12 +49,14 @@
             <div id="container-sign-in">       
                 <form action="" method="post">
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" minlength="5" required="required" title="Name should have at least 5 letters">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Ooops! Email format not invented yet">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required="required" pattern="[a-zA-Z0-9]{5,10}" title="username should have 5 - 10 letters with no special characters">
-                    <label for="password">Password:</label>
+                    <input type="text" id="name" name="name" minlength="3" required="required" 
+                    pattern="[a-zA-Z0-9]{5,10}" title="Call your meet-up something cool">
+                    <label for="date">Date of Event:</label>
+                    <input type="datetime-local" id="email" name="date" required="required" 
+                    title="And what's your lucky day?">
+                    <label for="image">Username:</label>
+                    <input type="image" id="username" name="image" placeholder="Add an event-image" title="Having a picture is always cool">
+                    <label for="location">Password:</label>
                     <input type="password" id="pass" name="password" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Password must contain at least one digit, one uppercase, one lowercase letter, and at least 6 characters">
                     <label for="confirm-password">Confirm Password:</label>
                     <input type="password" id="confirm-pass" name="confirm-password" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Passwords should be the same">
@@ -62,6 +64,7 @@
                         <input class="sign-button" id="sign-up-button" type="submit" value="Sign Up">           
                         <a class="bottom-right" href="default.html">Terms of use and agreement</a>
                     </div>
+                    <<input type="datetime-local" name="" value="" placeholder="">
                 </form>
             </div><!-- /wrapper-sign-in-->
         </div>
