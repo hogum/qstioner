@@ -68,11 +68,20 @@ a.active {
 /*======================
     2. Contents
 ========================*/
+a {
+    outline: none;
+    text-decoration: none;
+}
+
+.create-mbutton {
+    width: 100%;
+}
 
 #create-meetup {
      border: 1.2px solid #34D55B;
     border-radius: 4px;
     background-color: #fff;
+    background-color: #0D9D03;
     color: #ff8C00;
     color: #fff;
     padding: 8px 12px;
