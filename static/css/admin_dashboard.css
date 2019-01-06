@@ -1,0 +1,199 @@
+body {
+    border: none;
+    color: #656565;
+    background: #F0F0F0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/*========================
+    1. Header
+========================= */
+
+header {
+    border: 1px solid black;
+    padding: 0;
+    width: 100%;
+    border-radius: 3px;
+}
+
+.user-profile {
+    padding: 0px;
+    width: 100%;
+    height: 23px;
+    margin: 0;
+    background: red;
+    color: #111;
+    font-size: 10px;
+    margin-bottom: 0;
+}
+
+.user-profile .profile-admin p {
+    position: absolute;
+    text-transform: uppercase;
+    right: 12px;
+    top: 0px;
+    font-weight: bolder;
+    font-size: 12px;
+}
+
+.user-profile .profile-admin p a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.user-profile .profile-admin p a:hover {
+    text-decoration: underline;
+}
+
+.nav-nav.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 7.6vw;
+    margin-top: 14px;
+  }
+
+header ul li a#sign-in {
+    display: none;
+}
+
+a.active {
+    color: #3336FF !important;
+}
+
+
+
+/*======================
+    2. Contents
+========================*/
+a {
+    outline: none;
+    text-decoration: none;
+}
+
+.create-mbutton {
+    width: 100%;
+    margin: 40px;
+    text-align: right;
+    padding: 10px 30px;
+    overflow: hidden;
+}
+
+#create-meetup {
+    float: right;
+    margin-right: 15vw;
+    border: 1.2px solid #34D55B;
+    border-radius: 4px;
+    background-color: #fff;
+    background-color: #0DB102;
+    color: #ff8C00;
+    color: #fff;
+    padding: 8px 12px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                    transition: all .7s ease;
+}
+
+#create-meetup:hover {
+    background-color: #79D534;
+    background-color: #10C803;
+    color: #fff;
+}
+
+.container-admin {
+    width: 70vw;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    padding: 12px;
+    margin-top: 12px;
+}
+
+
+.container-admin .search-meetups {
+    width: 100%;
+    margin: 12px 0;
+}
+
+.search-meetups input {
+    width: 100%;
+    padding: 8px;
+    background-color: #fff;
+    color: #111;
+    border: 1px solid #5E5E5E;
+    border-radius: 3px;
+}
+
+.container-admin .meet-up-contents {
+    display: -webkit-box;
+          display: -moz-box;
+            display: -ms-flexbox;
+                display: -webkit-flex;
+    
+    flex-flow: row wrap;
+        -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+    overflow: auto;
+
+}
+
+
+/*====================
+    Display Cards
+====================== */
+
+.admin-card-card {
+    border: 1px solid #999;
+    color: #000;
+    background-color: #fff;
+    height: 200px;
+    text-align: center;
+    margin-top: 5vw;
+    border-radius: 14px;
+}
+
+.admin-card-card .acard-text p {
+    float: left;
+    padding: 0 20px;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+.admin-card-card .acard-text p:last-child {
+    float: right;
+}
+
+.admin-card-card .acard-text p a {
+    text-decoration: none;
+}
+
+.admin-card-card .acard-text {
+    border-bottom: 1px solid black;
+    overflow: hidden;
+}
+
+.admin-card-card .acard-center img {
+    width: 100%;
+    font-size: 12px;
+    max-width: 300px;
+
+}
+
+.admin-card-card .acard-center {
+    width: 100%;
+    max-height: 150px;
+    text-align: center;
+}
+
+.admin-cards {
+}
+
+@media screen and (max-width: 500px) {
+    .admin-card-card .acard-text p {
+        font-size: 3vw;
+    }
+}
