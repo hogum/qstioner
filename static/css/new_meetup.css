@@ -1,0 +1,191 @@
+/*
+====================
+    Content
+==================== */
+
+#container-sign-in-sign-in label {
+    display: block;
+    margin: 10px 0;
+}
+
+#container-sign-in-sign-in form {
+    margin: auto;
+    margin-top: 30px;
+}
+
+#container-sign-in form label {
+    font-weight: bolder;
+}
+
+.wrapper-sign-in {
+    box-sizing: border-box;
+    justify-content: center;
+    display: flex;
+    width: 60%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+#container-sign-in {
+    width: 100%;
+    display: block;
+    max-width: 500px;
+    height: auto;
+    padding: 20px;
+    padding-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.18);
+
+
+}
+
+input {
+    outline: none;
+}
+
+
+input#username,#pass,#confirm-pass,#name,#email,#description {
+    margin: 10px;
+    margin-top: 12px;
+    padding: 0px;
+    margin-left: 0px;
+    width: 100%;
+    height: 40px;
+    background-color: #fff;
+    border: 1px solid #D4D7D9;
+    border-radius: 4px;
+    color: black;
+
+}
+
+input,#pass,#confirm-pass,#name,#email,#description {
+    padding: 8px;
+}
+
+input#username:hover,#pass:hover,#confirm-pass:hover,#name:hover,#email:hover {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+}
+
+input#username:focus,#pass:focus,#confirm-pass:focus,#name:focus,#email:focus {
+    box-shadow: 0 0 10px rgba(20, 150, 128, 1);
+}
+
+.check {
+    display: inline-block;
+}
+
+input.sign-button {
+    margin-top: 20px;
+    padding: 6px 13px;
+    background-color: #0D7F9A;
+    border-radius: 3px;
+}
+
+input.sign-button:hover {
+    background-color: #065C9D;
+    cursor: pointer;
+
+}
+
+input.sign-button {
+    width: 100%;
+    margin-left: 0;
+}
+
+.bottom-right {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    color: #0D7F9A;
+    text-decoration: none;
+}
+
+.bottom-right:hover {
+    color: #065C9D;
+    text-decoration: underline;
+}
+.pass-reset {
+    float: right;
+    right: 2vw;
+}
+
+.action-sign h4 {
+    font-size: 18.5px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.action-sign {
+    width: 60%;
+    margin: 0 15%;
+}
+
+@media screen and (max-width: 600px) {
+    .action-sign h4 {
+        font-size: 2.7vw;
+    }
+    .nav-nav li:nth-child(3) {
+        right: 20vw;
+        }
+
+    @media screen and (max-width: 450px) {
+
+        .wrapper-sign-in {
+            width: 80%;
+            margin: 0 10%;
+        }
+        li.enquire {
+            display: none;
+        }
+        .nav-nav li:nth-child(3) {
+        right: 32vw;
+        font-size: 12.5px;
+        }
+    }
+
+}
+
+footer {
+    margin-top: 5vw;
+    margin-bottom: 0;
+    height: 45px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+footer p {
+    float: left;
+    padding-top: 0;
+    padding: 0 10px;
+}
+
+.footer-text {
+    margin-top: 0;
+    padding: 0;
+}
+
+input.sign-button {
+    background-color: red;
+}
+
+input.sign-button {
+    border: 1.2px solid #009756;
+    font-weight: bolder;
+    border-radius: 4px;
+    background-color: #fff;
+    background-color: #0DB102;
+    color: #ff8C00;
+    color: #fff;
+    padding: 8px 12px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                    transition: all .7s ease;
+}
+
+input.sign-button:hover {
+    background-color: #79D534;
+    background-color: #10C803;
+    color: #fff;
+}

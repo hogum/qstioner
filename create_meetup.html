@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="static/css/admin_dashboard.css">
     <link rel="shortcut icon" type="image/png" href="static/images/fav.jpeg"/>
-    <link rel="stylesheet" href="static/css/sign-in.css">
+    <link rel="stylesheet" href="static/css/new_meetup.css">
 </head>
 <body>
     <div class="wrapper">
@@ -53,13 +53,16 @@
                     <input type="text" id="name" name="name" minlength="3" required="required" 
                     pattern="[a-zA-Z0-9]{3,20}" title="Call your meet-up something cool">
                     <label for="date">Date of Event:</label>
-                    <input type="datetime-local" id="email" name="date" required="required" 
+                    <input type="date" id="email" name="date" required="required" 
                     title="And what's your lucky day?">
+                    <label for="time">Time of Event:</label>
+                    <input type="time" id="username" name="time" required="required" 
+                    title="And time?">
                     <label for="image">Image:</label>
-                    <input type="image" id="username" name="image" placeholder="Add an event-image" title="Having a picture is always cool">
+                    <input type="file" class="imagein" id="username" name="image" placeholder="Add an event-image" title="Having a picture is always cool" accept="image/*">
                     <label for="location">Location of Meet-up:</label>
                     <input type="text" id="pass" name="location" required="required" pattern="[a-zA-Z0-9]" placeholder="e.g Kivuli gardens, Nairobi">
-                    <label for="tag">Add Tags(Make finding your event easier):</label>
+                    <label for="tag">Add Tags  - (Make finding your event easier):</label>
                     <input type="text" id="confirm-pass" name="tag" required="required" pattern=[a-z0-9,_%+-] title="Tags make finding your event easier" placeholder="e.g Soap, Health, Fast-cars">
                     <div id="bottom">
                         <input class="sign-button" id="sign-up-button" type="submit" value="Create Meet-Up">           
@@ -69,7 +72,12 @@
             </div><!-- /wrapper-sign-in-->
         </div>
 
-    </div> <!-- /wrapper -->
     <script src="static/js/application.js" type="text/javascript" charset="utf-8"></script>
 </body>
+<footer>
+     <div class="footer-text">
+            <p>&#169; <span class="year">2019</span></p>
+            <p>We just discovered <a href="#">what's sweeter than cookies.</a> Come share with us</p>
+        </div>
+</footer>
 </html>
