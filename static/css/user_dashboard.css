@@ -1,0 +1,15 @@
+.container-user {
+    overflow: hidden;
+}
+
+.container-admin.user {
+    margin-right: 0;
+}
+
+.container-user .user-info, .container-user .container-admin.user{
+    float: left;
+}
+
+.user-info {
+    border: 1px solid #111;
+}
