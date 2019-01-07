@@ -5,7 +5,6 @@
 .container-admin.user {
     margin-right: 1vw;
     margin-left: 10vw;
-    border: 1px solid black;
 }
 
 .container-user .user-info, .container-user .container-admin.user {
@@ -13,7 +12,7 @@
 }
 
 .user-info {
-    margin-top: 1vw;
+    margin-top: 2.5vw;
     color: #444;
     border: 1px solid #988;
     font-size: 12.5px;
