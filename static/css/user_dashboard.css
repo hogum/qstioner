@@ -2,14 +2,15 @@
     overflow: hidden;
 }
 
-.container-admin.user {
+.container-admin .user {
     margin-right: 0;
+    border: 1px solid black;
 }
 
-.container-user .user-info, .container-user .container-admin.user{
+.container-user .user-info, .container-user .container-admin {
     float: left;
 }
 
 .user-info {
-    border: 1px solid #111;
+    border: 1px solid black;
 }
