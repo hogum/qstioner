@@ -51,9 +51,12 @@ Overrride Inherited Content
     .container-user {
         overflow: auto;
     }
-
+    
+    .container-user .user-info {
+        width: 96%;
+        margin: 0 2%;
+    }
     .user-info {
-        width: 100%;
         margin-top: 0;
     }
 }
