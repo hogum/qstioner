@@ -61,25 +61,31 @@ Overrride Inherited Content
     height: auto;
 }
 .admin-card-card .acard-bottom {
-    border: 1px solid #111;
+    border-top: 1px solid #ADADAD;
     margin-top: 90px;
-    padding: 0 5px;
-    font-size: 12px;
+    padding: 0 8px;
+    font-size: 11.5px;
     width: 100%;
     text-align: justify;
     line-height: normal;
-    padding-bottom: 3px;
+    padding-bottom: 2px;
+    border-radius: 0 0 14px 14px;
+
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                   transition: all .7s ease;
 }
 
 .admin-card-card .acard-bottom h6 {
-    text-align: left: ;;
+    text-align: left;
     margin: 0;
     margin-top: 2px;
 }
 
 .admin-card-card .acard-tags {
     overflow: hidden;
-    border: 1px solid #111;
 }
 
 .admin-card-card .acard-tags p {
@@ -87,4 +93,9 @@ Overrride Inherited Content
     margin: 0;
     padding: 0;
     padding-right: 18px;
+}
+
+.admin-card-card .acard-bottom:hover {
+    cursor: pointer;
+    background-color: #DFDFDF
 }
