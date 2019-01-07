@@ -99,3 +99,10 @@ Overrride Inherited Content
     cursor: pointer;
     background-color: #DFDFDF
 }
+
+.admin-card-card .acard-tags p span {
+    color: #111;
+    padding: 2px;
+    font-weight: bolder;
+    border-radius: 3px 0; 
+}
