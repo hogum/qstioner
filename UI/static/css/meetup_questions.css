@@ -68,6 +68,10 @@
     margin-bottom: 0;
 }
 
+.admin-cards .question-card-card .qcard-text p a {
+    color: #222;
+}
+
 .admin-cards .question-card-card .qcard {
     width: 750px;
     background-color: #E7E7E7;
