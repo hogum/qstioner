@@ -9,7 +9,8 @@ Overrride Inherited Content
 
 .container-admin.user {
     margin-right: 1vw;
-    margin-left: 10vw;
+    margin-left: 8vw;
+    padding: 12px 4px;
 }
 
 .container-user .user-info, .container-user .container-admin.user {
@@ -19,6 +20,7 @@ Overrride Inherited Content
 .admin-card-card .acard-text p.edit a {
     display: none;
 }
+
 /*
 ===============
     Feed
