@@ -2,15 +2,36 @@
     overflow: hidden;
 }
 
-.container-admin .user {
-    margin-right: 0;
+.container-admin.user {
+    margin-right: 1vw;
+    margin-left: 10vw;
     border: 1px solid black;
 }
 
-.container-user .user-info, .container-user .container-admin {
+.container-user .user-info, .container-user .container-admin.user {
     float: left;
 }
 
 .user-info {
     border: 1px solid black;
+    margin-top: 1vw;
+    color: #111;
+    font-size: 12.5px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px 10px 5px 0;
+}
+
+@media screen and (max-width: 960px) {
+    .container-user .user-info, .container-user .container-admin.user {
+        float: none;
+    }
+
+    .container-user {
+        overflow: auto;
+    }
+
+    .user-info {
+        width: 100%;
+    }
 }
