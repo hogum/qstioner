@@ -1,0 +1,212 @@
+
+/*
+===================
+   1. Breadcrumb
+===================== */
+
+.user-profile .profile-admin {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    padding-left: 4px;
+}
+
+.user-profile {
+    height: auto;
+    width: 99%;
+    margin: 0 1%;
+    margin-left: 0;
+}
+
+.user-profile .profile-admin p {
+    position: static;
+    text-transform: none;
+    font-weight: 900;
+    font-size: 11.5px;
+    float: left;
+}
+
+.meet-link {
+    color: #fff !important;
+    padding: 0 3px;
+}
+
+
+/*
+=================
+    2. Contents
+================= */
+
+.container-admin {
+    background-color: #fff;
+    padding: 30px;
+    border: 1px solid #999;
+    border-radius: 4px 4px 0 0;
+    margin-bottom: 60px;
+}
+
+.admin-cards .qcard-text {
+    margin-top: 8px;
+    font-size: 13px;
+    text-align: justify;
+    padding: 4px 12px;
+    border-bottom: 0.2px solid rgba(169, 171, 166, .999);
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -ms-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
+}
+
+.admin-cards .question-card-card .qcard-text:hover {
+    background-color: #D8D9D8;
+    color: #333;
+
+}
+
+.admin-cards .question-card-card .qcard-text p {
+    margin-bottom: 0;
+}
+
+.admin-cards .question-card-card .qcard {
+    width: 750px;
+    background-color: #E7E7E7;
+    border: 1.2px solid #A2A2A1;
+    border-radius: 10px;
+}
+
+.admin-cards .question-card-card .qcard-text .after-p:after {
+    content: ' see more';
+    padding-left: 12px;
+    font-size: 12px;
+}
+
+.admin-cards .question-card-card .qicons {
+    padding: 4px;
+    margin-bottom: 6px;
+    padding-left: 16px;
+    padding-top: 8px;
+}
+
+.admin-cards .question-card-card .qicons p {
+    display: inline;
+    font-size: 10px;
+    padding: 2px;
+    padding-top: 0;
+}
+
+
+.admin-cards .question-card-card .qicons .qtags {
+    color: darkblue;
+    background-color: #FDFDFD;
+    border: 1px solid #444;
+    border-radius: 3px;
+    
+}
+
+.admin-cards .question-card-card .qicons p:nth-child(2) {
+    margin-right: 5px;
+}
+
+.admin-cards .question-card-card .qicons .right-tag {
+    float: right;
+    margin-right: 10px;
+    margin-top: 0;
+    font-size: 10px;
+}
+
+.admin-cards .question-card-card .qicons p:not(.qtags) {
+    font-size: 12px;
+}
+
+.admin-cards .question-card-card .qicons p:last-child {
+    font-size: 10px;
+}
+
+.admin-cards .question-card-card .qicons p.vote {
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.admin-cards .question-card-card .qicons p.vote a span {
+    color: #000;
+    font-size: 25px;
+    margin-top: 30px;
+}
+
+.admin-cards .question-card-card .qicons p.vote a span:hover:not(.number) {
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.admin-cards .question-card-card .qicons p.vote .number {
+    font-size: 13px;
+}
+
+/*
+=========================
+    Card Appearance
+========================== */
+
+.question-card-card {
+    position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.question-card-card:before, .question-card-card:after {
+    content:"";
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+        -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+            box-shadow:0 0 20px rgba(0,0,0,0.8);
+                -moz-border-radius:100px / 10px;
+
+    border-radius:100px / 10px;
+}
+
+.question-card-card:after {
+    right:10px;
+    left:auto;
+    -webkit-transform:skew(8deg) rotate(3deg);
+       -moz-transform:skew(8deg) rotate(3deg);
+        -ms-transform:skew(8deg) rotate(3deg);
+         -o-transform:skew(8deg) rotate(3deg);
+            transform:skew(8deg) rotate(3deg);
+}
+
+@media screen and (max-width: 500px) {
+    .admin-cards .question-card-card .qicons .right-tag {
+        float: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .admin-cards .question-card-card .qicons .right-tag {
+        margin-left: 20px;
+    }
+}
+
+.action-sign h4 {
+    font-size: 18px;
+    text-align: center;
+    font-weight: bolder;
+    padding: 0;
+}
+
+.action-sign {
+    width: 60%;
+    margin: 0 15%;
+}
+
+@media screen and (max-width: 500px) {
+    .action-sign h4 {
+        font-size: 4vw;
+    }
+
+    .action-sign {
+        width: 100%;
+        margin: 0;
+    }
+}
