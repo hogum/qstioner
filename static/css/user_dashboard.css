@@ -1,3 +1,8 @@
+/*
+==========================
+Overrride Inherited Content
+============================ */
+
 .container-user {
     overflow: hidden;
 }
@@ -10,6 +15,14 @@
 .container-user .user-info, .container-user .container-admin.user {
     float: left;
 }
+
+.admin-card-card .acard-text p.edit a {
+    display: none;
+}
+/*
+===============
+    Feed
+=============== */
 
 .user-info {
     margin-top: 2.5vw;
