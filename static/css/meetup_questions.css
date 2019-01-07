@@ -187,3 +187,15 @@
     .question-card-card {
     }
 }
+
+.action-sign h4 {
+    font-size: 18px;
+    text-align: center;
+    font-weight: bolder;
+    padding: 0;
+}
+
+.action-sign {
+    width: 60%;
+    margin: 0 15%;
+}
