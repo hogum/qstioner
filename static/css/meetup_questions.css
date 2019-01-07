@@ -137,7 +137,7 @@
 
 /*
 =========================
-    Card
+    Card Appearance
 ========================== */
 
 .question-card-card {
@@ -151,9 +151,10 @@
     content:"";
     z-index:-1;
     -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
-    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
-    box-shadow:0 0 20px rgba(0,0,0,0.8);
-    -moz-border-radius:100px / 10px;
+        -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+            box-shadow:0 0 20px rgba(0,0,0,0.8);
+                -moz-border-radius:100px / 10px;
+
     border-radius:100px / 10px;
 }
 
@@ -165,4 +166,19 @@
         -ms-transform:skew(8deg) rotate(3deg);
          -o-transform:skew(8deg) rotate(3deg);
             transform:skew(8deg) rotate(3deg);
+}
+
+@media screen and (max-width: 500px) {
+    .admin-cards .question-card-card .qicons .right-tag {
+        float: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .admin-cards .question-card-card .qicons .right-tag {
+        margin-left: 20px;
+    }
+
+    .question-card-card {
+    }
 }
