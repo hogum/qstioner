@@ -38,8 +38,10 @@
 ================= */
 
 .container-admin {
-    border: 1px solid #222;
-    background-color: #EFEFEF;
+    background-color: #fff;
+    padding: 30px;
+    border: 1px solid #999;
+    border-radius: 4px 4px 0 0;
 }
 
 .admin-cards .qcard-text {
@@ -183,9 +185,6 @@
     .admin-cards .question-card-card .qicons .right-tag {
         margin-left: 20px;
     }
-
-    .question-card-card {
-    }
 }
 
 .action-sign h4 {
@@ -198,4 +197,15 @@
 .action-sign {
     width: 60%;
     margin: 0 15%;
+}
+
+@media screen and (max-width: 500px) {
+    .action-sign h4 {
+        font-size: 4vw;
+    }
+
+    .action-sign {
+        width: 100%;
+        margin: 0;
+    }
 }
