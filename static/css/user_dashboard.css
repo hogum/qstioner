@@ -56,3 +56,25 @@ Overrride Inherited Content
     }
 }
 
+.admin-card-card {
+    max-width: 23em;
+}
+.admin-card-card .acard-bottom {
+    border: 1px solid #111;
+    margin-top: 90px;
+    padding: 0 5px;
+    font-size: 12px;
+    width: 100%;
+    text-align: justify;
+    line-height: normal;
+}
+
+.admin-card-card .acard-tags {
+    overflow: hidden;
+    border: 1px solid #111;
+}
+
+.admin-card-card .acard-tags p {
+    float: left;
+    margin: 0;
+}
