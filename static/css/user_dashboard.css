@@ -13,13 +13,20 @@
 }
 
 .user-info {
-    border: 1px solid black;
     margin-top: 1vw;
-    color: #111;
+    color: #444;
+    border: 1px solid #988;
     font-size: 12.5px;
     padding: 10px;
     background-color: #fff;
-    border-radius: 5px 10px 5px 0;
+    border-radius: 3px 8px 3px 0;
+}
+.user-info span {
+    color: #111;
+    padding: 2px;
+    border: 1px solid #999;
+    font-weight: bolder;
+    border-radius: 3px 0; 
 }
 
 @media screen and (max-width: 960px) {
