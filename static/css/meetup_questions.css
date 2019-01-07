@@ -1,10 +1,16 @@
 
+/*
+===================
+   1. Breadcrumb
+===================== */
+
 .user-profile .profile-admin {
     overflow: hidden;
     margin: 0;
     padding: 0;
     padding-left: 4px;
 }
+
 .user-profile {
     height: auto;
     width: 99%;
@@ -23,4 +29,87 @@
 .meet-link {
     color: #fff !important;
     padding: 0 3px;
+}
+
+
+/*
+=================
+    2. Contents
+================= */
+
+.container-admin {
+    border: 1px solid #222;
+}
+
+.admin-cards .qcard-text {
+    margin-top: 3px;
+    font-size: 13px;
+    text-align: justify;
+    padding: 4px 12px;
+    border-bottom: 0.2px solid rgba(169, 171, 166, .999);
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -ms-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
+}
+
+.admin-cards .question-card-card .qcard-text:hover {
+    background-color: #D8D9D8;
+    color: #333;
+
+}
+
+.admin-cards .question-card-card .qcard-text p {
+    margin-bottom: 0;
+}
+
+.admin-cards .question-card-card .qcard {
+    width: 750px;
+    background-color: #E7E7E7;
+    border: 1.2px solid #A2A2A1;
+    border-radius: 10px;
+}
+
+.admin-cards .question-card-card .qcard-text .after-p:after {
+    content: ' see more';
+    padding-left: 12px;
+    font-size: 12px;
+}
+
+.admin-cards .question-card-card .qicons {
+    padding: 4px;
+    margin-bottom: 6px;
+    padding-left: 16px;
+    padding-top: 0;
+}
+
+.admin-cards .question-card-card .qicons p {
+    display: inline;
+    font-size: 10px;
+    padding: 2px;
+    padding-top: 0;
+}
+
+
+.admin-cards .question-card-card .qicons .qtags {
+    color: darkblue;
+    background-color: #FDFDFD;
+    border: 1px solid #444;
+    border-radius: 3px;
+    
+}
+
+.admin-cards .question-card-card .qicons p:nth-child(2) {
+    margin-right: 5px;
+}
+
+.admin-cards .question-card-card .qicons .right-tag {
+    float: right;
+    margin-right: 10px;
+    margin-top: 0;
+}
+
+.admin-cards .question-card-card .qicons p:not(.qtags) {
+    font-size: 13px;
 }
