@@ -58,6 +58,7 @@ Overrride Inherited Content
 
 .admin-card-card {
     max-width: 23em;
+    height: auto;
 }
 .admin-card-card .acard-bottom {
     border: 1px solid #111;
@@ -69,6 +70,12 @@ Overrride Inherited Content
     line-height: normal;
 }
 
+.admin-card-card .acard-bottom h6 {
+    text-align: left: ;;
+    margin: 0;
+    margin-top: 2px;
+}
+
 .admin-card-card .acard-tags {
     overflow: hidden;
     border: 1px solid #111;
@@ -76,5 +83,7 @@ Overrride Inherited Content
 
 .admin-card-card .acard-tags p {
     float: left;
+    padding-right: 13px;
     margin: 0;
+    padding: 0;
 }
