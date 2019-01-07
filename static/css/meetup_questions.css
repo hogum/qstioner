@@ -82,7 +82,7 @@
     padding: 4px;
     margin-bottom: 6px;
     padding-left: 16px;
-    padding-top: 0;
+    padding-top: 8px;
 }
 
 .admin-cards .question-card-card .qicons p {
@@ -112,5 +112,20 @@
 }
 
 .admin-cards .question-card-card .qicons p:not(.qtags) {
+    font-size: 13px;
+}
+
+.admin-cards .question-card-card .qicons p.vote {
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.admin-cards .question-card-card .qicons p.vote a span {
+    color: #000;
+    font-size: 25px;
+    margin-top: 30px;
+}
+
+.admin-cards .question-card-card .qicons p.vote .number {
     font-size: 13px;
 }
