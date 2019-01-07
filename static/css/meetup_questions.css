@@ -1,0 +1,12 @@
+
+.user-profile .profile-admin {
+    overflow: hidden;
+}
+
+.user-profile .profile-admin p {
+    position: static;
+    text-transform: none;
+    font-weight: 900;
+    font-size: 11px;
+    float: left;
+}
