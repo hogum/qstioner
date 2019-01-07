@@ -39,5 +39,6 @@
 
     .user-info {
         width: 100%;
+        margin-top: 0;
     }
 }
