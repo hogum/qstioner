@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="veiwport" content="width=device-width, initial-scale=1.0">
+    <title>Questioner User Dashboard</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="static/css/admin_dashboard.css">
+    <link rel="stylesheet" href="static/css/user_dashboard.css">
+    <link rel="stylesheet" href="static/css/new_meetup.css">
+    <link rel="shortcut icon" type="image/png" href="static/images/fav.jpeg"/>
+</head>
+<body>
+    <div class="wrapper">
+         <div class="user-profile">
+                <div class="profile-admin">
+                    <p><a href="#">profile</a></p>
+                </div>
+            </div>
+    <header id="header" class="header-nav">
+              <ul>
+                <div class="qlogo">
+
+                    <li>
+                        <a href="#"><img src="static/images/logoab" alt="Questioner"></a>
+                    </li>
+                </div>
+                <div class="nav-nav admin-user" id="navbar">        
+                    
+                    <li><a class="active" href="#">Scheduled meet-ups</a></li>
+                    <li><a href="#" title="See all upcoming meet-ups">upcoming</a></li>
+                    <li class="enquire"><a href="#"></a></li>
+                    <li class="sgnin admin-user">
+                        <a id="sign-in" href="#">sign in</a>
+                    </li>
+                    <li class="icon">
+                        <a href="javascript:void(0);" class="icona" onclick="showNav()">
+                            <i class="icon-button">&#9778</i>
+                        </a>
+                    </li>
+                </div>    
+            </ul>
+
+        </header><!-- /header -->
+
+        <div class="container-user">
+        <div class="container-admin user">
+             <div class="search-meetups">
+                <input type="search" name="search-meetups-input" value="" placeholder="Search active meet-ups">
+            </div>
+            <div class="meet-up-contents">
+                <div class="admin-cards">
+                    <div class="admin-card-card">
+                        <div class="acard-text">
+                            <p class="acard-name"><a href="#" title="See this meet-up's details">Meet-up Spam</a></p>
+                            <p class="acard-date">Jan 12</p>
+                            <p class="edit"><a href="#" title="Edit or delete this meetup">edit</a></p>
+                        </div>
+                        <div class="acard-center"><img src="#" alt="provocative photo of lovingly rendered meet-up spam"></div>
+                        <div class="acard-bottom"></div>
+                    </div>
+                </div>
+
+                <div class="admin-cards">
+                    <div class="admin-card-card">
+                        <div class="acard-text">
+                            <p class="acard-name"><a href="#" title="See this meet-up's details">Meet-up Spam</a></p>
+                            <p class="acard-date">Jan 12</p>
+                            <p class="edit"><a href="#" title="Edit or delete this meetup">edit</a></p>
+                        </div>
+                        <div class="acard-center"><img src="#" alt="provocative photo of lovingly rendered meet-up spam"></div>
+                        <div class="acard-bottom"></div>
+                    </div>
+                </div>
+
+                <div class="admin-cards">
+                    <div class="admin-card-card">
+                        <div class="acard-text">
+                            <p class="acard-name"><a href="#" title="See this meet-up's details">Meet-up Spam</a></p>
+                            <p class="acard-date">Jan 12</p>
+                            <p class="edit"><a href="#" title="Edit or delete this meetup">edit</a></p>
+                        </div>
+                        <div class="acard-center"><img src="#" alt="provocative photo of lovingly rendered meet-up spam"></div>
+                        <div class="acard-bottom"></div>
+                    </div>
+                </div>
+            </div><!-- meetup-contents -->
+        </div><!-- /Container-admin -->
+        <div class="user-info">
+            <p>Questions Asked <span class="number qasked">3</span></p>
+            <p>Questions commented <span class="number qcommented">12</p>
+        </div>
+    </div>
+    </div>
+
+    <script src="static/js/application.js" type="text/javascript" charset="utf-8"></script>
+</body>
+<footer>
+     <div class="footer-text">
+            <p>&#169; <span class="year">2019</span></p>
+            <p>We just discovered <a href="#">what's sweeter than cookies.</a> Come share with us</p>
+        </div>
+</footer>
+</html>

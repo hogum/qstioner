@@ -1,0 +1,57 @@
+/*
+==========================
+Overrride Inherited Content
+============================ */
+
+.container-user {
+    overflow: hidden;
+}
+
+.container-admin.user {
+    margin-right: 1vw;
+    margin-left: 10vw;
+}
+
+.container-user .user-info, .container-user .container-admin.user {
+    float: left;
+}
+
+.admin-card-card .acard-text p.edit a {
+    display: none;
+}
+/*
+===============
+    Feed
+=============== */
+
+.user-info {
+    margin-top: 2.5vw;
+    color: #444;
+    border: 1px solid #988;
+    font-size: 12.5px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 3px 8px 3px 0;
+}
+.user-info span {
+    color: #111;
+    padding: 2px;
+    border: 1px solid #999;
+    font-weight: bolder;
+    border-radius: 3px 0; 
+}
+
+@media screen and (max-width: 960px) {
+    .container-user .user-info, .container-user .container-admin.user {
+        float: none;
+    }
+
+    .container-user {
+        overflow: auto;
+    }
+
+    .user-info {
+        width: 100%;
+        margin-top: 0;
+    }
+}
