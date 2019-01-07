@@ -68,6 +68,7 @@ Overrride Inherited Content
     width: 100%;
     text-align: justify;
     line-height: normal;
+    padding-bottom: 3px;
 }
 
 .admin-card-card .acard-bottom h6 {
@@ -83,7 +84,7 @@ Overrride Inherited Content
 
 .admin-card-card .acard-tags p {
     float: left;
-    padding-right: 13px;
     margin: 0;
     padding: 0;
+    padding-right: 18px;
 }
