@@ -39,7 +39,14 @@ function registerUser() {
             isadmin: true,
             password: password
         })
-    }).then(function (response)) {
+    }).then(function (response) {
         return response.json()
-    }
+    }).then(function (data) {
+        let resMessage = data.Status;
+        if (resMessage === 201) {
+            let page = 'sign-in.html';
+            regForm.reset();
+            loadNextPage('page');
+        } 
+    })
 }
