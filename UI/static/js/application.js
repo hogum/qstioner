@@ -56,3 +56,25 @@ function registerUser() {
         }
     }).catch(error => console.log(error))
 }
+
+function loginUser() {
+    let form = document.getElementById('sign-in-form');
+    let username = form.elements['username'].value;
+    let email = form.elements['email'].value;
+
+    fetch (url + 'auth/login', {
+        method: 'post',
+        headers: {
+            "Content-type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password
+        })
+    }).then function(response) {
+        if (response.status !== 200) {
+            console.log("Encountered a problem duting log in")
+            console.log("Status Code: " + response.status)
+        }
+    }
+}
