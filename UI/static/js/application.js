@@ -12,17 +12,17 @@ function showNav() {
     }
 }
 
+function loadNextPage(nextPage) {
+    document.location.href = nextPage;
+}
 
 function registerUser() {
     let regForm = document.getElementById("registration-form");
 
-    let firstname = regForm.elements['firstname'].value;
-    let lastname = regForm.elements['lastname'].value;
+    let firstname = regForm.elements['name'].value;
     let username = regForm.elements['username'].value;
-    let othername = regForm.elements['othername'].value;
     let email = regForm.elements['email'].value;
     let password = regForm.elements['password'].value;
-    let phonenumber = regForm.elements['phonenumber'].value;
 
     fetch(url + 'auth/register', {
         method: 'post',
