@@ -47,6 +47,10 @@ function registerUser() {
             let page = 'sign-in.html';
             regForm.reset();
             loadNextPage('page');
-        } 
-    })
+        }
+
+        else {
+
+        }
+    }).catch(error => console.log(error))
 }
