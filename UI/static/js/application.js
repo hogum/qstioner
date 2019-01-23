@@ -23,7 +23,9 @@ function registerUser() {
     let username = regForm.elements['username'].value;
     let email = regForm.elements['email'].value;
     let password = regForm.elements['password'].value;
-
+    console.log(firstname);
+    console.log(email
+)
     fetch(url + 'auth/register', {
         method: 'post',
         headers: {
@@ -46,7 +48,7 @@ function registerUser() {
         if (resMessage === 201) {
             let page = 'sign-in.html';
             regForm.reset();
-            loadNextPage('page');
+            loadNextPage(page);
         }
 
         else {
