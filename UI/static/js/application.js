@@ -16,6 +16,7 @@ function loadNextPage(nextPage) {
     document.location.href = nextPage;
 }
 
+
 function registerUser() {
     let regForm = document.getElementById("registration-form");
 
@@ -57,10 +58,15 @@ function registerUser() {
     }).catch(error => console.log(error))
 }
 
+function checkUserRole(userDetails) {
+    return userDetails[0].isadmin;
+}
+
 function loginUser() {
     let form = document.getElementById('sign-in-form');
     let username = form.elements['username'].value;
-    let email = form.elements['email'].value;
+    let email = form.elements['username'].value;
+    let password = form.elements['password'].value
 
     fetch (url + 'auth/login', {
         method: 'post',
@@ -68,7 +74,7 @@ function loginUser() {
             "Content-type": "application/json; charset=utf-8"
         },
         body: JSON.stringify({
-            username: username,
+            email: username,
             password: password
         })
     }).then(function(response) {
@@ -81,7 +87,7 @@ function loginUser() {
         let resMessage = data.Status;
 
         if (resMessage === 200) {
-            let isadmin = checkUserRole();
+            let isadmin = checkUserRole(data.Data);
             let token = data.Data[0].token;
             localStorage.setItem('isadmin', isadmin);
             localStorage.setItem('authToken', token);
@@ -90,17 +96,17 @@ function loginUser() {
 
             if (isadmin) {
                 let userDashboard = 'admin_page.html';;
-            } else if (! admin) {
+            } else if (! isadmin) {
                 let userDashboard = 'user_page.html';
             }
             form.reset();
 
             setTimeout(function() {
-                loadNextPage(page)
+                loadNextPage(userDashboard)
             }, 2000);
         
         } else {
-            console.log(data.Message);
+            console.log(data['Message']);
         }
     }).catch(error => console.log(error))
 }
