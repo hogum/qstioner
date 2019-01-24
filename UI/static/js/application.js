@@ -77,7 +77,7 @@ function loginUser() {
             console.log("Status Code: " + response.status);
         }
         return response.json()
-    }).then(function(data)) {
+    }).then(function(data) {
         let resMessage = data.Status;
 
         if (resMessage === 200) {
@@ -85,15 +85,22 @@ function loginUser() {
             let token = data.Data[0].token;
             localStorage.setItem('isadmin', isadmin);
             localStorage.setItem('authToken', token);
-            console.log(token)
-            console.log(isadmin)
+            console.log(token);
+            console.log(isadmin);
 
             if (isadmin) {
-                let userDashboard = 'admin_page.html';
+                let userDashboard = 'admin_page.html';;
             } else if (! admin) {
-                let userDashboard = 'user_page.html'
+                let userDashboard = 'user_page.html';
             }
+            form.reset();
 
+            setTimeout(function() {
+                loadNextPage(page)
+            }, 2000);
+        
+        } else {
+            console.log(data.Message);
         }
-    }
+    }).catch(error => console.log(error))
 }
