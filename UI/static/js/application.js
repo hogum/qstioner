@@ -71,10 +71,29 @@ function loginUser() {
             username: username,
             password: password
         })
-    }).then function(response) {
+    }).then(function(response) {
         if (response.status !== 200) {
-            console.log("Encountered a problem duting log in")
-            console.log("Status Code: " + response.status)
+            console.log("Encountered a problem during log in");
+            console.log("Status Code: " + response.status);
+        }
+        return response.json()
+    }).then(function(data)) {
+        let resMessage = data.Status;
+
+        if (resMessage === 200) {
+            let isadmin = checkUserRole();
+            let token = data.Data[0].token;
+            localStorage.setItem('isadmin', isadmin);
+            localStorage.setItem('authToken', token);
+            console.log(token)
+            console.log(isadmin)
+
+            if (isadmin) {
+                let userDashboard = 'admin_page.html';
+            } else if (! admin) {
+                let userDashboard = 'user_page.html'
+            }
+
         }
     }
 }
