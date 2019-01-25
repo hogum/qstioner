@@ -25,8 +25,7 @@ function registerUser() {
     let email = regForm.elements['email'].value;
     let password = regForm.elements['password'].value;
     console.log(firstname);
-    console.log(email
-)
+    console.log(email);
     fetch(url + 'auth/register', {
         method: 'post',
         headers: {
@@ -43,7 +42,7 @@ function registerUser() {
             password: password
         })
     }).then(function (response) {
-        return response.json()
+        return response.json();
     }).then(function (data) {
         let resMessage = data.status;
         if (resMessage === 201) {
@@ -79,9 +78,10 @@ function loginUser() {
         })
     }).then(function(response) {
       
-        return response.json()
+        return response.json();
     }).then(function(data) {
         let resMessage = data.status;
+        console.log(resMessage + ' data status');
 
         if (resMessage === 200) {
             let isadmin = checkUserRole(data.data);
