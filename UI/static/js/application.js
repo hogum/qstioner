@@ -63,7 +63,6 @@ function checkUserRole(userDetails) {
 
 function loginUser() {
     let form = document.getElementById('sign-in-form');
-    let username = form.elements['username'].value;
     let email = form.elements['username'].value;
     let password = form.elements['password'].value
 
