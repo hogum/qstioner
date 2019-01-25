@@ -75,12 +75,11 @@ function loginUser() {
             email: username,
             password: password
         })
-    }).then(function(response) {
-      
+    }).then(function(response) {  
         return response.json();
     }).then(function(data) {
         let resMessage = data.status;
-        console.log(resMessage + ' data status');
+        console.log(data + ' data status');
 
         if (resMessage === 200) {
             let isadmin = checkUserRole(data.data);
