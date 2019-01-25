@@ -45,7 +45,7 @@ function registerUser() {
     }).then(function (response) {
         return response.json()
     }).then(function (data) {
-        let resMessage = data.Status;
+        let resMessage = data.status;
         if (resMessage === 201) {
             let page = 'sign-in.html';
             regForm.reset();
@@ -78,17 +78,14 @@ function loginUser() {
             password: password
         })
     }).then(function(response) {
-        if (response.status !== 200) {
-            console.log("Encountered a problem during log in");
-            console.log("Status Code: " + response.status);
-        }
+      
         return response.json()
     }).then(function(data) {
-        let resMessage = data.Status;
+        let resMessage = data.status;
 
         if (resMessage === 200) {
-            let isadmin = checkUserRole(data.Data);
-            let token = data.Data[0].token;
+            let isadmin = checkUserRole(data.data);
+            let token = data.data[0].token;
             localStorage.setItem('isadmin', isadmin);
             localStorage.setItem('authToken', token);
             console.log(token);
@@ -106,7 +103,9 @@ function loginUser() {
             }, 2000);
         
         } else {
-            console.log(data['Message']);
+            console.log("Encountered a problem during log in");
+            console.log("Status Code: " + response.status);
+            console.log(data['message']);
         }
     }).catch(error => console.log(error))
 }
