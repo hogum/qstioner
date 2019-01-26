@@ -2,6 +2,7 @@ const url = 'http://localhost:5000/api/v1/';
 // const url = 'https://qstionerv2-api-heroku.herokuapp.com/';
 
 function showNav() {
+    // Toggles the nav bar button for responsiveness.
     let class_id = document.getElementById('navbar');
 
     if (class_id.className === "nav-nav") {
@@ -62,9 +63,12 @@ function checkUserRole(userDetails) {
 }
 
 function loginUser() {
-    let form = document.getElementById('sign-in-form');
-    let email = form.elements['username'].value;
-    let password = form.elements['password'].value
+    /*
+        Allows users to log in.
+    */
+    let form = document.getElementById('sign-in-form'); // sign-in.html
+    let email = form.elements['email'].value;
+    let password = form.elements['password'].value;
 
     fetch (url + 'auth/login', {
         method: 'post',
@@ -72,14 +76,14 @@ function loginUser() {
             "Content-type": "application/json; charset=utf-8"
         },
         body: JSON.stringify({
-            email: username,
+            email: email,
             password: password
         })
-    }).then(function(response) {  
+    }).then(function(response) {
+        console.log(response);  
         return response.json();
     }).then(function(data) {
         let resMessage = data.status;
-        console.log(data + ' data status');
 
         if (resMessage === 200) {
             let isadmin = checkUserRole(data.data);

@@ -44,8 +44,8 @@
         <div class="wrapper-sign-in">
             <div id="container-sign-in">       
                 <form action="" method="post" id="sign-in-form">
-                    <label for="username">Username or email:</label>
-                    <input type="text" id="username" name="username" minlength="5" required="required" title="Name should have at least 5 letters">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required="required" pattern="[^@\s]+@[^@\s]+\.[a-zA-Z0-9]+$" title="Ooops! Email format not invented yet">
                     <label for="password">Password:</label>
                     <input type="password" id="pass" name="password" required="required" title="Password must contain at least one digit, one uppercase, one lowercase letter, and at least 6 characters"`>
                     <div id="bottom">
