@@ -62,7 +62,7 @@ function checkUserRole(userDetails) {
     return userDetails[0].isadmin;
 }
 
-function loginUser() {
+ function loginUser() {
     let logInForm = document.getElementById("sign-in-form");
 
     let userEmail = logInForm.elements["email"].value;
@@ -79,20 +79,15 @@ function loginUser() {
             password: userPass
         })
     }).then(function (response) {
-        console.log(response);
-        if (response.status !== 200) {
-            console.log('There was an error '
-                + response.status);
-        }
         return response.json()
         }).then(function (data) {
-            let resMessage = data['message'];
-            console.log(resMessage);
-            console.log('data\n' + data['status']);
+            let resMessage = data.status;
+            console.log(resMessage + ' resMessage');
+            console.log('data\n' + data.data);
 
-            if (data['status'] === 200) {
-                let userRole = data[0]['isadmin'];
-                let userToken = data[0]['token'];
+            if (resMessage === 200) {
+                let userRole = data.data[0]['isadmin'];
+                let userToken = data.data[0]['token'];
                 localstorage.setItem('userIsAdmin', userRole);
                 localstorage.setItem('userToken', userToken);
                 console.log(userToken);
@@ -110,7 +105,9 @@ function loginUser() {
                     loadNextPage(userPage)
                 }, 2000);
             } else {
-                console.log("Failed\n" + data['status']);
+                console.log("Failed\n" + data.status);
             }
         }).catch(error => console.log(error))
 }
+
+
