@@ -65,11 +65,11 @@ function checkUserRole(userDetails) {
 function loginUser() {
     let logInForm = document.getElementById("sign-in-form");
 
-    let userEmail = logInForm.elements.["email"].value;
+    let userEmail = logInForm.elements["email"].value;
     let userPass = logInForm.elements["password"].value;
     let userPage = undefined;
 
-    fetch(url + '/auth/login', {
+    fetch(url + 'auth/login', {
         method: 'post',
         headers: {
             "Content-type": "application/json; charset=utf-8"
@@ -81,13 +81,14 @@ function loginUser() {
     }).then(function (response) {
         if (response.status !== 200) {
             console.log('There was an error '
-                + response.status;
+                + response.status);
             }
             return response.json();
         }).then(function (data) {
             let resMessage = data.message;
+            console.log(resMessage);
 
-            if (resMessage.includes('Logged in')) {
+            if (data.status === 200)) {
                 let userRole = data[0]['isadmin'];
                 let userToken = data[0]['token'];
                 localstorage.setItem('userIsAdmin', userRole);
@@ -95,5 +96,4 @@ function loginUser() {
                 console.log(userToken);
             }
         })
-    })
 }
