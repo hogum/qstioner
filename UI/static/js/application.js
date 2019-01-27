@@ -79,21 +79,38 @@ function loginUser() {
             password: userPass
         })
     }).then(function (response) {
+        console.log(response);
         if (response.status !== 200) {
             console.log('There was an error '
                 + response.status);
-            }
-            return response.json();
+        }
+        return response.json()
         }).then(function (data) {
-            let resMessage = data.message;
+            let resMessage = data['message'];
             console.log(resMessage);
+            console.log('data\n' + data['status']);
 
-            if (data.status === 200)) {
+            if (data['status'] === 200) {
                 let userRole = data[0]['isadmin'];
                 let userToken = data[0]['token'];
                 localstorage.setItem('userIsAdmin', userRole);
                 localstorage.setItem('userToken', userToken);
                 console.log(userToken);
+
+                if (userRole) {
+                    userPage = "admin-page.html";
+                }
+
+                else {
+                    userPage = "user_page.html";
+                }
+                logInForm.reset();
+
+                setTimeout(function () {
+                    loadNextPage(userPage)
+                }, 2000);
+            } else {
+                console.log("Failed\n" + data['status']);
             }
-        })
+        }).catch(error => console.log(error))
 }
