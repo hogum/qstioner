@@ -62,3 +62,23 @@ function checkUserRole(userDetails) {
     return userDetails[0].isadmin;
 }
 
+function loginUser() {
+    let logInForm = document.getElementById("sign-in-form");
+
+    let userEmail = logInForm.elements.["email"].value;
+    let userPass = logInForm.elements["password"].value;
+    let userPage = undefined;
+
+    fetch(url + '/auth/login', {
+        method: 'post',
+        headers: {
+            "Content-type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify({
+            email: userEmail,
+            password: userPass
+        })
+    }).then(function (response) {
+        
+    })
+}
