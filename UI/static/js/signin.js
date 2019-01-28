@@ -25,6 +25,8 @@ function signIn(event) {
                 let message = undefined;
                 if (payload.status === 200) {
                     message = "Success"
+                    handler.saveToken(payload.body.token)
+                    
                 }
         })
 }
