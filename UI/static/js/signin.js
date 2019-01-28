@@ -16,4 +16,15 @@ function signIn(event) {
         "email": email,
         "password": password
     }
+
+    handler.post('login', data)
+        .then(response => response.json().then (
+            payload => ({status: response.status, body: payload})
+            )).then(payload => {
+
+                let message = undefined;
+                if (payload.status === 200) {
+                    message = "Success"
+                }
+        })
 }
