@@ -1,7 +1,7 @@
 let path = 'http://localhost:5000/api/v1/'
 
 
-class Handler {
+export default class Handler {
     constructor () {
 
     }
@@ -25,4 +25,3 @@ class Handler {
     }
 }
 
-export default Handler
