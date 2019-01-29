@@ -1,4 +1,4 @@
-import Handler from "./handler.js"
+import Handler from "./handler.js";
 
 document.getElementById('sign-in-form').addEventListener("submit", signIn)
 
@@ -26,7 +26,7 @@ function signIn(event) {
                 if (payload.status === 200) {
                     message = "Success"
                     handler.saveToken(payload.body.token)
-                    
+
                 }
         })
 }
