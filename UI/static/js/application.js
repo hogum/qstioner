@@ -93,10 +93,6 @@ function checkUserRole(userDetails) {
 /*
  function loginUser() {
     let logInForm = document.getElementById("signin-form");
-    
-    if (logInForm) {
-        console.log("found  it");
-    }
 
     let userEmail = logInForm.elements["email"].value;
     let userPass = logInForm.elements["password"].value;
@@ -162,7 +158,7 @@ function signIn(event) {
         "password": password
     }
 
-    handler.post('login', data)
+    handler.post('auth/login', data)
         .then(response => response.json().then (
             payload => ({status: response.status, body: payload})
             )).then(payload => {
@@ -170,7 +166,7 @@ function signIn(event) {
                 let message = undefined;
                 if (payload.status === 200) {
                     message = "Success"
-                    handler.saveToken(payload.body.token)
+                    handler.saveToken(payload.body.data[0].token)
 
                 }
         })
