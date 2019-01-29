@@ -1,4 +1,5 @@
 const url = 'http://localhost:5000/api/v1/';
+let path  = 'http://localhost:5000/api/v1/';
 // const url = 'https://qstionerv2-api-heroku.herokuapp.com/';
 
 function showNav() {
@@ -16,6 +17,33 @@ function showNav() {
 function loadNextPage(nextPage) {
     document.location.href = nextPage;
 }
+
+
+class Handler {
+    // Handles api fetch, and other common methods.
+    constructor () {
+
+    }
+
+    post (url, data) {
+        let absPath = path + url        
+
+        return fetch(absPath, {
+                method: 'POST',
+                headers: {
+                'Content-type': 'application/json',
+                'Acess-Control-Allow-Origin': '*',
+                'Acess-Control-Request-Method': 'POST',
+            },
+            body : JSON.stringify(data)
+        });
+    }
+
+    saveToken(authToken) {
+        localStorage.setItem("userToken", authToken)
+    }
+}
+
 
 
 function registerUser() {
@@ -62,8 +90,13 @@ function checkUserRole(userDetails) {
     return userDetails[0].isadmin;
 }
 
+/*
  function loginUser() {
-    let logInForm = document.getElementById("sign-in-form");
+    let logInForm = document.getElementById("signin-form");
+    
+    if (logInForm) {
+        console.log("found  it");
+    }
 
     let userEmail = logInForm.elements["email"].value;
     let userPass = logInForm.elements["password"].value;
@@ -109,5 +142,36 @@ function checkUserRole(userDetails) {
             }
         }).catch(error => console.log(error))
 }
+*/
 
 
+let handler = new Handler();
+
+document.getElementById('signin-form').addEventListener("submit", signIn)
+
+function signIn(event) {
+    // Logs in registered user to an access
+    // session
+    event.preventDefault();
+
+    let email = document.getElementById('signin-form').elements['email'].value;
+    let password = document.getElementById('signin-form').elements['password'].value;
+
+    let data = {
+        "email": email,
+        "password": password
+    }
+
+    handler.post('login', data)
+        .then(response => response.json().then (
+            payload => ({status: response.status, body: payload})
+            )).then(payload => {
+
+                let message = undefined;
+                if (payload.status === 200) {
+                    message = "Success"
+                    handler.saveToken(payload.body.token)
+
+                }
+        })
+}
