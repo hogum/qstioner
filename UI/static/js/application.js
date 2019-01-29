@@ -113,6 +113,10 @@ function signIn(event) {
                     message = "Success"
                     handler.saveToken(payload.body.data[0].token)
 
+                    // Assign guest name for failed login sessions
+                    let user = payload.body.data[0].user ? payload.body.data[0].user.split(' ')[1] : "Guest";
+                    localStorage.setItem("currentUser", user)
+
                 }
         })
 }
