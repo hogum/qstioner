@@ -24,3 +24,5 @@ class Handler {
         localStorage.setItem("userToken", authToken)
     }
 }
+
+export default Handler
