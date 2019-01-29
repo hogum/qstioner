@@ -45,7 +45,6 @@ class Handler {
 }
 
 
-
 function registerUser() {
     let regForm = document.getElementById("registration-form");
 
@@ -85,60 +84,6 @@ function registerUser() {
         }
     }).catch(error => console.log(error))
 }
-
-function checkUserRole(userDetails) {
-    return userDetails[0].isadmin;
-}
-
-/*
- function loginUser() {
-    let logInForm = document.getElementById("signin-form");
-
-    let userEmail = logInForm.elements["email"].value;
-    let userPass = logInForm.elements["password"].value;
-    let userPage = undefined;
-
-    fetch(url + 'auth/login', {
-        method: 'post',
-        headers: {
-            "Content-type": "application/json; charset=utf-8"
-        },
-        body: JSON.stringify({
-            email: userEmail,
-            password: userPass
-        })
-    }).then(function (response) {
-        return response.json()
-        }).then(function (data) {
-            let resMessage = data.status;
-            console.log(resMessage + ' resMessage');
-            console.log('data\n' + data.data);
-
-            if (resMessage === 200) {
-                let userRole = data.data[0]['isadmin'];
-                let userToken = data.data[0]['token'];
-                localstorage.setItem('userIsAdmin', userRole);
-                localstorage.setItem('userToken', userToken);
-                console.log(userToken);
-
-                if (userRole) {
-                    userPage = "admin-page.html";
-                }
-
-                else {
-                    userPage = "user_page.html";
-                }
-                logInForm.reset();
-
-                setTimeout(function () {
-                    loadNextPage(userPage)
-                }, 2000);
-            } else {
-                console.log("Failed\n" + data.status);
-            }
-        }).catch(error => console.log(error))
-}
-*/
 
 
 let handler = new Handler();
