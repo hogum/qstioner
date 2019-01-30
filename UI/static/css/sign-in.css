@@ -124,13 +124,19 @@ input#username:focus,#pass:focus,#confirm-pass:focus,#name:focus,#email:focus {
 
 input.sign-button {
     margin-top: 20px;
+    color: #fff;
     padding: 6px 13px;
     background-color: #0D7F9A;
     border-radius: 3px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                   transition: all .7s ease;
 }
 
 input.sign-button:hover {
-    background-color: #065C9D;
+    background-color: #014A66;
     cursor: pointer;
 
 }
