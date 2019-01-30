@@ -44,8 +44,13 @@ class Handler {
     }
 }
 
+let registrationForm = document.getElementById("registration-form");
 
-function registerUser() {
+if (registrationForm)
+        registrationForm.addEventListener("submit", registerUser)
+
+function registerUser(event) {
+    event.preventDefault()
     let regForm = document.getElementById("registration-form");
 
     let firstname = regForm.elements['name'].value;
@@ -66,12 +71,13 @@ function registerUser() {
             email: email,
             username: username,
             phonenumber: 123000,
-            isadmin: true,
             password: password
         })
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
+        console.log("In data\n");
+        console.log(data);
         let resMessage = data.status;
         if (resMessage === 201) {
             let page = 'sign-in.html';
