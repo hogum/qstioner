@@ -117,6 +117,14 @@ function signIn(event) {
                     let user = payload.body.data[0].user ? payload.body.data[0].user.split(' ')[1] : "Guest";
                     localStorage.setItem("currentUser", user)
 
+                    let isAdmin = payload.body.data[0].isadmin
+
+                    let userPage = isAdmin ? 'admin_page.html' : 'user_page.html'
+
+                    setTimeout(() => {
+                        window.location.href = userPage;
+                    }, 2000)
+
                 }
-        })
+        }).catch(err => console.log(err))
 }
