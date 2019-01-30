@@ -127,10 +127,12 @@ function signIn(event) {
 
                 } else {
                     // Show wrong credentials error
-                    let errSign = document.getElementById('')
-                    errSign.className
+                    let errSign = document.getElementById('cred-error')
+                    // innerHtml = payload.body.message ** For registration only
+                    errSign.style.display = 'block';
                     setTimeout(() => {
                         // Possibly clear error notification
+                        errSign.style.display = 'none';
                     }, 20000)
                 }
         }).catch(err => console.log(err))
