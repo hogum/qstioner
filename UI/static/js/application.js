@@ -125,6 +125,13 @@ function signIn(event) {
                         window.location.href = userPage;
                     }, 2000)
 
+                } else {
+                    // Show wrong credentials error
+                    let errSign = document.getElementById('')
+                    errSign.className
+                    setTimeout(() => {
+                        // Possibly clear error notification
+                    }, 20000)
                 }
         }).catch(err => console.log(err))
 }
