@@ -14,8 +14,6 @@ function showNav() {
     }
 }
 
-let handler = new Handler();
-
 function loadNextPage(nextPage) {
     document.location.href = nextPage;
 }
@@ -46,7 +44,9 @@ class Handler {
     }
 }
 
-let registrationForm = document.getElementById("registration-form");
+let handler = new Handler();
+
+let registrationForm = document.getElementById("registration-form")
 
 if (registrationForm)
         registrationForm.addEventListener("submit", registerUser)
@@ -58,8 +58,6 @@ function registerUser(event) {
     let username = registrationForm.elements['username'].value;
     let email = registrationForm.elements['email'].value;
     let password = registrationForm.elements['password'].value;
-    console.log(firstname);
-    console.log(email);
 
     let data = {
             firstname: firstname,
@@ -77,12 +75,21 @@ function registerUser(event) {
         )).then (payload => {
         if (payload.status === 201) {
             console.log("\nSuccess  Register")
+
+            // Show success message on Registration
+            // missing 
+            setTimeout(() => {
+                window.location.href = 'user_page.html';
+            }, 2500)
         } else {
             let warningMessage = document.getElementById('reg-cred--warning')
+            // invalid cred format response are an object in {message}
+            // Conflicting accounts response is an object in {body}
+            warningMessage.innerHTML = payload.body.message.username ? payload.body.message.username : payload.body.message;
             warningMessage.style.display = 'block';
-            setItem(() => {
+            setTimeout(() => {
                 warningMessage.style.display = 'none';
-            }, 10000)
+            }, 20000)
         }
     }).catch(error => console.log(error))
     
