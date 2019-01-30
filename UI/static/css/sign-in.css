@@ -102,11 +102,12 @@ input#username,#pass,#confirm-pass,#name,#email,#description,#cred-error {
 }
 
 #cred-error {
+    display: none;
     padding-top: 5px;
     text-align: center;
     font-weight: 450;
     color: #FF2D00;
-    background-color: #F7AD9D;
+    background-color: #FFD9D1;
 }
 
 input#username:hover,#pass:hover,#confirm-pass:hover,#name:hover,#email:hover {
