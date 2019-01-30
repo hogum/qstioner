@@ -14,6 +14,8 @@ function showNav() {
     }
 }
 
+let handler = new Handler();
+
 function loadNextPage(nextPage) {
     document.location.href = nextPage;
 }
@@ -50,21 +52,16 @@ if (registrationForm)
         registrationForm.addEventListener("submit", registerUser)
 
 function registerUser(event) {
-    event.preventDefault()
-    let regForm = document.getElementById("registration-form");
+    event.preventDefault();
 
-    let firstname = regForm.elements['name'].value;
-    let username = regForm.elements['username'].value;
-    let email = regForm.elements['email'].value;
-    let password = regForm.elements['password'].value;
+    let firstname = registrationForm.elements['name'].value;
+    let username = registrationForm.elements['username'].value;
+    let email = registrationForm.elements['email'].value;
+    let password = registrationForm.elements['password'].value;
     console.log(firstname);
     console.log(email);
-    fetch(url + 'auth/register', {
-        method: 'post',
-        headers: {
-            "Content-type": "application/json; charset=utf-8"
-        },
-        body: JSON.stringify({
+
+    let data = {
             firstname: firstname,
             lastname: "missing",
             othername: "missing",
@@ -72,27 +69,25 @@ function registerUser(event) {
             username: username,
             phonenumber: 123000,
             password: password
-        })
-    }).then(function (response) {
-        return response.json();
-    }).then(function (data) {
-        console.log("In data\n");
-        console.log(data);
-        let resMessage = data.status;
-        if (resMessage === 201) {
-            let page = 'sign-in.html';
-            regForm.reset();
-            loadNextPage(page);
-        }
+    }
 
-        else {
-
+    handler.post('auth/register', data)
+    .then(response => response.json().then (
+        payload => ({status: response.status, body: payload})
+        )).then (payload => {
+        if (payload.status === 201) {
+            console.log("\nSuccess  Register")
+        } else {
+            let warningMessage = document.getElementById('reg-cred--warning')
+            warningMessage.style.display = 'block';
+            setItem(() => {
+                warningMessage.style.display = 'none';
+            }, 10000)
         }
     }).catch(error => console.log(error))
+    
 }
 
-
-let handler = new Handler();
 
 let signInPage = document.getElementById('signin-form')
 if (signInPage)
