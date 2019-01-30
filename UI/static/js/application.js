@@ -88,8 +88,9 @@ function registerUser() {
 
 let handler = new Handler();
 
-document.getElementById('signin-form').addEventListener("submit", signIn)
-
+let signInPage = document.getElementById('signin-form')
+if (signInPage)
+        signInPage.addEventListener("submit", signIn)
 function signIn(event) {
     // Logs in registered user to an access
     // session
