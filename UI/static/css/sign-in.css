@@ -87,7 +87,7 @@ input {
 }
 
 
-input#username,#pass,#confirm-pass,#name,#email,#description {
+input#username,#pass,#confirm-pass,#name,#email,#description,#cred-error {
     margin: 10px;
     margin-top: 12px;
     padding: 0;
@@ -99,6 +99,36 @@ input#username,#pass,#confirm-pass,#name,#email,#description {
     border-radius: 4px;
     color: black;
 
+}
+
+#cred-error, #reg-cred--warning, #reg-cred--pass {
+    display: none;
+    padding-top: 5px;
+    text-align: center;
+    font-weight: 450;
+    color: #FF2D00;
+    background-color: #FFD9D1;
+}
+
+#reg-cred--warning, #reg-cred--pass {
+    padding-bottom: 5px;
+    border-radius: 5px;
+    font-size: .86em;
+
+}
+
+#reg-cred--success {
+    display: none;
+    padding: 10px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                   transition: all .7s ease;
+   background-image: linear-gradient(to right, #05CD00 20%, #06FF00 100%);
+   border-radius: 5px/12px;
+   color: #fff;
+   padding-left: 3.7vw;
 }
 
 input#username:hover,#pass:hover,#confirm-pass:hover,#name:hover,#email:hover {
@@ -115,13 +145,19 @@ input#username:focus,#pass:focus,#confirm-pass:focus,#name:focus,#email:focus {
 
 input.sign-button {
     margin-top: 20px;
+    color: #fff;
     padding: 6px 13px;
     background-color: #0D7F9A;
     border-radius: 3px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                   transition: all .7s ease;
 }
 
 input.sign-button:hover {
-    background-color: #065C9D;
+    background-color: #014A66;
     cursor: pointer;
 
 }

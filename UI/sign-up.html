@@ -41,7 +41,11 @@
         </div>
         <div class="wrapper-sign-in">
             <div id="container-sign-in">       
-                <form action="" method="post">
+                <form action="" method="post" id="registration-form">
+                    <p id="reg-cred--warning"> Wrong email or Password</p>
+                    <p id="reg-cred--success">
+                        Registration Sucessful
+                    </p>
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" minlength="5" required="required" title="Name should have at least 5 letters">
                     <label for="email">Email:</label>
@@ -51,6 +55,7 @@
                     <label for="password">Password:</label>
                     <input type="password" id="pass" name="password" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Password must contain at least one digit, one uppercase, one lowercase letter, and at least 6 characters">
                     <label for="confirm-password">Confirm Password:</label>
+                    <p id="reg-cred--pass"></p>
                     <input type="password" id="confirm-pass" name="confirm-password" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Passwords should be the same">
                     <div id="bottom">
                         <input class="sign-button" id="sign-up-button" type="submit" value="Sign Up">           
@@ -59,6 +64,7 @@
                 </form>
             </div><!-- /wrapper-sign-in-->
         </div>
+    <script src="static/js/application.js" type="text/javascript" charset="utf-8"></script>
     </body>
     <footer>
         <div class="footer-text">
