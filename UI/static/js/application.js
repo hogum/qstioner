@@ -51,6 +51,23 @@ let registrationForm = document.getElementById("registration-form")
 if (registrationForm)
         registrationForm.addEventListener("submit", registerUser)
 
+function showMessage(element, message) {
+    let display = document.getElementById(element)
+
+    if (message)
+        display.innerHTML = message
+
+}
+
+function validateRegPass(passA, passB) {
+    // Checks for similarity in registration passwords
+
+    while (passA !== passB) {
+        showPasswordError('reg-cred--pass', "Your passwords do not match")
+
+    }
+}
+
 function registerUser(event) {
     event.preventDefault();
 
@@ -58,6 +75,9 @@ function registerUser(event) {
     let username = registrationForm.elements['username'].value;
     let email = registrationForm.elements['email'].value;
     let password = registrationForm.elements['password'].value;
+    let retypedPass = registrationForm.elements['confirm-password'].value;
+
+    validateRegPass(password, retypedPass)
 
     let data = {
             firstname: firstname,
@@ -74,7 +94,7 @@ function registerUser(event) {
         payload => ({status: response.status, body: payload})
         )).then (payload => {
         let warningMessage = document.getElementById('reg-cred--warning')
-        let successMessage = document.getElementById('#reg-cred--success')
+        let successMessage = document.getElementById('reg-cred--success')
 
         if (payload.status === 201) {
 
