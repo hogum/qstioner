@@ -114,6 +114,7 @@ function registerUser(event) {
             // missing
 
             setTimeout(() => {
+                registrationForm.reset()
                 window.location.href = 'user_page.html';
                 successMessage.style.display = 'none'
             }, 2500)
