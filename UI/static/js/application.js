@@ -1,6 +1,5 @@
-const url = 'http://localhost:5000/api/v1/';
 let path  = 'http://localhost:5000/api/v1/';
-// const url = 'https://qstionerv2-api-heroku.herokuapp.com/';
+// const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
 
 function showNav() {
     // Toggles the nav bar button for responsiveness.
@@ -51,14 +50,6 @@ let registrationForm = document.getElementById("registration-form")
 if (registrationForm)
         registrationForm.addEventListener("submit", registerUser)
 
-function showMessage(element, message) {
-    let display = document.getElementById(element)
-
-    if (message)
-        display.innerHTML = message
-
-}
-
 function validateRegPass(passA, passB) {
     // Checks for similarity in registration passwords
     let passElement = document.getElementById('reg-cred--pass')
@@ -77,6 +68,7 @@ function validateRegPass(passA, passB) {
 }
 
 function registerUser(event) {
+    // Posts user registration form details
     event.preventDefault();
 
     let firstname = registrationForm.elements['name'].value;
