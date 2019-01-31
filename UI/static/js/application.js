@@ -64,7 +64,7 @@ function validateRegPass(passA, passB) {
     let passElement = document.getElementById('reg-cred--pass')
 
     while (passA !== passB) {
-        showPasswordError('reg-cred--pass', "Your passwords do not match")
+        passElement.innerHTML = "Just let your passwords match. cool?"
         passElement.style.display = 'block'
     }
     passElement.style.display = 'none'
@@ -81,9 +81,8 @@ function registerUser(event) {
     let password = registrationForm.elements['password'].value;
     let retypedPass = registrationForm.elements['confirm-password'].value;
 
-    
+    validateRegPass(password, retypedPass)
 
-    if (validateRegPass(password, retypedPass)) {
         let data = {
                 firstname: firstname,
                 lastname: "missing",
@@ -93,7 +92,6 @@ function registerUser(event) {
                 phonenumber: 123000,
                 password: password
         }
-    }
 
     handler.post('auth/register', data)
     .then(response => response.json().then (
