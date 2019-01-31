@@ -73,16 +73,21 @@ function registerUser(event) {
     .then(response => response.json().then (
         payload => ({status: response.status, body: payload})
         )).then (payload => {
-        if (payload.status === 201) {
-            console.log("\nSuccess  Register")
+        let warningMessage = document.getElementById('reg-cred--warning')
+        let successMessage = document.getElementById('#reg-cred--success')
 
+        if (payload.status === 201) {
+
+            warningMessage.style.display = 'none'
+            successMessage.style.display = 'block'
             // Show success message on Registration
-            // missing 
+            // missing
+
             setTimeout(() => {
                 window.location.href = 'user_page.html';
+                successMessage.style.display = 'none'
             }, 2500)
         } else {
-            let warningMessage = document.getElementById('reg-cred--warning')
             // invalid cred format response are an object in {message}
             // Conflicting accounts response is an object in {body}
             warningMessage.innerHTML = payload.body.message.username ? payload.body.message.username : payload.body.message;
