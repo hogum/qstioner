@@ -61,11 +61,15 @@ function showMessage(element, message) {
 
 function validateRegPass(passA, passB) {
     // Checks for similarity in registration passwords
+    let passElement = document.getElementById('reg-cred--pass')
 
     while (passA !== passB) {
         showPasswordError('reg-cred--pass', "Your passwords do not match")
-
+        passElement.style.display = 'block'
     }
+    passElement.style.display = 'none'
+
+    return true
 }
 
 function registerUser(event) {
@@ -77,16 +81,18 @@ function registerUser(event) {
     let password = registrationForm.elements['password'].value;
     let retypedPass = registrationForm.elements['confirm-password'].value;
 
-    validateRegPass(password, retypedPass)
+    
 
-    let data = {
-            firstname: firstname,
-            lastname: "missing",
-            othername: "missing",
-            email: email,
-            username: username,
-            phonenumber: 123000,
-            password: password
+    if (validateRegPass(password, retypedPass)) {
+        let data = {
+                firstname: firstname,
+                lastname: "missing",
+                othername: "missing",
+                email: email,
+                username: username,
+                phonenumber: 123000,
+                password: password
+        }
     }
 
     handler.post('auth/register', data)
