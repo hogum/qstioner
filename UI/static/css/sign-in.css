@@ -101,7 +101,7 @@ input#username,#pass,#confirm-pass,#name,#email,#description,#cred-error {
 
 }
 
-#cred-error, #reg-cred--warning {
+#cred-error, #reg-cred--warning, #reg-cred--pass {
     display: none;
     padding-top: 5px;
     text-align: center;
