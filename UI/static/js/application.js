@@ -63,12 +63,16 @@ function validateRegPass(passA, passB) {
     // Checks for similarity in registration passwords
     let passElement = document.getElementById('reg-cred--pass')
 
-    while (passA !== passB) {
-        passElement.innerHTML = "Just let your passwords match. cool?"
+    if (passA != passB) {
+        passElement.innerHTML = "Just let your passwords match. Cool?"
         passElement.style.display = 'block'
-    }
-    passElement.style.display = 'none'
 
+        setTimeout(() => {
+            passElement.style.display = 'none'
+        }, 6500)
+
+        return false
+    }
     return true
 }
 
@@ -81,7 +85,9 @@ function registerUser(event) {
     let password = registrationForm.elements['password'].value;
     let retypedPass = registrationForm.elements['confirm-password'].value;
 
-    validateRegPass(password, retypedPass)
+    if (! validateRegPass(password, retypedPass)) {
+        return "failed password fields"
+    }
 
         let data = {
                 firstname: firstname,
