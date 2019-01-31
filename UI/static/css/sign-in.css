@@ -114,6 +114,20 @@ input#username,#pass,#confirm-pass,#name,#email,#description,#cred-error {
     padding-bottom: 5px;
     border-radius: 5px;
     font-size: .86em;
+
+}
+
+#reg-cred--success {
+    padding: 10px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                   transition: all .7s ease;
+   background-image: linear-gradient(to right, #05CD00 20%, #06FF00 100%);
+   border-radius: 5px/12px;
+   color: #fff;
+   padding-left: 3.7vw;
 }
 
 input#username:hover,#pass:hover,#confirm-pass:hover,#name:hover,#email:hover {
