@@ -58,6 +58,20 @@ input#username,#pass,#confirm-pass,#name,#email,#description {
 
 }
 
+#meetup-detail-error {
+    display: none;
+    padding-top: 5px;
+    text-align: center;
+    font-weight: 450;
+    color: #FF2D00;
+    background-color: #fff;
+    border: 1px solid #FF0000;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    font-size: .86em;
+
+}
+
 input,#pass,#confirm-pass,#name,#email,#description {
     padding: 8px;
 }
