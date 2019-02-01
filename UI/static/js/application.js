@@ -179,3 +179,16 @@ function signIn(event) {
 let meetupDetails = document.getElementById('meetup-new--create')
 if (meetupDetails)
     meetupDetails.addEventListener("submit", createMeetup)
+
+function createMeetup(event) {
+    event.preventDefault()
+
+    let topic = meetupDetails.elements['name'].value
+    let day = meetupDetails.elements['date'].value
+    let time = meetupDetails.elements['time'].value
+    let location = meetupDetails.elements['location'].value
+    let tagsString = meetupDetails.elements['tag'].value
+    let images = meetupDetails.elements['image'].value
+
+    console.log(topic, day, time, location, tagsString, images)
+}

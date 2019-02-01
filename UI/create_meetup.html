@@ -61,9 +61,9 @@
                     <label for="image">Image:</label>
                     <input type="file" class="imagein" id="username" name="image" placeholder="Add an event-image" title="Having a picture is always cool" accept="image/*">
                     <label for="location">Location of Meet-up:</label>
-                    <input type="text" id="pass" name="location" required="required" pattern="[a-zA-Z0-9]" placeholder="e.g Kivuli gardens, Nairobi">
+                    <input type="text" id="pass" name="location" required="required" placeholder="e.g Kivuli gardens, Nairobi">
                     <label for="tag">Add Tags  - (Make finding your event easier):</label>
-                    <input type="text" id="confirm-pass" name="tag" required="required" pattern=[a-z0-9,_%+-] title="Tags make finding your event easier" placeholder="e.g Soap, Health, Fast-cars">
+                    <input type="text" id="confirm-pass" name="tag" required="required" pattern="^[A-Za-z0-9_ ?/.,':;]+$" title="Tags make finding your event easier" placeholder="e.g Soap, Health, Fast-cars">
                     <div id="bottom">
                         <input class="sign-button" id="sign-up-button" type="submit" value="Create Meet-Up">           
                         <a class="bottom-right" href="default.html"></a>
