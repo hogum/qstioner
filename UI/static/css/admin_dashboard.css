@@ -43,6 +43,9 @@ a.active {
     color: #111;
     font-size: 10px;
     margin-bottom: 0;
+    background-image: -webkit-linear-gradient(to right, #30cfd0 0%, #330867 100%);
+    background-image: -o-linear-gradient(to right, #30cfd0 0%, #330867 100%);
+    background-image: linear-gradient(to right, #30cfd0 0%, #330867 100%);
 }
 
 .user-profile .profile-admin p {
