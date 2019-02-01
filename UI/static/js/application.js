@@ -181,6 +181,7 @@ if (meetupDetails)
     meetupDetails.addEventListener("submit", createMeetup)
 
 function createMeetup(event) {
+    // Posts a meetup from given meetups details
     event.preventDefault()
 
     let topic = meetupDetails.elements['name'].value
@@ -189,6 +190,31 @@ function createMeetup(event) {
     let location = meetupDetails.elements['location'].value
     let tagsString = meetupDetails.elements['tag'].value
     let images = meetupDetails.elements['image'].value
+    happeningOn = day + 'T' + time + ':00'
+    tags = tagsString.split(',')
 
     console.log(topic, day, time, location, tagsString, images)
+    console.log(happeningOn, '\n', tags)
+
+    let data = {
+        topic: topic,
+        happeningOn: happeningOn,
+        tags: tags,
+        location: location,
+        images: images
+    }
+
+    handler.post('meetups', data)
+    .then(response => response.json()
+        .then(payload => ({status: response.status, body: payload})
+            )).then(payload => {
+        let warningMessage = document.getElementById('create-meetup--error')
+        let successMessage = document.getElementById('create-meetup--success')
+
+        if (payload.status === 200) {
+            showMessage(successMessage, msg, timeOut)
+        } else {
+            showMessage(warningMessage, msg, timeOut)
+        }
+    })
 }
