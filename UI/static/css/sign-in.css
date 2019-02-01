@@ -107,7 +107,9 @@ input#username,#pass,#confirm-pass,#name,#email,#description,#cred-error {
     text-align: center;
     font-weight: 450;
     color: #FF2D00;
-    background-color: #FFD9D1;
+    background-color: #fff;
+    border: 1px solid #FF0000;
+
 }
 
 #reg-cred--warning, #reg-cred--pass {
