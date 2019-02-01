@@ -174,3 +174,8 @@ function signIn(event) {
                 }
         }).catch(err => console.log(err))
 }
+
+
+let meetupDetails = document.getElementById('meetup-new--create')
+if (meetupDetails)
+    meetupDetails.addEventListener("submit", createMeetup)
