@@ -17,6 +17,15 @@ function loadNextPage(nextPage) {
     document.location.href = nextPage;
 }
 
+function showMessage(element, message, period) {
+    // Displays flash responses to user
+
+    element.innerHTML = message
+    element.style.display = 'block'
+    setTimeout(() => {
+        element.style.display = 'none'
+    }, period)
+}
 
 class Handler {
     // Handles api fetch, and other common methods.
@@ -208,8 +217,9 @@ function createMeetup(event) {
     .then(response => response.json()
         .then(payload => ({status: response.status, body: payload})
             )).then(payload => {
-        let warningMessage = document.getElementById('create-meetup--error')
+        let warningMessage = document.getElementById('meetup-detail-error')
         let successMessage = document.getElementById('create-meetup--success')
+        let timeOut = 5000
 
         if (payload.status === 200) {
             showMessage(successMessage, msg, timeOut)
