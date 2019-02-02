@@ -45,6 +45,7 @@ class Handler {
                 'Content-type': 'application/json',
                 'Acess-Control-Allow-Origin': '*',
                 'Acess-Control-Request-Method': 'POST',
+                'Authorization': 'Bearer ' + this.retrieveToken()
             },
             body : JSON.stringify(data)
         });
@@ -52,6 +53,14 @@ class Handler {
 
     saveToken(authToken) {
         localStorage.setItem("userToken", authToken)
+    }
+
+    retrieveToken() {
+        let token = localStorage.getItem("userToken")
+
+        if (token)
+            return token
+        return ' '
     }
 }
 
@@ -220,9 +229,10 @@ function createMeetup(event) {
     .then(response => response.json()
         .then(payload => ({status: response.status, body: payload})
             )).then(payload => {
+        console.log(payload.body)
         let warningMessage = document.getElementById('meetup-detail-error')
         let successMessage = document.getElementById('create-meetup--success')
-        let timeOut = 5000
+        let timeOut = 15000
 
         if (payload.status === 200) {
             showMessage(successMessage)
@@ -231,7 +241,7 @@ function createMeetup(event) {
             let msg = payload.body.message ? payload.body.message : payload.body.message[0]
             showMessage(warningMessage, msg, timeOut)
         }
-    })
+    }).catch(err => console.log(err))
 }
 
 function addCloseOption() {
