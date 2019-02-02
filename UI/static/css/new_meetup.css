@@ -73,6 +73,7 @@ input#username,#pass,#confirm-pass,#name,#email,#description {
 }
 
 #create-meetup--success {
+    display: none;
     padding: 4px;
     -webkit-transition: all .7s ease;
         -moz-transition: all .7s ease;
