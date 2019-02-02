@@ -20,7 +20,8 @@ function loadNextPage(nextPage) {
 function showMessage(element, message, period) {
     // Displays flash responses to user
 
-    element.innerHTML = message
+    if (message)    
+        element.textContent = message
     element.style.display = 'block'
     if (period) {
         setTimeout(() => {
@@ -224,9 +225,10 @@ function createMeetup(event) {
         let timeOut = 5000
 
         if (payload.status === 200) {
-            showMessage(successMessage, msg)
+            showMessage(successMessage)
             addCloseOption()
         } else {
+            let msg = payload.body.message ? payload.body.message : payload.body.message[0]
             showMessage(warningMessage, msg, timeOut)
         }
     })
