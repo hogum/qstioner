@@ -52,15 +52,29 @@ class Handler {
     }
 
     saveToken(authToken) {
+        // Ssaves auth token to local storage
         localStorage.setItem("userToken", authToken)
     }
 
     retrieveToken() {
+        // Gets saved auth token from local storage
         let token = localStorage.getItem("userToken")
 
         if (token)
             return token
         return ' '
+    }
+
+    getCurrentUser() {
+        return localStorage.getItem("currentUser")
+    }
+
+    confirmAuthorizedAccess() {
+         if (! this.getCurrentUser || this.getCurrentUser === 'Guest') {
+                window.location.href = 'sign-in.html'
+                let signInPrompt = document.getElementById('sign-in-guest-propmt')
+                showMessage(signInPrompt, null, null)
+        }
     }
 }
 
@@ -204,6 +218,8 @@ if (meetupDetails)
 function createMeetup(event) {
     // Posts a meetup from given meetups details
     event.preventDefault()
+
+    console.log('User\n', handler.getCurrentUser())
 
     let topic = meetupDetails.elements['name'].value
     let day = meetupDetails.elements['date'].value
