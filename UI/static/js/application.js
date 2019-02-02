@@ -22,9 +22,11 @@ function showMessage(element, message, period) {
 
     element.innerHTML = message
     element.style.display = 'block'
-    setTimeout(() => {
-        element.style.display = 'none'
-    }, period)
+    if (period) {
+        setTimeout(() => {
+            element.style.display = 'none'
+        }, period)
+    }
 }
 
 class Handler {
@@ -222,9 +224,17 @@ function createMeetup(event) {
         let timeOut = 5000
 
         if (payload.status === 200) {
-            showMessage(successMessage, msg, timeOut)
+            showMessage(successMessage, msg)
+            addCloseOption()
         } else {
             showMessage(warningMessage, msg, timeOut)
         }
+    })
+}
+
+function addCloseOption() {
+    let notificationButton = document.getElementById('meetup-notifcation--close-button')
+    notificationButton.addEventListener("click", function(event) {
+        document.getElementById('create-meetup--success').style.display = 'none'
     })
 }

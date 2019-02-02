@@ -73,7 +73,7 @@ input#username,#pass,#confirm-pass,#name,#email,#description {
 }
 
 #create-meetup--success {
-    padding: 5px;
+    padding: 4px;
     -webkit-transition: all .7s ease;
         -moz-transition: all .7s ease;
             -ms-transition: all .7s ease;
@@ -92,7 +92,7 @@ input#username,#pass,#confirm-pass,#name,#email,#description {
             -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
-.close-button {
+#meetup-notifcation--close-button {
     position: absolute;
     right: 1em;
     font-size: 18px;
