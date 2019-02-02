@@ -70,15 +70,37 @@ class Handler {
     }
 
     confirmAuthorizedAccess() {
-         if (! this.getCurrentUser || this.getCurrentUser === 'Guest') {
+
+         if ((!this.getCurrentUser()) || (this.getCurrentUser() === 'Guest')) {
                 window.location.href = 'sign-in.html'
-                let signInPrompt = document.getElementById('sign-in-guest-propmt')
-                showMessage(signInPrompt, null, null)
+                // **
+                // Script terminates on redirect
+                window.onload = function() {
+                    let signInPrompt = document.getElementById('sign-in-guest-propmt')
+                    signInPrompt.style.display = 'block'
+                 }
         }
     }
 }
 
 let handler = new Handler();
+
+
+function protectRoutes() {
+    // Checks visited files in protected have
+    // a current user session
+
+    const protectedRoutes = ['create_meetup.html']
+    let url = window.location.href
+    let currentRoute = url.substr(url.lastIndexOf('/') + 1)
+
+
+    if (protectedRoutes.includes(currentRoute)) {
+        handler.confirmAuthorizedAccess()
+    }
+}
+
+protectRoutes()
 
 let registrationForm = document.getElementById("registration-form")
 
@@ -218,8 +240,6 @@ if (meetupDetails)
 function createMeetup(event) {
     // Posts a meetup from given meetups details
     event.preventDefault()
-
-    console.log('User\n', handler.getCurrentUser())
 
     let topic = meetupDetails.elements['name'].value
     let day = meetupDetails.elements['date'].value
