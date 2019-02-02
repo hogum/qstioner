@@ -63,24 +63,36 @@ header {
 .wrapper-sign-in {
     box-sizing: border-box;
     justify-content: center;
-    display: flex;
     width: 60%;
     margin-left: 15%;
     margin-right: 15%;
+    align-content: center;
 }
 
 #container-sign-in {
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     display: block;
-    max-width: 500px;
+    max-width: 450px;
     height: auto;
     padding: 20px;
     padding-bottom: 20px;
     background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.18);
 
-
 }
+
+.sign-prompt-holder {
+    width: 100%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 450px;
+    user-select: none;
+}
+
 
 input {
     outline: none;
@@ -112,7 +124,7 @@ input#username,#pass,#confirm-pass,#name,#email,#description,#cred-error {
 
 }
 
-#reg-cred--warning, #reg-cred--pass {
+#reg-cred--warning, #reg-cred--pass, #sign-in-guest-propmt {
     padding-bottom: 5px;
     border-radius: 5px;
     font-size: .86em;
@@ -133,6 +145,14 @@ input#username,#pass,#confirm-pass,#name,#email,#description,#cred-error {
    padding-left: 3.7vw;
 }
 
+#sign-in-guest-propmt {
+    padding-top: 5px;
+    text-align: center;
+    font-weight: 450;
+    color: #FF6300;
+    background-color: #fff;
+    border: 1px solid #FF6300;
+}
 
 input#username:hover,#pass:hover,#confirm-pass:hover,#name:hover,#email:hover {
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
