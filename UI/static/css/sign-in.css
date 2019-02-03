@@ -179,14 +179,12 @@ input#username:focus,#pass:focus,#confirm-pass:focus,#name:focus,#email:focus {
             -ms-transition: all .7s ease;
                 -o-transition: all .7s ease;
                    transition: all .7s ease;
-}
-
-.sign-button {
     position:relative;
     -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
        -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
             box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
+
 .sign-button:before, .sign-button:after {
     content:"";
     position:absolute;
@@ -198,18 +196,10 @@ input#username:focus,#pass:focus,#confirm-pass:focus,#name:focus,#email:focus {
     bottom:0;
     left:10px;
     right:10px;
-    -moz-border-radius:100px / 10px;
-    border-radius:300px / 10px;
+    -moz-border-radius:90px/9.5px;
+        border-radius:90px/9.5px;
 }
-.sign-button:after {
-    right:10px;
-    left:auto;
-    -webkit-transform:skew(8deg) rotate(3deg);
-       -moz-transform:skew(8deg) rotate(3deg);
-        -ms-transform:skew(8deg) rotate(3deg);
-         -o-transform:skew(8deg) rotate(3deg);
-            transform:skew(8deg) rotate(3deg);
-}
+
 
 .sign-button:hover {
     background-color: #014A66;
