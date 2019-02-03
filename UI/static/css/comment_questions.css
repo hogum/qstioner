@@ -36,6 +36,7 @@ body {
 }
 .comment-comm p.comment-time {
     margin-top: 0;
+    font-size: .71em;
 }
 
 .add-comm {
@@ -63,22 +64,22 @@ body {
 
 .submit-comment {
     border-radius: 4px;
+    border: 1px solid #0DB102;
     background-color: #fff;
     background-color: #0DB102;
-    color: #ff8C00;
     color: #fff;
     padding: 6px 8px;
-    -webkit-transition: all .4s ease;
-        -moz-transition: all .4s ease;
-            -ms-transition: all .4s ease;
-                -o-transition: all .4s ease;
-                    transition: all .4s ease;
+    -webkit-transition: all .6s ease;
+        -moz-transition: all .6s ease;
+            -ms-transition: all .6s ease;
+                -o-transition: all .6s ease;
+                    transition: all .6s ease;
 }
 
 .submit-comment:hover {
-    background-color: #79D534;
-    background-color: #10C803;
+    background-color: #00A214;
     color: #fff;
+    cursor: pointer;
 }
 
 .comm-input {
