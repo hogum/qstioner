@@ -297,7 +297,8 @@ function createMeetup(event) {
         let successMessage = document.getElementById('create-meetup--success')
         let timeOut = 15000
 
-        if (payload.status === 200) {
+        if (payload.status === 201) {
+            warningMessage.style.display = 'none'
             showMessage(successMessage)
             addCloseOption()
         } else {
