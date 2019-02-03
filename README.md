@@ -33,7 +33,15 @@ An account is required to get access to features of the application.
  - Registred users have access to the `sign-in` button on the home page.
  - On successful registration or login, the application directs to a dashboard page, of either an Admin user or a normal user depending on the role registred.
  #### Users
- By default, all users are normal users. To change this for testing, a simple change can be made temporaily to the script in the `static/application.js` file.
+ By default, all users are normal users.
+ 
+ However, a default admin user account exists. This can be used to access the Admin-protected features of the application.
+ To log in with this administrator account, navigate to the `sign in` page and pass in the following credentials:
+ ``` shell
+ email : admincow@mammals.milk
+ password: pa555word
+ ```
+ To change the default user priviledge on registration for testing, a simple change can be made temporaily to the script in the `static/application.js` file.
  
  On the registerUser function, find the line `JSON.stringify` and add a statement `isAdmin: true,` beween the user details' statements.
  
