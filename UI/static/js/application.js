@@ -91,8 +91,31 @@ function protectRoutes() {
     // a current user session
 
     const protectedRoutes = ['create_meetup.html']
+    var previous = localStorage.getItem('previous')
     let url = window.location.href
     let currentRoute = url.substr(url.lastIndexOf('/') + 1)
+    console.log("protected", document.referrer)
+    console.log('current', currentRoute)
+    let check = localStorage.getItem('check')
+    console.log('\ncheck', check)
+
+    if (protectedRoutes.includes(currentRoute)) {    
+        localStorage.setItem('check', 0)
+        console.log('check in protected', localStorage.getItem('check'))
+    }
+    if (localStorage.getItem('check') == 0)  {
+        previousPage = currentRoute
+        localStorage.setItem('previous', previousPage)
+        localStorage.setItem('check', 1)
+    }
+    check = localStorage.getItem('check')
+    previous = localStorage.getItem('previous')
+    console.log('\ncheck again', check, previous)
+    if (currentRoute === 'sign-in.html' && protectedRoutes.includes(previous)) {
+        console.log('prev', previous)
+        document.getElementById('sign-in-guest-propmt').style.display = 'block'
+        document.getElementById('action-sign-header').style.display = 'none'
+    } 
 
 
     if (protectedRoutes.includes(currentRoute)) {
