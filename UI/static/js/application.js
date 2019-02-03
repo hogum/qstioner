@@ -94,31 +94,35 @@ function protectRoutes() {
     var previous = localStorage.getItem('previous')
     let url = window.location.href
     let currentRoute = url.substr(url.lastIndexOf('/') + 1)
-    console.log("protected", document.referrer)
-    console.log('current', currentRoute)
     let check = localStorage.getItem('check')
-    console.log('\ncheck', check)
 
+    // If user is redirected to sign-in page
+    // from a protected route,
+    // Display prompt request for login
+
+    // Assign flag 'check' as '0'
     if (protectedRoutes.includes(currentRoute)) {    
         localStorage.setItem('check', 0)
-        console.log('check in protected', localStorage.getItem('check'))
     }
+
+    // Flag matches 0
+    // Store current protected route
+    // Unmatch flag
     if (localStorage.getItem('check') == 0)  {
         previousPage = currentRoute
         localStorage.setItem('previous', previousPage)
         localStorage.setItem('check', 1)
     }
-    check = localStorage.getItem('check')
     previous = localStorage.getItem('previous')
-    console.log('\ncheck again', check, previous)
+
+    // For a redirection, display the prompt
     if (currentRoute === 'sign-in.html' && protectedRoutes.includes(previous)) {
-        console.log('prev', previous)
         document.getElementById('sign-in-guest-propmt').style.display = 'block'
         document.getElementById('action-sign-header').style.display = 'none'
     } 
 
-
     if (protectedRoutes.includes(currentRoute)) {
+        // Confirm user has access
         handler.confirmAuthorizedAccess()
     }
 }
