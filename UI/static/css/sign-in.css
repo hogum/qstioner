@@ -167,12 +167,13 @@ input#username:focus,#pass:focus,#confirm-pass:focus,#name:focus,#email:focus {
     display: inline-block;
 }
 
-input.sign-button {
+.sign-button {
     margin-top: 20px;
     color: #fff;
+    background: #fff;
     padding: 6px 13px;
     background-color: #0D7F9A;
-    border-radius: 3px;
+    border: 1px solid #0D7F9A;
     -webkit-transition: all .7s ease;
         -moz-transition: all .7s ease;
             -ms-transition: all .7s ease;
@@ -180,7 +181,37 @@ input.sign-button {
                    transition: all .7s ease;
 }
 
-input.sign-button:hover {
+.sign-button {
+    position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+.sign-button:before, .sign-button:after {
+    content:"";
+    position:absolute;
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+        -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+            box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:0;
+    bottom:0;
+    left:10px;
+    right:10px;
+    -moz-border-radius:100px / 10px;
+    border-radius:300px / 10px;
+}
+.sign-button:after {
+    right:10px;
+    left:auto;
+    -webkit-transform:skew(8deg) rotate(3deg);
+       -moz-transform:skew(8deg) rotate(3deg);
+        -ms-transform:skew(8deg) rotate(3deg);
+         -o-transform:skew(8deg) rotate(3deg);
+            transform:skew(8deg) rotate(3deg);
+}
+
+.sign-button:hover {
     background-color: #014A66;
     cursor: pointer;
 
