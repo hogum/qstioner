@@ -2,6 +2,8 @@
 Questioner is a site that facilitates interactive crowd-sourcing of questions for a meet-up. Questioner helps the meetup organizer prioritize questions to be answered. Other users can vote on asked questions and they bubble at the top or bottom log.
 
 ## USER INTERFACE
+- Note: The hosted testing interface can be accessed from [it's github-pages link](https://hogum.github.io/qstioner/UI)
+
 ### Set Up
 - Create a new directory locally and open a terminal window from that folder
 - Clone the repository
@@ -14,7 +16,6 @@ $ cd qstioner-v2
 ```
 
 ### Starting the Interface
-- The hosted testing interface can be accessed from [it's github-pages link](https://hogum.github.io/qstioner/)
 
 Open the home page file from your terminal
 ``` shell
