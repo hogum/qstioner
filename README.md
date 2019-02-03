@@ -14,6 +14,8 @@ $ cd qstioner-v2
 ```
 
 ### Starting the Interface
+- The hosted testing interface can be accessed from [it's github-pages link](https://hogum.github.io/qstioner/)
+
 Open the home page file from your terminal
 ``` shell
 $ your_preferred_browser index.html"
