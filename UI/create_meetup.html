@@ -28,8 +28,8 @@
                 </div>
                 <div class="nav-nav admin-user" id="navbar">        
                     
-                    <li><a href="admin_page.html"> meet-ups</a></li>
-                    <li><a class="active" href="create_meetup.html" title="Add a new meet-up to your schedule">create meet-up</a></li>
+                    <li><a class="header-links" href="admin_page.html">meet-ups</a></li>
+                    <li><a class="active header-links" href="create_meetup.html" title="Add a new meet-up to your schedule">create meet-up</a></li>
                     <li class="enquire"><a href="#"></a></li>
                     <li class="sgnin admin-user">
                         <a id="sign-in" href="#">sign in</a>
@@ -42,13 +42,16 @@
                 </div>    
             </ul>
         </header><!-- /header -->
-        
+        <div class="user--admin-home notifier">
+            <p id="create-meetup--success">Your meetup has been created <span id="meetup-notifcation--close-button">&times</span> </p>
+        </div>
          <div class="action-sign">
             <h4>Just follow along. It's that simple</h4>
         </div>
         <div class="wrapper-sign-in">
             <div id="container-sign-in">       
-                <form action="" method="post">
+                <form action="" method="post" id="meetup-new--create">
+                    <p id="meetup-detail-error"> Err illegal detail!</p>
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" minlength="3" required="required" 
                     pattern="[a-zA-Z0-9]{3,20}" title="Call your meet-up something cool">
@@ -61,9 +64,9 @@
                     <label for="image">Image:</label>
                     <input type="file" class="imagein" id="username" name="image" placeholder="Add an event-image" title="Having a picture is always cool" accept="image/*">
                     <label for="location">Location of Meet-up:</label>
-                    <input type="text" id="pass" name="location" required="required" pattern="[a-zA-Z0-9]" placeholder="e.g Kivuli gardens, Nairobi">
+                    <input type="text" id="pass" name="location" required="required" placeholder="e.g Kivuli gardens, Nairobi">
                     <label for="tag">Add Tags  - (Make finding your event easier):</label>
-                    <input type="text" id="confirm-pass" name="tag" required="required" pattern=[a-z0-9,_%+-] title="Tags make finding your event easier" placeholder="e.g Soap, Health, Fast-cars">
+                    <input type="text" id="confirm-pass" name="tag" required="required" pattern="^[A-Za-z0-9_ ?/.,':;]+$" title="Tags make finding your event easier" placeholder="e.g Soap, Health, Fast-cars">
                     <div id="bottom">
                         <input class="sign-button" id="sign-up-button" type="submit" value="Create Meet-Up">           
                         <a class="bottom-right" href="default.html"></a>

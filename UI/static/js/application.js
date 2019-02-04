@@ -1,5 +1,5 @@
-let path  = 'http://localhost:5000/api/v1/';
-// const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
+// let path  = 'http://localhost:5000/api/v1/';
+const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
 
 function showNav() {
     // Toggles the nav bar button for responsiveness.
@@ -17,6 +17,23 @@ function loadNextPage(nextPage) {
     document.location.href = nextPage;
 }
 
+function showMessage(element, message, period) {
+    // Displays flash responses to user
+
+    if (message)    
+        element.textContent = message
+    element.style.display = 'block'
+    if (period) {
+        setTimeout(() => {
+            element.style.display = 'none'
+        }, period)
+    }
+}
+
+function clearFilledForm(form) {
+    // Resets filled form data
+    form.reset()
+}
 
 class Handler {
     // Handles api fetch, and other common methods.
@@ -33,17 +50,89 @@ class Handler {
                 'Content-type': 'application/json',
                 'Acess-Control-Allow-Origin': '*',
                 'Acess-Control-Request-Method': 'POST',
+                'Authorization': 'Bearer ' + this.retrieveToken()
             },
             body : JSON.stringify(data)
         });
     }
 
     saveToken(authToken) {
+        // Ssaves auth token to local storage
         localStorage.setItem("userToken", authToken)
+    }
+
+    retrieveToken() {
+        // Gets saved auth token from local storage
+        let token = localStorage.getItem("userToken")
+
+        if (token)
+            return token
+        return ' '
+    }
+
+    getCurrentUser() {
+        return localStorage.getItem("currentUser")
+    }
+
+    confirmAuthorizedAccess() {
+
+         if ((!this.getCurrentUser()) || (this.getCurrentUser() === 'Guest')) {
+                window.location.href = 'sign-in.html'
+                // **
+                // Script terminates on redirect
+                window.onload = function() {
+                    let signInPrompt = document.getElementById('sign-in-guest-propmt')
+                    signInPrompt.style.display = 'block'
+                 }
+        }
     }
 }
 
 let handler = new Handler();
+
+
+function protectRoutes() {
+    // Checks visited files in protected have
+    // a current user session
+
+    const protectedRoutes = ['create_meetup.html']
+    let previous = localStorage.getItem('previous')
+    let url = window.location.href
+    let currentRoute = url.substr(url.lastIndexOf('/') + 1)
+    let check = localStorage.getItem('check')
+
+    // If user is redirected to sign-in page
+    // from a protected route,
+    // Display prompt request for login
+
+    // Assign flag 'check' as '0'
+    if (protectedRoutes.includes(currentRoute)) {    
+        localStorage.setItem('check', 0)
+    }
+
+    // Flag matches 0
+    // Store current protected route
+    // Unmatch flag
+    if (localStorage.getItem('check') == 0)  {
+        previousPage = currentRoute
+        localStorage.setItem('previous', previousPage)
+        localStorage.setItem('check', 1)
+    }
+    previous = localStorage.getItem('previous')
+
+    // For a redirection, display the prompt
+    if (currentRoute === 'sign-in.html' && protectedRoutes.includes(previous)) {
+        document.getElementById('sign-in-guest-propmt').style.display = 'block'
+        document.getElementById('action-sign-header').style.display = 'none'
+    } 
+
+    if (protectedRoutes.includes(currentRoute)) {
+        // Confirm user has access
+        handler.confirmAuthorizedAccess()
+    }
+}
+
+protectRoutes()
 
 let registrationForm = document.getElementById("registration-form")
 
@@ -173,4 +262,61 @@ function signIn(event) {
                     }, 20000)
                 }
         }).catch(err => console.log(err))
+}
+
+
+let meetupDetails = document.getElementById('meetup-new--create')
+if (meetupDetails)
+    meetupDetails.addEventListener("submit", createMeetup)
+
+function createMeetup(event) {
+    // Posts a meetup from given meetups details
+    event.preventDefault()
+
+    let topic = meetupDetails.elements['name'].value
+    let day = meetupDetails.elements['date'].value
+    let time = meetupDetails.elements['time'].value
+    let location = meetupDetails.elements['location'].value
+    let tagsString = meetupDetails.elements['tag'].value
+    let images = meetupDetails.elements['image'].value
+    happeningOn = day + 'T' + time + ':00'
+    tags = tagsString.split(',')
+
+    console.log(topic, day, time, location, tagsString, images)
+    console.log(happeningOn, '\n', tags)
+
+    let data = {
+        topic: topic,
+        happeningOn: happeningOn,
+        tags: tags,
+        location: location,
+        images: images
+    }
+
+    handler.post('meetups', data)
+    .then(response => response.json()
+        .then(payload => ({status: response.status, body: payload})
+            )).then(payload => {
+        console.log(payload)
+        let warningMessage = document.getElementById('meetup-detail-error')
+        let successMessage = document.getElementById('create-meetup--success')
+        let timeOut = 15000
+
+        if (payload.status === 201) {
+            warningMessage.style.display = 'none'
+            showMessage(successMessage)
+            addCloseOption()
+            clearFilledForm(meetupDetails)
+        } else {
+            let msg = payload.body.message ? payload.body.message : payload.body.message[0]
+            showMessage(warningMessage, msg, timeOut)
+        }
+    }).catch(err => console.log(err))
+}
+
+function addCloseOption() {
+    let notificationButton = document.getElementById('meetup-notifcation--close-button')
+    notificationButton.addEventListener("click", function(event) {
+        document.getElementById('create-meetup--success').style.display = 'none'
+    })
 }

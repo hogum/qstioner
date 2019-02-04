@@ -63,24 +63,36 @@ header {
 .wrapper-sign-in {
     box-sizing: border-box;
     justify-content: center;
-    display: flex;
     width: 60%;
     margin-left: 15%;
     margin-right: 15%;
+    align-content: center;
 }
 
 #container-sign-in {
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     display: block;
-    max-width: 500px;
+    max-width: 450px;
     height: auto;
     padding: 20px;
     padding-bottom: 20px;
     background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.18);
 
-
 }
+
+.sign-prompt-holder {
+    width: 100%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 450px;
+    user-select: none;
+}
+
 
 input {
     outline: none;
@@ -107,10 +119,12 @@ input#username,#pass,#confirm-pass,#name,#email,#description,#cred-error {
     text-align: center;
     font-weight: 450;
     color: #FF2D00;
-    background-color: #FFD9D1;
+    background-color: #fff;
+    border: 1px solid #FF0000;
+
 }
 
-#reg-cred--warning, #reg-cred--pass {
+#reg-cred--warning, #reg-cred--pass, #sign-in-guest-propmt {
     padding-bottom: 5px;
     border-radius: 5px;
     font-size: .86em;
@@ -131,6 +145,16 @@ input#username,#pass,#confirm-pass,#name,#email,#description,#cred-error {
    padding-left: 3.7vw;
 }
 
+#sign-in-guest-propmt {
+    display: none;
+    padding-top: 5px;
+    text-align: center;
+    font-weight: 450;
+    color: #FF6300;
+    background-color: #fff;
+    border: 1px solid #FF6300;
+}
+
 input#username:hover,#pass:hover,#confirm-pass:hover,#name:hover,#email:hover {
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
 }
@@ -143,20 +167,41 @@ input#username:focus,#pass:focus,#confirm-pass:focus,#name:focus,#email:focus {
     display: inline-block;
 }
 
-input.sign-button {
+.sign-button {
     margin-top: 20px;
     color: #fff;
+    background: #fff;
     padding: 6px 13px;
     background-color: #0D7F9A;
-    border-radius: 3px;
+    border: 1px solid #0D7F9A;
     -webkit-transition: all .7s ease;
         -moz-transition: all .7s ease;
             -ms-transition: all .7s ease;
                 -o-transition: all .7s ease;
                    transition: all .7s ease;
+    position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 
-input.sign-button:hover {
+.sign-button:before, .sign-button:after {
+    content:"";
+    position:absolute;
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+        -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+            box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:0;
+    bottom:0;
+    left:10px;
+    right:10px;
+    -moz-border-radius:90px/9.5px;
+        border-radius:90px/9.5px;
+}
+
+
+.sign-button:hover {
     background-color: #014A66;
     cursor: pointer;
 

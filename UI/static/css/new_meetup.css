@@ -58,6 +58,49 @@ input#username,#pass,#confirm-pass,#name,#email,#description {
 
 }
 
+#meetup-detail-error {
+    display: none;
+    padding-top: 5px;
+    text-align: center;
+    font-weight: 450;
+    color: #FF2D00;
+    background-color: #fff;
+    border: 1px solid #FF0000;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    font-size: .86em;
+
+}
+
+#create-meetup--success {
+    display: none;
+    padding: 4px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                   transition: all .7s ease;
+   background-image: linear-gradient(to right, #39D041 20%, #06FF00 100%);
+   border: 1px solid #999;
+   border-radius: 3px/8px;
+   color: #fff;
+   padding-left: 3.7vw;
+   user-select: none; 
+    -moz-user-select: none;
+       -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+         -khtml-user-select: none; /* Konqueror HTML */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+#meetup-notifcation--close-button {
+    position: absolute;
+    right: 1em;
+    font-size: 18px;
+    color: #111;
+    cursor: pointer;
+}
+
 input,#pass,#confirm-pass,#name,#email,#description {
     padding: 8px;
 }

@@ -140,7 +140,7 @@ header ul li a#sign-in:hover {
     color: #457EBB;
 }
 
-#navbar li a:before {
+#navbar .header-links:before {
   content: "";
   position: absolute;
   width: 100%;
@@ -161,7 +161,7 @@ header ul li a#sign-in:hover {
                 -o-transition: all .5s ease-in-out;
 }
 
- #navbar a:hover:before {
+ #navbar .header-links:hover:before {
   visibility: visible;
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
