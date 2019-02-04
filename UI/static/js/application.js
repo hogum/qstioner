@@ -30,6 +30,11 @@ function showMessage(element, message, period) {
     }
 }
 
+function clearFilledForm(form) {
+    // Resets filled form data
+    form.reset()
+}
+
 class Handler {
     // Handles api fetch, and other common methods.
     constructor () {
@@ -91,7 +96,7 @@ function protectRoutes() {
     // a current user session
 
     const protectedRoutes = ['create_meetup.html']
-    var previous = localStorage.getItem('previous')
+    let previous = localStorage.getItem('previous')
     let url = window.location.href
     let currentRoute = url.substr(url.lastIndexOf('/') + 1)
     let check = localStorage.getItem('check')
@@ -292,7 +297,7 @@ function createMeetup(event) {
     .then(response => response.json()
         .then(payload => ({status: response.status, body: payload})
             )).then(payload => {
-        console.log(payload.body)
+        console.log(payload)
         let warningMessage = document.getElementById('meetup-detail-error')
         let successMessage = document.getElementById('create-meetup--success')
         let timeOut = 15000
@@ -301,6 +306,7 @@ function createMeetup(event) {
             warningMessage.style.display = 'none'
             showMessage(successMessage)
             addCloseOption()
+            clearFilledForm(meetupDetails)
         } else {
             let msg = payload.body.message ? payload.body.message : payload.body.message[0]
             showMessage(warningMessage, msg, timeOut)
