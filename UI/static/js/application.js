@@ -353,8 +353,9 @@ function findMeetupPages(page) {
 }
 
 let meetupsDisplayPage = window.location.href.split('/').pop()
-findMeetupPages(meetupsDisplayPage)
 let meetups = new Array()
+
+findMeetupPages(meetupsDisplayPage)
 
 function retrieveAllMeetups() {
     /*
@@ -381,12 +382,25 @@ function displayMeetups(meetupsList) {
     let parent = document.getElementsByClassName('main-pane')[0]
 
     meetupsList.forEach(meetup => {
-        var meetupCard = meetCard.cloneNode(true)
+        let meetupCard = meetCard.cloneNode(true)
+        let day = new Date(meetup.happening_on)
+            .toString()
+            .split(' ')
+
         createMeetupElements(meetupCard, 'meetup-title', meetup.topic)
         createMeetupElements(meetupCard, 'meetup-location', meetup.location)
         createMeetupElements(meetupCard, 'maincard--card', meetup.images)
-        createMeetupElements(meetupCard, 'owner', meetup.happening_on)
-        createMeetupElements(meetupCard, 'see-more-mdetails', meetup.id)
+      
+        /* Day Mon DD YYYY */
+        createMeetupElements(meetupCard, 'owner', day.slice(0, 4).join(' '))
+       
+        /* DD Mon, YY */
+      /*  createMeetupElements(meetupCard, 'owner',
+            day.slice(1, 3)
+            + ', '
+            + day[3]
+            .slice(1, 3))
+        */createMeetupElements(meetupCard, 'see-more-mdetails', meetup.id)
         // createMeetupElements(meetup.tags)
 
         parent.appendChild(meetupCard)
@@ -404,15 +418,21 @@ function createMeetupElements(meetupCard, classItem, detail) {
 
     // Image
     if(classItem === 'maincard--card') {
-        card.style.background = 'url(' + detail[0] + ')'
+        // Fails
+        // Needs to store uploaded server images
+
+        /*
+        card.style.background = 'url(' 
+        + detail[0].split(' ').shift() + ') center no-repeat'
         return
+        */
      } else if (classItem === 'see-more-mdetails') {
+        card.href = "meetup_questions.html"
         card.addEventListener("click", function() {
-            confirm("Sign in first")
+            window.location.href = 'meetup_questions.html'
         })
         return
     } else if (classItem === 'meetup-title') {
-        console.log(detail, card)
         card.href = 'meetup_questions.html'
         card.textContent = detail
         return
