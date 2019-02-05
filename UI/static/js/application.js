@@ -388,10 +388,16 @@ function displayMeetups(meetupsList) {
         // createMeetupElements(meetup.tags)
 
     })
+}
 
-    function createMeetupElements(meetupCard, element, item) {
-          for (let i = meetupCard.childNodes.length - 1; i >= 0; i--) {
-                Things[i]
-         }
-    }
+function createMeetupElements(meetupCard, element, item) {
+      for (let i = meetupCard.childNodes.length - 1; i >= 0; i--) {
+
+            if (meetupCard.childNodes[i].className === element) {
+             if (element === 'maincard--card' && item === 'images') {
+                childNodes[i].style.background = 'url(' + item[0] + ') center no-repeat'
+            } else
+                childNodes[i].textContent = item
+            }
+     }
 }
