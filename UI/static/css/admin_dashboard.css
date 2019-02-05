@@ -147,6 +147,7 @@ a {
         -webkit-flex-flow: row wrap;
     justify-content: space-around;
     overflow: auto;
+    padding: 10px;
 
 }
 
@@ -157,14 +158,39 @@ a {
 ====================== */
 
 .admin-card-card {
+    position:  relative;
     border: 1px solid #999;
     color: #000;
     background-color: #fff;
     height: 200px;
     text-align: center;
     margin-top: 5vw;
+    margin-right: 3px;
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+}
+
+.admin-card-card:before, .admin-card-card:after {
+  position:absolute;
+  content:"";
+  box-shadow:0 10px 25px 20px #A8A8A8;
+  top:42px;
+  left:10px;
+  bottom:25px;
+  width:15%;
+  z-index:-1;
+  transform: rotate(-8deg);
+    -webkit-transform: rotate(-8deg);
+        -moz-transform: rotate(-8deg);
+}
+
+.admin-card-card:after {
+  -webkit-transform: rotate(8deg);
+  -moz-transform: rotate(8deg);
+  transform: rotate(8deg);
+  right: 9.2px;
+  left: auto;
 }
 
 .admin-card-card .acard-text p {
@@ -177,10 +203,19 @@ a {
 
 #edit-meetup-button {
     padding: 0 10px;
-    background-color: brown;
+    background-color: #6362CC;
     margin-right: 3px;
     margin-bottom: 5px;
     border-radius: 2px / 4px;
+    -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+            -ms-transition: all .3s ease;
+                -o-transition: all .3s ease;
+                    transition: all .3s ease;
+}
+
+#edit-meetup-button:hover {
+    background-color: #2A29A8;
 }
 
 .admin-card-card .acard-text p:last-child {
@@ -190,6 +225,17 @@ a {
 
 .admin-card-card .acard-text p a {
     text-decoration: none;
+    color: #444;
+    -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+            -ms-transition: all .3s ease;
+                -o-transition: all .3s ease;
+                    transition: all .3s ease;
+}
+
+.admin-card-card .acard-text p:first-child a:hover {
+    color: #000;
+    text-decoration: underline;
 }
 
 .admin-card-card .acard-text p:last-child a {
