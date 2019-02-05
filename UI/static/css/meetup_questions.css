@@ -45,6 +45,15 @@
     margin-bottom: 60px;
 }
 
+@media screen and (max-width: 750px) {
+    .container-admin {
+        width: 92vw;
+        margin-left: 3vw;
+        margin-right: 3vw;
+        padding: 10px;
+    }
+}
+
 .admin-cards .qcard-text {
     margin-top: 8px;
     font-size: 13px;
