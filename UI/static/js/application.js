@@ -382,8 +382,7 @@ function displayMeetups(meetupsList) {
 
     meetupsList.forEach(meetup => {
         var meetupCard = meetCard.cloneNode(true)
-        console.log(meetupCard)
-        createMeetupElements(meetupCard, 'meetup-title', meetup.title)
+        createMeetupElements(meetupCard, 'meetup-title', meetup.topic)
         createMeetupElements(meetupCard, 'meetup-location', meetup.location)
         createMeetupElements(meetupCard, 'maincard--card', meetup.images)
         createMeetupElements(meetupCard, 'owner', meetup.happening_on)
@@ -391,7 +390,6 @@ function displayMeetups(meetupsList) {
         // createMeetupElements(meetup.tags)
 
         parent.appendChild(meetupCard)
-        console.log(meetupCard)
 
     })
 }
@@ -406,18 +404,20 @@ function createMeetupElements(meetupCard, classItem, detail) {
 
     // Image
     if(classItem === 'maincard--card') {
-        card.style.background = 'url(' + item[0] + ') center no-repeat'
+        card.style.background = 'url(' + detail[0] + ')'
         return
-     }   
-    if (classItem === 'see-more-mdetails') {
-        card.addEventListener("click", () => {
+     } else if (classItem === 'see-more-mdetails') {
+        card.addEventListener("click", function() {
             confirm("Sign in first")
         })
         return
-    }
-    if (classItem === 'meetup-title')
+    } else if (classItem === 'meetup-title') {
+        console.log(detail, card)
         card.href = 'meetup_questions.html'
-    card.textContent = detail
+        card.textContent = detail
+        return
+    } else
+        card.textContent = detail
 }
 
 function createMeetupNodes(meetupCard, element, item) {
