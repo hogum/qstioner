@@ -378,26 +378,38 @@ function retrieveAllMeetups() {
 
 function displayMeetups(meetupsList) {
     let meetCard = document.getElementById('main-card--id')
+    let parent = document.getElementsByClassName('main-pane')[0]
 
     meetupsList.forEach(meetup => {
-        let meetupCard = meetCard.cloneNode(true)
+        var meetupCard = meetCard.cloneNode(true)
+        console.log(meetupCard)
         createMeetupElements(meetupCard, 'meetup-title', meetup.title)
         createMeetupElements(meetupCard, 'meetup-location', meetup.location)
         createMeetupElements(meetupCard, 'maincard--card', meetup.images)
         createMeetupElements(meetupCard, 'owner', meetup.happening_on)
+        createMeetupElements(meetupCard, 'see-more-mdetails', meetup.id)
         // createMeetupElements(meetup.tags)
+
+        parent.appendChild(meetupCard)
+        console.log(meetupCard)
 
     })
 }
 
 function createMeetupElements(meetupCard, element, item) {
+      let filled = ''
       for (let i = meetupCard.childNodes.length - 1; i >= 0; i--) {
+           console.log(meetupCard.childNodes[i].className, element, item, '\n')
 
             if (meetupCard.childNodes[i].className === element) {
              if (element === 'maincard--card' && item === 'images') {
-                childNodes[i].style.background = 'url(' + item[0] + ') center no-repeat'
-            } else
-                childNodes[i].textContent = item
+                filled = childNodes[i].style.background = 'url(' + item[0] + ') center no-repeat'
+            } else if (element === 'see-more-mdetails') {
+                childNodes[i].href = 'meetup_questions.html'
+            }
+             else
+                filled = childNodes[i].textContent = item
             }
      }
+
 }
