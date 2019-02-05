@@ -1,5 +1,5 @@
-// let path  = 'http://localhost:5000/api/v1/';
-const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
+let path  = 'http://localhost:5000/api/v1/';
+// const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
 
 function showNav() {
     // Toggles the nav bar button for responsiveness.
@@ -216,7 +216,13 @@ function registerUser(event) {
         } else {
             // invalid cred format response are an object in {message}
             // Conflicting accounts response is an object in {body}
-            warningMessage.innerHTML = payload.body.message.username ? payload.body.message.username : payload.body.message;
+            
+            if (payload.status === 409) {
+                warningMessage.textContent = payload.body.message
+            } else {
+
+                warningMessage.innerHTML = Object.keys(payload.body.message) ? Object.values(payload.body.message)[0] : payload.body.message
+            }
             warningMessage.style.display = 'block';
             setTimeout(() => {
                 warningMessage.style.display = 'none';
@@ -296,9 +302,6 @@ function createMeetup(event) {
     happeningOn = day + 'T' + time + ':00'
     tags = tagsString.split(',')
 
-    console.log(topic, day, time, location, tagsString, images)
-    console.log(happeningOn, '\n', tags)
-
     let data = {
         topic: topic,
         happeningOn: happeningOn,
@@ -311,7 +314,6 @@ function createMeetup(event) {
     .then(response => response.json()
         .then(payload => ({status: response.status, body: payload})
             )).then(payload => {
-        console.log(payload)
         let warningMessage = document.getElementById('meetup-detail-error')
         let successMessage = document.getElementById('create-meetup--success')
         let timeOut = 15000
