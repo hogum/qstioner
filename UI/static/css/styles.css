@@ -784,3 +784,16 @@ color:#fff;
  .active {
   color: #004BA6 !important;
  }
+
+ /*
+ *******************
+  Trending Page No Records to Show
+
+ *********************/
+ .initial-inherit {
+  display: none;
+ }
+
+ #no-content-trending {
+    display: none;
+}
