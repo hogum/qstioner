@@ -396,10 +396,35 @@ function displayMeetups(meetupsList) {
     })
 }
 
-function createMeetupElements(meetupCard, element, item) {
+function createMeetupElements(meetupCard, classItem, detail) {
+    /*
+    Find child classes of meetup display card
+    and appends new meetup data to them
+    */
+
+    card =  meetupCard.getElementsByClassName(classItem)[0]
+
+    // Image
+    if(classItem === 'maincard--card') {
+        card.style.background = 'url(' + item[0] + ') center no-repeat'
+        return
+     }   
+    if (classItem === 'see-more-mdetails') {
+        card.addEventListener("click", () => {
+            confirm("Sign in first")
+        })
+        return
+    }
+    if (classItem === 'meetup-title')
+        card.href = 'meetup_questions.html'
+    card.textContent = detail
+}
+
+function createMeetupNodes(meetupCard, element, item) {
+    /* Appends meetup data to cloned card elements*/
+
       let filled = ''
       for (let i = meetupCard.childNodes.length - 1; i >= 0; i--) {
-           console.log(meetupCard.childNodes[i].className, element, item, '\n')
 
             if (meetupCard.childNodes[i].className === element) {
              if (element === 'maincard--card' && item === 'images') {
