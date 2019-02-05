@@ -1,5 +1,5 @@
-// let path  = 'http://localhost:5000/api/v1/';
- const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
+ let path  = 'http://localhost:5000/api/v1/';
+ // const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
 
 function showNav() {
     // Toggles the nav bar button for responsiveness.
@@ -340,4 +340,58 @@ function addCloseOption() {
     notificationButton.addEventListener("click", function(event) {
         document.getElementById('create-meetup--success').style.display = 'none'
     })
+}
+
+function findMeetupPages(page) {
+    /*
+        Get all files sending GET requests to meetups resource
+    */
+    meetupPages = ['index.html', 'trending.html', 'admin_page.html']
+
+    if (meetupPages.includes(page))
+        retrieveAllMeetups()
+}
+
+let meetupsDisplayPage = window.location.href.split('/').pop()
+findMeetupPages(meetupsDisplayPage)
+let meetups = new Array()
+
+function retrieveAllMeetups() {
+    /*
+        Send get request for existing meetup records.
+    */
+
+    handler.get('meetups/upcoming')
+        .then(response => response.json()
+            .then (payload => ({status: response.status, body: payload})
+                )).then (
+                    payload => {
+                        console.log(payload)
+                        if (payload.status === 200) {
+                            meetups = payload.body.data
+                            displayMeetups(meetups)
+                        } else {
+                            // window.location.href = 'sign-in.html'
+                        }
+                    }).catch(err => console.log(err))
+}
+
+function displayMeetups(meetupsList) {
+    let meetCard = document.getElementById('main-card--id')
+
+    meetupsList.forEach(meetup => {
+        let meetupCard = meetCard.cloneNode(true)
+        createMeetupElements(meetupCard, 'meetup-title', meetup.title)
+        createMeetupElements(meetupCard, 'meetup-location', meetup.location)
+        createMeetupElements(meetupCard, 'maincard--card', meetup.images)
+        createMeetupElements(meetupCard, 'owner', meetup.happening_on)
+        // createMeetupElements(meetup.tags)
+
+    })
+
+    function createMeetupElements(meetupCard, element, item) {
+          for (let i = meetupCard.childNodes.length - 1; i >= 0; i--) {
+                Things[i]
+         }
+    }
 }
