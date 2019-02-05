@@ -45,7 +45,7 @@
                 </div>
             <div id="container-sign-in">
                 <form action="" method="post" id="signin-form">
-                    <p id="cred-error"> Wrong email or Password</p>
+                    <p id="cred-error">Incorrect email or password</p>
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required="required" pattern="[^@\s]+@[^@\s]+\.[a-zA-Z0-9]+$" title="Ooops! Email format not invented yet">
                     <label for="password">Password:</label>
@@ -53,7 +53,7 @@
                     <div id="bottom">
                         <input type="checkbox" name="sign-checkbox" value="true" checked=checked><label class="check"for="checkbox">Keep me signed in</label>
                         <a class="bottom-right pass-reset" href="#">Forgot password</a><br/>
-                        <input class="sign-button" type="submit" value="Sign in" >
+                        <input class="sign-button" id="sign-in-form-button" type="submit" value="Sign in" >
                         
                     </div>
                 </form>

@@ -1,5 +1,5 @@
-let path  = 'http://localhost:5000/api/v1/';
-// const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
+// let path  = 'http://localhost:5000/api/v1/';
+ const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
 
 function showNav() {
     // Toggles the nav bar button for responsiveness.
@@ -243,6 +243,9 @@ function signIn(event) {
 
     let email = document.getElementById('signin-form').elements['email'].value;
     let password = document.getElementById('signin-form').elements['password'].value;
+    let submitOption = document.getElementById('sign-in-form-button')
+    submitOption.value = 'Signing in...'
+    submitOption.disabled = true
 
     let data = {
         "email": email,
@@ -274,6 +277,8 @@ function signIn(event) {
                 } else {
                     // Show wrong credentials error
                     let errSign = document.getElementById('cred-error')
+                    submitOption.value = 'Sign in'
+                    submitOption.disabled = false
                     // innerHtml = payload.body.message ** For registration only
                     errSign.style.display = 'block';
                     setTimeout(() => {
