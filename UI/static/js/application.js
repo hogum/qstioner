@@ -394,13 +394,14 @@ function displayMeetups(meetupsList) {
         /* Day Mon DD YYYY */
         createMeetupElements(meetupCard, 'owner', day.slice(0, 4).join(' '))
        
-        /* DD Mon, YY */
-      /*  createMeetupElements(meetupCard, 'owner',
+        /* Date Tag -->  DD Mon, YY */
+        createMeetupElements(meetupCard, 'meetup-date-tag',
             day.slice(1, 3)
+            .join(' ')
             + ', '
             + day[3]
             .slice(1, 3))
-        */createMeetupElements(meetupCard, 'see-more-mdetails', meetup.id)
+        createMeetupElements(meetupCard, 'see-more-mdetails', meetup.id)
         // createMeetupElements(meetup.tags)
 
         parent.appendChild(meetupCard)
