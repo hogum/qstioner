@@ -163,7 +163,8 @@ a {
     height: 200px;
     text-align: center;
     margin-top: 5vw;
-    border-radius: 14px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .admin-card-card .acard-text p {
@@ -174,12 +175,26 @@ a {
     font-weight: bolder;
 }
 
+#edit-meetup-button {
+    padding: 0 10px;
+    background-color: brown;
+    margin-right: 3px;
+    margin-bottom: 5px;
+    border-radius: 2px / 4px;
+}
+
 .admin-card-card .acard-text p:last-child {
     float: right;
+    color: #fff;
 }
 
 .admin-card-card .acard-text p a {
     text-decoration: none;
+}
+
+.admin-card-card .acard-text p:last-child a {
+    color: #fff;
+    font-weight: 400;
 }
 
 .admin-card-card .acard-text {
