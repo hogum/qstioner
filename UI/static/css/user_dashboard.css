@@ -67,6 +67,12 @@ Overrride Inherited Content
     min-width: 30em;
 }
 
+@media screen and (max-width: 616.7px) {
+    .admin-card-card {
+        min-width: 2em;
+    }
+}
+
 .acard-name {
     text-transform: uppercase;
 }
