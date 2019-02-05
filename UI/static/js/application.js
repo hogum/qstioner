@@ -41,6 +41,20 @@ class Handler {
 
     }
 
+    get(url) {
+        let absPath = path + url
+
+         return fetch(absPath, {
+                method: 'GET',
+                headers: {
+                'Content-type': 'application/json',
+                'Acess-Control-Allow-Origin': '*',
+                'Acess-Control-Request-Method': 'GET',
+                'Authorization': 'Bearer ' + this.retrieveToken()
+            },
+        });
+    }
+
     post (url, data) {
         let absPath = path + url        
 
