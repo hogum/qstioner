@@ -145,7 +145,7 @@ a {
     
     flex-flow: row wrap;
         -webkit-flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     overflow: auto;
     padding: 10px;
 
@@ -160,6 +160,7 @@ a {
 .admin-card-card {
     position:  relative;
     border: 1px solid #999;
+    margin: 5px;
     color: #000;
     background-color: #fff;
     height: 200px;
@@ -169,28 +170,6 @@ a {
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1) inset;
-}
-
-.admin-card-card:before, .admin-card-card:after {
-  position:absolute;
-  content:"";
-  box-shadow:0 10px 25px 20px #A8A8A8;
-  top:42px;
-  left:10px;
-  bottom:25px;
-  width:15%;
-  z-index:-1;
-  transform: rotate(-8deg);
-    -webkit-transform: rotate(-8deg);
-        -moz-transform: rotate(-8deg);
-}
-
-.admin-card-card:after {
-  -webkit-transform: rotate(8deg);
-  -moz-transform: rotate(8deg);
-  transform: rotate(8deg);
-  right: 9.2px;
-  left: auto;
 }
 
 .admin-card-card .acard-text p {
