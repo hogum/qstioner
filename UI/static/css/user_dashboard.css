@@ -64,7 +64,13 @@ Overrride Inherited Content
 .admin-card-card {
     max-width: 27.8em;
     height: auto;
+    min-width: 30em;
 }
+
+.acard-name {
+    text-transform: uppercase;
+}
+
 .admin-card-card .acard-bottom {
     border-top: 1px solid #ADADAD;
     padding: 0 8px;
