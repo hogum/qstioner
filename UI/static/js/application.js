@@ -382,7 +382,7 @@ function displayMeetups(meetupsList) {
     let parent = document.getElementsByClassName('main-pane')[0]
     let noRecords = document.getElementById('no-content-trending')
     if (meetupsList.length === 0 && noRecords) {
-            noRecords.style.display = 'none'
+            noRecords.style.display = 'block'
     }
 
     meetupsList.forEach(meetup => {
@@ -409,6 +409,7 @@ function displayMeetups(meetupsList) {
         // createMeetupElements(meetup.tags)
 
         parent.appendChild(meetupCard)
+        meetupCard.style.display = 'block'
 
     })
 }
