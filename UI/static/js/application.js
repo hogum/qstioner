@@ -380,6 +380,10 @@ function retrieveAllMeetups() {
 function displayMeetups(meetupsList) {
     let meetCard = document.getElementById('main-card--id')
     let parent = document.getElementsByClassName('main-pane')[0]
+    let noRecords = document.getElementById('no-content-trending')
+    if (meetupsList.length === 0 && noRecords) {
+            noRecords.style.display = 'none'
+    }
 
     meetupsList.forEach(meetup => {
         let meetupCard = meetCard.cloneNode(true)
