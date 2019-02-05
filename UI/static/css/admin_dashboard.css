@@ -2,6 +2,8 @@ body {
     border: none;
     color: #656565;
     background: #F0F0F0;
+    width: 100%;
+    height: auto;
 }
 
 * {
@@ -247,4 +249,7 @@ a {
     .admin-card-card .acard-text p {
         font-size: 3vw;
     }
+}
+footer a {
+    text-decoration: underline;
 }
