@@ -1,5 +1,5 @@
- // let path  = 'http://localhost:5000/api/v1/';
- const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
+ let path  = 'http://localhost:5000/api/v1/';
+ // const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
 
 function showNav() {
     // Toggles the nav bar button for responsiveness.
@@ -179,8 +179,13 @@ function registerUser(event) {
     let email = registrationForm.elements['email'].value;
     let password = registrationForm.elements['password'].value;
     let retypedPass = registrationForm.elements['confirm-password'].value;
+    let submitOption = document.getElementById('sign-up-button')
+    submitOption.value = 'Signing up...'
+    submitOption.disabled = true
 
     if (! validateRegPass(password, retypedPass)) {
+        submitOption.value = 'Sign Up'
+        submitOption.disabled = false
         return "failed password fields"
     }
 
@@ -214,6 +219,8 @@ function registerUser(event) {
                 successMessage.style.display = 'none'
             }, 2500)
         } else {
+            submitOption.value = 'Sign Up'
+            submitOption.disabled = false
             // invalid cred format response are an object in {message}
             // Conflicting accounts response is an object in {body}
             
