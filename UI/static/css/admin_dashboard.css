@@ -85,6 +85,17 @@ a {
     text-decoration: none;
 }
 
+#no-records-admin-meetups {
+    display: none;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 900;
+    color: #777;
+}
+
+#no-rec-admin-text {
+}
+
 .create-mbutton {
     width: 100%;
     margin: 40px;
@@ -199,6 +210,10 @@ a {
     background-color: #2A29A8;
 }
 
+.inherit-admin-card {
+    display: none;
+}
+
 .admin-card-card .acard-text p:last-child {
     float: right;
     color: #fff;
@@ -249,6 +264,18 @@ a {
     .admin-card-card .acard-text p {
         font-size: 3vw;
     }
+}
+
+/*
+=======================
+    Footer
+========================
+*/
+footer {
+    position: absolute;
+    bottom: 0;
+    margin-left: 0;
+    height: auto;
 }
 footer a {
     text-decoration: underline;
