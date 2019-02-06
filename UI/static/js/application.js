@@ -377,13 +377,55 @@ function retrieveAllMeetups() {
                     }).catch(err => console.log(err))
 }
 
+function showDashboardMeetups(cardTemplate, meetupsList) {
+    /*
+        Appends meetup details to display elements in the
+        admin dashboard.
+    */
+
+    let parent = document.getElementsByClassName('meet-up-contents')[0]
+    let noRecords = document.getElementById('no-records-admin-meetups')
+    let imageUrls = ['default_meetup1.jpg',
+                'default_meetup2.jpg',
+                'default_meetup3.jpg',
+                'default_meetup4.jpg']
+
+    if (meetupsList.length === 0 && noRecords) {
+        noRecords.style.display = 'block'
+    } else {
+        document.getElementById('footer-admin-dash').style.position = 'relative'
+    }
+
+    meetupsList.forEach(meetup => {
+        let card = cardTemplate.cloneNode(true)
+        let meetupTime = new Date(meetup.happening_on)
+            .toString()
+            .split(' ')
+        let imageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)]
+        let ipa = `static/images/${imageUrl}`
+
+        card.getElementsByClassName('acard-name')[0].textContent = meetup.topic
+        card.getElementsByClassName('acard-date')[0].textContent = meetupTime
+            .slice(1, 3)
+            .join(' ')
+        card.getElementsByClassName('centre-photo')[0].src = `static/images/${imageUrl}`
+        parent.appendChild(card)
+        card.style.display = 'block'
+    })
+}
+
 function displayMeetups(meetupsList) {
     let meetCard = document.getElementById('main-card--id')
+    let adminCard = document.getElementById('inherit-admin-card')
     let parent = document.getElementsByClassName('main-pane')[0]
     let noRecords = document.getElementById('no-content-trending')
     if (meetupsList.length === 0 && noRecords) {
             noRecords.style.display = 'block'
     }
+
+    if (adminCard)
+        showDashboardMeetups(adminCard, meetupsList)
+        return
 
     meetupsList.forEach(meetup => {
         let meetupCard = meetCard.cloneNode(true)
