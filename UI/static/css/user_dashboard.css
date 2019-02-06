@@ -116,8 +116,8 @@ Overrride Inherited Content
 
 .admin-card-card:after {
   -webkit-transform: rotate(8deg);
-  -moz-transform: rotate(8deg);
-  transform: rotate(8deg);
+      -moz-transform: rotate(8deg);
+        transform: rotate(8deg);
   right: 13.7px;
   left: auto;
 }
@@ -126,6 +126,7 @@ Overrride Inherited Content
     width: 100%;
     min-height: 153px;
     text-align: center;
+    background: url('../images/default_user_page_meetup1.jpg') center no-repeat;
 }
 
 .admin-card-card:hover .acard-bottom-cont {
