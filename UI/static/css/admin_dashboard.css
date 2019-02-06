@@ -271,7 +271,7 @@ a {
     Footer
 ========================
 */
-footer {
+.footer-admin-dash {
     position: absolute;
     bottom: 0;
     margin-left: 0;
