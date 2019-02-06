@@ -184,3 +184,7 @@ Overrride Inherited Content
     font-weight: bolder;
     border-radius: 3px 0; 
 }
+
+footer {
+    position: relative;
+}

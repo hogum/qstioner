@@ -195,6 +195,7 @@ input.sign-button {
 
 footer {
     margin-top: 5vw;
+    position: relative;
     margin-bottom: 0;
     height: 45px;
     padding-top: 0;
