@@ -62,12 +62,23 @@ Overrride Inherited Content
 }
 
 .admin-card-card {
-    max-width: 23em;
+    max-width: 27.8em;
     height: auto;
+    min-width: 30em;
 }
+
+@media screen and (max-width: 616.7px) {
+    .admin-card-card {
+        min-width: 2em;
+    }
+}
+
+.acard-name {
+    text-transform: uppercase;
+}
+
 .admin-card-card .acard-bottom {
     border-top: 1px solid #ADADAD;
-    margin-top: 90px;
     padding: 0 8px;
     font-size: 11.5px;
     width: 100%;
@@ -81,6 +92,68 @@ Overrride Inherited Content
             -ms-transition: all .7s ease;
                 -o-transition: all .7s ease;
                    transition: all .7s ease;
+}
+
+.admin-card-card .acard-bottom-cont {
+    opacity: 0;
+    display: none;
+
+}
+
+.admin-card-card:before, .admin-card-card:after {
+  position:absolute;
+  content:"";
+  box-shadow:0 8px 27.8px 20px #A8A8A8;
+  top:52px;
+  left:13.6px;
+  bottom:14px;
+  width:15%;
+  z-index:-1;
+  transform: rotate(-8deg);
+    -webkit-transform: rotate(-8deg);
+        -moz-transform: rotate(-8deg);
+}
+
+.admin-card-card:after {
+  -webkit-transform: rotate(8deg);
+      -moz-transform: rotate(8deg);
+        transform: rotate(8deg);
+  right: 13.7px;
+  left: auto;
+}
+
+.admin-card-card .acard-center {
+    width: 100%;
+    min-height: 153px;
+    text-align: center;
+    background: url('../images/default_user_page_meetup1.jpg') center no-repeat;
+}
+
+.admin-card-card:hover .acard-bottom-cont {
+    display:  block;
+    opacity: 1;
+    -webkit-animation: display-transition .7s ease-in-out;
+      animation: display-transition .7s ease-in-out;
+        -o-animation: display-transition .7s ease-in-out;
+            -ms-animation: display-transition .7s ease-in-out;
+}
+
+@-webkit-keyframes display-transition {
+  0% {
+    opacity: 0;
+  }
+}
+@keyframes display-transition {
+  0% {
+    opacity: 0;
+  }
+}
+
+.separator {
+    color: red;
+    width: 100%;
+    margin: 0px 0;
+    background-color: #f0f0f0;
 }
 
 .admin-card-card .acard-bottom h6 {
@@ -110,4 +183,8 @@ Overrride Inherited Content
     padding: 2px;
     font-weight: bolder;
     border-radius: 3px 0; 
+}
+
+footer {
+    position: relative;
 }

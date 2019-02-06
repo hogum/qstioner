@@ -2,6 +2,8 @@ body {
     border: none;
     color: #656565;
     background: #F0F0F0;
+    width: 100%;
+    height: auto;
 }
 
 * {
@@ -83,6 +85,17 @@ a {
     text-decoration: none;
 }
 
+#no-records-admin-meetups {
+    display: none;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 900;
+    color: #777;
+}
+
+#no-rec-admin-text {
+}
+
 .create-mbutton {
     width: 100%;
     margin: 40px;
@@ -145,8 +158,9 @@ a {
     
     flex-flow: row wrap;
         -webkit-flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     overflow: auto;
+    padding: 10px;
 
 }
 
@@ -157,13 +171,18 @@ a {
 ====================== */
 
 .admin-card-card {
+    position:  relative;
     border: 1px solid #999;
+    margin: 5px;
     color: #000;
     background-color: #fff;
-    height: 200px;
+    height: auto;
     text-align: center;
     margin-top: 5vw;
-    border-radius: 14px;
+    margin-right: 3px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1) inset;
 }
 
 .admin-card-card .acard-text p {
@@ -174,16 +193,54 @@ a {
     font-weight: bolder;
 }
 
+#edit-meetup-button {
+    padding: 0 10px;
+    background-color: #6362CC;
+    margin-right: 3px;
+    margin-bottom: 5px;
+    border-radius: 2px / 4px;
+    -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+            -ms-transition: all .3s ease;
+                -o-transition: all .3s ease;
+                    transition: all .3s ease;
+}
+
+#edit-meetup-button:hover {
+    background-color: #2A29A8;
+}
+
+.inherit-admin-card {
+    display: none;
+}
+
 .admin-card-card .acard-text p:last-child {
     float: right;
+    color: #fff;
 }
 
 .admin-card-card .acard-text p a {
     text-decoration: none;
+    color: #444;
+    -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+            -ms-transition: all .3s ease;
+                -o-transition: all .3s ease;
+                    transition: all .3s ease;
+}
+
+.admin-card-card .acard-text p:first-child a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.admin-card-card .acard-text p:last-child a {
+    color: #fff;
+    font-weight: 400;
 }
 
 .admin-card-card .acard-text {
-    border-bottom: 1px solid black;
+    border-bottom: 1.4px solid #ADADAD;
     overflow: hidden;
 }
 
@@ -196,7 +253,7 @@ a {
 
 .admin-card-card .acard-center {
     width: 100%;
-    max-height: 150px;
+    height: auto;
     text-align: center;
 }
 
@@ -207,4 +264,19 @@ a {
     .admin-card-card .acard-text p {
         font-size: 3vw;
     }
+}
+
+/*
+=======================
+    Footer
+========================
+*/
+footer {
+    position: absolute;
+    bottom: 0;
+    margin-left: 0;
+    height: auto;
+}
+footer a {
+    text-decoration: underline;
 }

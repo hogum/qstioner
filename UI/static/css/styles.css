@@ -422,19 +422,19 @@ header ul li a#sign-in:hover {
 .card-side:hover {
     cursor: pointer;
     background-color: #EAEAEA;
-      box-shadow: 0 8px 10px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 10px 0 rgba(0,0,0,0.2);
 }
 
 .card-side img {
     height: auto;
-    padding-bottom: 40px;
     width: 100%;
     font-size: 11px;
     border-radius: 3px;
+    margin-bottom: 0;
 }
 
 .card-side #card-img-side {
-    min-height: 18vw;               /* clear*/
+    height: auto;               /* clear*/
     border-bottom: 1px solid grey;
     background-color: #EFEFEF;
     border-radius: 4px;
@@ -784,3 +784,16 @@ color:#fff;
  .active {
   color: #004BA6 !important;
  }
+
+ /*
+ *******************
+  Trending Page No Records to Show
+
+ *********************/
+ .initial-inherit {
+  display: none;
+ }
+
+ #no-content-trending {
+    display: none;
+}

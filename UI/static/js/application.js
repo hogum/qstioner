@@ -1,5 +1,5 @@
-// let path  = 'http://localhost:5000/api/v1/';
-const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
+ // let path  = 'http://localhost:5000/api/v1/';
+ const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
 
 function showNav() {
     // Toggles the nav bar button for responsiveness.
@@ -39,6 +39,20 @@ class Handler {
     // Handles api fetch, and other common methods.
     constructor () {
 
+    }
+
+    get(url) {
+        let absPath = path + url
+
+         return fetch(absPath, {
+                method: 'GET',
+                headers: {
+                'Content-type': 'application/json',
+                'Acess-Control-Allow-Origin': '*',
+                'Acess-Control-Request-Method': 'GET',
+                'Authorization': 'Bearer ' + this.retrieveToken()
+            },
+        });
     }
 
     post (url, data) {
@@ -202,7 +216,13 @@ function registerUser(event) {
         } else {
             // invalid cred format response are an object in {message}
             // Conflicting accounts response is an object in {body}
-            warningMessage.innerHTML = payload.body.message.username ? payload.body.message.username : payload.body.message;
+            
+            if (payload.status === 409) {
+                warningMessage.textContent = payload.body.message
+            } else {
+
+                warningMessage.innerHTML = Object.keys(payload.body.message) ? Object.values(payload.body.message)[0] : payload.body.message
+            }
             warningMessage.style.display = 'block';
             setTimeout(() => {
                 warningMessage.style.display = 'none';
@@ -223,6 +243,9 @@ function signIn(event) {
 
     let email = document.getElementById('signin-form').elements['email'].value;
     let password = document.getElementById('signin-form').elements['password'].value;
+    let submitOption = document.getElementById('sign-in-form-button')
+    submitOption.value = 'Signing in...'
+    submitOption.disabled = true
 
     let data = {
         "email": email,
@@ -254,6 +277,8 @@ function signIn(event) {
                 } else {
                     // Show wrong credentials error
                     let errSign = document.getElementById('cred-error')
+                    submitOption.value = 'Sign in'
+                    submitOption.disabled = false
                     // innerHtml = payload.body.message ** For registration only
                     errSign.style.display = 'block';
                     setTimeout(() => {
@@ -282,9 +307,6 @@ function createMeetup(event) {
     happeningOn = day + 'T' + time + ':00'
     tags = tagsString.split(',')
 
-    console.log(topic, day, time, location, tagsString, images)
-    console.log(happeningOn, '\n', tags)
-
     let data = {
         topic: topic,
         happeningOn: happeningOn,
@@ -297,7 +319,6 @@ function createMeetup(event) {
     .then(response => response.json()
         .then(payload => ({status: response.status, body: payload})
             )).then(payload => {
-        console.log(payload)
         let warningMessage = document.getElementById('meetup-detail-error')
         let successMessage = document.getElementById('create-meetup--success')
         let timeOut = 15000
@@ -319,4 +340,169 @@ function addCloseOption() {
     notificationButton.addEventListener("click", function(event) {
         document.getElementById('create-meetup--success').style.display = 'none'
     })
+}
+
+function findMeetupPages(page) {
+    /*
+        Get all files sending GET requests to meetups resource
+    */
+    meetupPages = ['index.html', 'trending.html', 'admin_page.html']
+
+    if (meetupPages.includes(page))
+        retrieveAllMeetups()
+}
+
+let meetupsDisplayPage = window.location.href.split('/').pop()
+let meetups = new Array()
+
+findMeetupPages(meetupsDisplayPage)
+
+function retrieveAllMeetups() {
+    /*
+        Send get request for existing meetup records.
+    */
+
+    handler.get('meetups/upcoming')
+        .then(response => response.json()
+            .then (payload => ({status: response.status, body: payload})
+                )).then (
+                    payload => {
+                        console.log(payload)
+                        if (payload.status === 200) {
+                            meetups = payload.body.data
+                            displayMeetups(meetups)
+                        } else {
+                            // window.location.href = 'sign-in.html'
+                        }
+                    }).catch(err => console.log(err))
+}
+
+function showDashboardMeetups(cardTemplate, meetupsList) {
+    /*
+        Appends meetup details to display elements in the
+        admin dashboard.
+    */
+
+    let parent = document.getElementsByClassName('meet-up-contents')[0]
+    let noRecords = document.getElementById('no-records-admin-meetups')
+    let imageUrls = ['default_meetup1.jpg',
+                'default_meetup2.jpg',
+                'default_meetup3.jpg',
+                'default_meetup4.jpg']
+
+    if (meetupsList.length === 0 && noRecords) {
+        noRecords.style.display = 'block'
+    } else {
+        document.getElementById('footer-admin-dash').style.position = 'relative'
+    }
+
+    meetupsList.forEach(meetup => {
+        let card = cardTemplate.cloneNode(true)
+        let meetupTime = new Date(meetup.happening_on)
+            .toString()
+            .split(' ')
+        let imageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)]
+        let ipa = `static/images/${imageUrl}`
+
+        card.getElementsByClassName('acard-name')[0].textContent = meetup.topic
+        card.getElementsByClassName('acard-date')[0].textContent = meetupTime
+            .slice(1, 3)
+            .join(' ')
+        card.getElementsByClassName('centre-photo')[0].src = `static/images/${imageUrl}`
+        parent.appendChild(card)
+        card.style.display = 'block'
+    })
+}
+
+function displayMeetups(meetupsList) {
+    let meetCard = document.getElementById('main-card--id')
+    let adminCard = document.getElementById('inherit-admin-card')
+    let parent = document.getElementsByClassName('main-pane')[0]
+    let noRecords = document.getElementById('no-content-trending')
+    if (meetupsList.length === 0 && noRecords) {
+            noRecords.style.display = 'block'
+    }
+
+    if (adminCard)
+        showDashboardMeetups(adminCard, meetupsList)
+        return
+
+    meetupsList.forEach(meetup => {
+        let meetupCard = meetCard.cloneNode(true)
+        let day = new Date(meetup.happening_on)
+            .toString()
+            .split(' ')
+
+        createMeetupElements(meetupCard, 'meetup-title', meetup.topic)
+        createMeetupElements(meetupCard, 'meetup-location', meetup.location)
+        createMeetupElements(meetupCard, 'maincard--card', meetup.images)
+      
+        /* Day Mon DD YYYY */
+        createMeetupElements(meetupCard, 'owner', day.slice(0, 4).join(' '))
+       
+        /* Date Tag -->  DD Mon, YY */
+        createMeetupElements(meetupCard, 'meetup-date-tag',
+            day.slice(1, 3)
+            .join(' ')
+            + ', '
+            + day[3]
+            .slice(1, 3))
+        createMeetupElements(meetupCard, 'see-more-mdetails', meetup.id)
+        // createMeetupElements(meetup.tags)
+
+        parent.appendChild(meetupCard)
+        meetupCard.style.display = 'block'
+
+    })
+}
+
+function createMeetupElements(meetupCard, classItem, detail) {
+    /*
+    Find child classes of meetup display card
+    and appends new meetup data to them
+    */
+
+    card =  meetupCard.getElementsByClassName(classItem)[0]
+
+    // Image
+    if(classItem === 'maincard--card') {
+        // Fails
+        // Needs to store uploaded server images
+
+        /*
+        card.style.background = 'url(' 
+        + detail[0].split(' ').shift() + ') center no-repeat'
+        return
+        */
+     } else if (classItem === 'see-more-mdetails') {
+        card.href = "meetup_questions.html"
+        card.addEventListener("click", function() {
+            window.location.href = 'meetup_questions.html'
+        })
+        return
+    } else if (classItem === 'meetup-title') {
+        card.href = 'meetup_questions.html'
+        card.textContent = detail
+        return
+    } else
+        card.textContent = detail
+}
+
+function createMeetupNodes(meetupCard, element, item) {
+    /* Appends meetup data to cloned card elements*/
+
+      let filled = ''
+      for (let i = meetupCard.childNodes.length - 1; i >= 0; i--) {
+
+            if (meetupCard.childNodes[i].className === element) {
+             if (element === 'maincard--card' && item === 'images') {
+                filled = childNodes[i].style.background = 'url(' + item[0] + ') center no-repeat'
+            } else if (element === 'see-more-mdetails') {
+                childNodes[i].href = 'meetup_questions.html'
+            }
+             else
+                filled = childNodes[i].textContent = item
+            }
+     }
+
 }
