@@ -513,3 +513,73 @@ function createMeetupNodes(meetupCard, element, item) {
      }
 
 }
+
+if (window.location.href.split('/').pop() === 'meetup_questions.html') {
+    console.log(window.location.href.split('/').pop(), 'meetup_questions')
+
+    getSingleMeetup()
+    getMeetupQuestions()
+} 
+
+function getSingleMeetup() {
+    /* Renders meetup details in meetup display page
+    */
+
+    let meetup_id = 1
+    handler.get(`meetups/${meetup_id}`)
+        .then(response => response.json()
+        .then (payload => ({status: response.status, body: payload})
+        )).then (
+        payload => {
+            if (payload.status === 200) {
+                meetup = payload.body.data
+                displaySingleMeetup(meetup)
+            } else {
+
+            }
+        }).catch(err => console.log(err))
+}
+
+function displaySingleMeetup(meetupItem) {
+     let day = new Date(meetup.happening_on)
+            .toString()
+            .split(' ')
+    let parentTags = document.getElementById('matgs')
+
+    document.getElementsByClassName("meet-up-title")[0].value = meetupItem.title
+    document.getElementById('location-text').value = meetupItem.location
+    document.getElementById('time-text').value = day.slice(0, 4).join(' ')
+    meetupItem.tags.forEach(tag => {
+        let tagELem = document.getElementsByClassName('mmatgs')
+        tagELem.value = tag
+        parentTags.appendChild(tagELem)
+        tagELem.style.display = 'block'
+        })
+}
+
+function getMeetupQuestions() {
+    /* Renders meetup questions in the question display area
+    */
+
+    let question_id = 1
+    let meetup_id = 1
+
+    handler.get(`meetups/${meetup_id}/questions/${question_id}`)
+        .then(response => response.json()
+        .then (payload => ({status: response.status, body: payload})
+        )).then (
+        payload => {
+            if (payload.status === 200) {
+                questions = payload.body.data
+                displayQuestions(questions)
+            } else {
+
+            }
+        }).catch(err => console.log(err))
+}
+
+function displayQuestions(questionsList) {
+    questionsList.forEach( question => {
+        //
+    })
+}
