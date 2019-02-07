@@ -286,17 +286,40 @@ New Question
 #meetup-images {
     text-align: center;
     width: 98%;
-    margin: 2em 0;
+    margin-top: 2em;
     margin-left: auto;
     margin-right: auto;
     background-color: #fff;
     height: 14em;
     border: 1px solid #999;
-    border-radius: 5px;
+    border-radius: 5px 5px 0 0;
     overflow-y: hidden;
     overflow-x: auto;
     white-space: nowrap;
     -ms-overflow-style: none; /* IE 11 */
+}
+
+#update-image {
+    margin-right: 1.5%;
+    margin-left: 1.5%;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: #E0E1E2;
+    padding: 4px;
+    border-radius: 0 0 5px 5px;
+    color: #777;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                    transition: all .4s ease;
+}
+
+#update-image:hover {
+    background-color: #D3D3D3;
+    cursor: pointer;   
 }
 
 #meetup-images::-webkit-scrollbar {
@@ -318,4 +341,20 @@ New Question
 #no-images {
     font-size: 13.6px;
     display: none;
+}
+
+.mmtags {
+    color: darkblue;
+    background-color: #FDFDFD;
+    border: 1px solid #444;
+    border-radius: 3px;
+    font-size: 12px;
+    padding: 0 8px;
+    -webkit-box-shadow:0 0 5px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow:0 0 5px rgba(0, 0, 0, 0.5);
+            box-shadow:0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.mmtags:hover {
+    cursor: pointer;
 }
