@@ -341,6 +341,11 @@ header ul li a#sign-in:hover {
     width: 74%;             /* clear*/
 }
 
+.main-pane::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+
 .wrapper .side-pane {
     width: 24%;             /* clear*/
     margin-right: 1px;        /* clear */
