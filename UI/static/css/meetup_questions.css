@@ -239,6 +239,10 @@ New Question
     width: 97%;
 }
 
+#input-question {
+    margin-top: 2em;
+}
+
 #text-question {
     width: 100%;
     height: 18vw;
@@ -277,4 +281,41 @@ New Question
 
 #create-question-button {
     color: #fff;
+}
+
+#meetup-images {
+    text-align: center;
+    width: 98%;
+    margin: 2em 0;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    height: 14em;
+    border: 1px solid #999;
+    border-radius: 5px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+    -ms-overflow-style: none; /* IE 11 */
+}
+
+#meetup-images::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+#meetup-images img {
+    height: 13em;
+    -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+    margin-top: .5em;
+    margin-left: .5em;
+    margin-right: .5em;
+    display: inline-block;
+}
+
+#no-images {
+    font-size: 13.6px;
+    display: none;
 }
