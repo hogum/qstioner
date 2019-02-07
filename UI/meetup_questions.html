@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questioner Meet-up All Questions</title>
+    <title>Questioner Meet-up</title>
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="static/css/admin_dashboard.css">
     <link rel="stylesheet" href="static/css/meetup_questions.css">
@@ -46,8 +46,21 @@
             add image
         </div>
         <div id="meetup-dtails">
-            <p class="mlocation detail">Location :</p>
-            <p class="mdate detail"></p>
+            <p class="mlocation detail">Location: <span id="location-text"></span></p>
+            <p class="mdate detail">Time: <span id="time-text"></span></p>
+            <p></p>
+        </div>
+        <div class="rsvp-option">
+            <p class="rsvp-label">Send RSVP</p>
+            <p><select id="select-rs" name="rsvp">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+              <option value="maybe">Maybe</option>
+            </select>
+            </p>
+            <p><input id="submit-rsvp" type="submit" value="Send"></p>
+            <p class="current-rs">Current RSVP:</p>
+            <p id="current-rsvp">None</p>
         </div>
         <div class="container-admin">
             <div id="mtags">
@@ -56,6 +69,8 @@
                     <span class="mmtags">tag</span>
                     <span class="mmtags">tag</span>
                     <span class="mmtags">tag</span>
+                    <span id="tag-text"> <input  id="tag-input" type="text" name="tag" value="" placeholder=""> </span>
+                    <span id="new-tag">Add tag</span>
 
                 </div>
             <div class="meet-up-contents">
