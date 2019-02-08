@@ -491,7 +491,6 @@ input[type=file]:hover {
 @media screen and (max-width: 494px) {
     .edit-t {
         margin-top: .5em;
-        border: 1px solid #333;
         width: 100%;
         display: inline-block;
         float: none;
@@ -500,4 +499,8 @@ input[type=file]:hover {
        float: right;
        margin: 0 3px;
     }
+}
+
+.mmtags:not(.inherited) {
+    display: none;
 }
