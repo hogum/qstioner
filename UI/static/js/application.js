@@ -485,7 +485,6 @@ function createMeetupElements(meetupCard, classItem, detail, meetup_id) {
     */
 
     card =  meetupCard.getElementsByClassName(classItem)[0]
-    console.log(card)
 
     // Image
     if(classItem === 'maincard--card') {
@@ -534,6 +533,7 @@ if (window.location.href.includes('meetup_questions.html')) {
 
     getSingleMeetup()
     // getMeetupQuestions()
+    showRsvpStatus()
 }
 
 if (window.location.href.includes('tagged_meetups.html')) {
@@ -575,7 +575,6 @@ function addNewTag(meetupId) {
     .then(response => response.json()
         .then(payload => ({status: response.status, body: payload})
             )).then(payload => {
-        console.log(payload)
         if (payload.status === 200) {
             updateTag(newTag)
         } else {
@@ -612,6 +611,7 @@ function displaySingleMeetup(meetupItem) {
     document.getElementById('location-text').textContent = meetupItem.location
     document.getElementById('time-text').textContent = day.slice(0, 4).join(' ') + ', ' + day.slice(4, 5)
     document.getElementById('new-tag').addEventListener('click', () => addNewTag(meetupItem.id))
+    document.getElementById('submit-rsvp').addEventListener('click', () => sendRSVP(meetupItem.id))
 
     meetupItem.tags.forEach(tag => {
         let tagELem = document.getElementById('mtag-inherit').cloneNode(true)
@@ -666,4 +666,29 @@ function showTaggedMeetups() {
 
             }
         }).catch(err => console.log(err))
+}
+
+function sendRSVP(meetupId) {
+    /*
+        POSTs a user RSVP to a meetup
+    */
+    let rsvp = document.getElementById('select-rs').value
+    let data = {'response': rsvp}
+
+    handler.post(`meetups/${meetupId}/response`, data)
+    .then(response => response.json()
+        .then(payload => ({status: response.status, body: payload})
+            )).then(payload => {
+        console.log(payload)
+        if (payload.status === 201) {
+            document.getElementById('current-rsvp').textContent = rsvp
+            localStorage.setItem('meetupRSVP', rsvp)
+        } else {
+            
+        }
+    }).catch(err => console.log(err))
+}
+
+function showRsvpStatus() {
+    document.getElementById('current-rsvp').textContent = localStorage.getItem('meetupRSVP')
 }
