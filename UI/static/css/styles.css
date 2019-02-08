@@ -324,7 +324,6 @@ header ul li a#sign-in:hover {
 
 .wrapper .content {
     overflow: hidden;
-    border: 1px solid #000;
     margin-top: 150px;
 }
 
@@ -339,6 +338,11 @@ header ul li a#sign-in:hover {
 
 .wrapper .main-pane {
     width: 74%;             /* clear*/
+}
+
+.main-pane::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
 }
 
 .wrapper .side-pane {
@@ -796,4 +800,32 @@ color:#fff;
 
  #no-content-trending {
     display: none;
+}
+
+/*
+===========================
+
+Tagged
+===========================*/
+
+#tag-title {
+  font-weight: 900;
+  text-align: center;
+  color: #333;
+  text-transform: uppercase;
+  display: block;
+  width: 100%;
+  background-color: #444;
+  color: #fff;
+}
+
+#tag-title-text {
+  display: block;
+}
+#tagged-side {
+  display: none;
+}
+
+#tagged-main {
+  width: 100%;
 }

@@ -70,6 +70,21 @@ class Handler {
         });
     }
 
+    patch (url, data) {
+        let absPath = path + url        
+
+        return fetch(absPath, {
+                method: 'PATCH',
+                headers: {
+                'Content-type': 'application/json',
+                'Acess-Control-Allow-Origin': '*',
+                'Acess-Control-Request-Method': 'POST',
+                'Authorization': 'Bearer ' + this.retrieveToken()
+            },
+            body : JSON.stringify(data)
+        });
+    }
+
     saveToken(authToken) {
         // Ssaves auth token to local storage
         localStorage.setItem("userToken", authToken)
@@ -102,7 +117,7 @@ class Handler {
     }
 }
 
-let handler = new Handler();
+let handler = new Handler()
 
 
 function protectRoutes() {
@@ -147,7 +162,7 @@ function protectRoutes() {
 }
 
 protectRoutes()
-
+clearSigninPrompts()
 let registrationForm = document.getElementById("registration-form")
 
 if (registrationForm)
@@ -170,6 +185,19 @@ function validateRegPass(passA, passB) {
     return true
 }
 
+function clearSigninPrompts() {
+    /*
+        Removes sign in prompts for logged in user
+    */
+
+    if ((handler.getCurrentUser()) && (handler.getCurrentUser !== 'Guest')) {
+        let signPrompt = document.getElementById('sign-in')
+
+        if (signPrompt)
+            signPrompt.style.display = 'none'
+    }
+}
+
 function registerUser(event) {
     // Posts user registration form details
     event.preventDefault();
@@ -179,8 +207,13 @@ function registerUser(event) {
     let email = registrationForm.elements['email'].value;
     let password = registrationForm.elements['password'].value;
     let retypedPass = registrationForm.elements['confirm-password'].value;
+    let submitOption = document.getElementById('sign-up-button')
+    submitOption.value = 'Signing up...'
+    submitOption.disabled = true
 
     if (! validateRegPass(password, retypedPass)) {
+        submitOption.value = 'Sign Up'
+        submitOption.disabled = false
         return "failed password fields"
     }
 
@@ -214,6 +247,8 @@ function registerUser(event) {
                 successMessage.style.display = 'none'
             }, 2500)
         } else {
+            submitOption.value = 'Sign Up'
+            submitOption.disabled = false
             // invalid cred format response are an object in {message}
             // Conflicting accounts response is an object in {body}
             
@@ -372,7 +407,7 @@ function retrieveAllMeetups() {
                             meetups = payload.body.data
                             displayMeetups(meetups)
                         } else {
-                            // window.location.href = 'sign-in.html'
+                            //window.location.href = 'sign-in.html'
                         }
                     }).catch(err => console.log(err))
 }
@@ -402,13 +437,15 @@ function showDashboardMeetups(cardTemplate, meetupsList) {
             .toString()
             .split(' ')
         let imageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)]
-        let ipa = `static/images/${imageUrl}`
+        let title = card.getElementsByClassName('meetup-link')[0]
 
-        card.getElementsByClassName('acard-name')[0].textContent = meetup.topic
+        title.textContent = meetup.topic
+        title.href = `meetup_questions.html?id=${meetup.id}`
         card.getElementsByClassName('acard-date')[0].textContent = meetupTime
             .slice(1, 3)
             .join(' ')
         card.getElementsByClassName('centre-photo')[0].src = `static/images/${imageUrl}`
+        card.getElementsByClassName('edit-meets-location')[0].href = `edit_meetups.html?id=${meetup.id}`
         parent.appendChild(card)
         card.style.display = 'block'
     })
@@ -425,7 +462,7 @@ function displayMeetups(meetupsList) {
 
     if (adminCard)
         showDashboardMeetups(adminCard, meetupsList)
-        return
+
 
     meetupsList.forEach(meetup => {
         let meetupCard = meetCard.cloneNode(true)
@@ -433,7 +470,7 @@ function displayMeetups(meetupsList) {
             .toString()
             .split(' ')
 
-        createMeetupElements(meetupCard, 'meetup-title', meetup.topic)
+        createMeetupElements(meetupCard, 'meetup-title', meetup.topic, meetup.id)
         createMeetupElements(meetupCard, 'meetup-location', meetup.location)
         createMeetupElements(meetupCard, 'maincard--card', meetup.images)
       
@@ -456,7 +493,7 @@ function displayMeetups(meetupsList) {
     })
 }
 
-function createMeetupElements(meetupCard, classItem, detail) {
+function createMeetupElements(meetupCard, classItem, detail, meetup_id) {
     /*
     Find child classes of meetup display card
     and appends new meetup data to them
@@ -469,19 +506,19 @@ function createMeetupElements(meetupCard, classItem, detail) {
         // Fails
         // Needs to store uploaded server images
 
-        /*
-        card.style.background = 'url(' 
-        + detail[0].split(' ').shift() + ') center no-repeat'
+        
+        // card.style.background = 'url(' 
+        // + detail[0].split(' ').shift() + ') center no-repeat'
         return
-        */
+        
      } else if (classItem === 'see-more-mdetails') {
-        card.href = "meetup_questions.html"
+        card.href = `meetup_questions.html?id=${detail}`
         card.addEventListener("click", function() {
-            window.location.href = 'meetup_questions.html'
+            // window.location.href = 'meetup_questions.html'
         })
         return
     } else if (classItem === 'meetup-title') {
-        card.href = 'meetup_questions.html'
+        card.href = `meetup_questions.html?id=${meetup_id}`
         card.textContent = detail
         return
     } else
@@ -505,4 +542,370 @@ function createMeetupNodes(meetupCard, element, item) {
             }
      }
 
+}
+
+if (window.location.href.includes('meetup_questions.html')) {
+
+    getSingleMeetup()
+    getMeetupQuestions()
+    showRsvpStatus()
+    createQuestion()
+}
+
+if (window.location.href.includes('tagged_meetups.html')) {
+    showTaggedMeetups()
+}
+
+if (window.location.href.includes('comment_question.html')) {
+    showComments()
+    submitComment()
+}
+
+function getSingleMeetup() {
+    /* Renders meetup details in meetup display page
+    */
+
+    let meetup_id = new URLSearchParams(window.location.search).get('id')
+    handler.get(`meetups/${meetup_id}`)
+        .then(response => response.json()
+        .then (payload => ({status: response.status, body: payload})
+        )).then (
+        payload => {
+            if (payload.status === 200) {
+                meetup = payload.body.data
+                displaySingleMeetup(meetup[0])
+            } else {
+
+            }
+        }).catch(err => console.log(err))
+}
+
+function addNewTag(meetupId) {
+    /**
+        Sends a request to add a tag to a meetup item
+    **/
+    
+    let newTag = document.getElementById('tag-input').value
+    let data = {}
+    const pattern = new RegExp('^[0-9]+$')
+
+    if (! newTag || pattern.test(newTag))
+        return
+
+    handler.post(`meetup/${meetupId}/${newTag}`, data)
+    .then(response => response.json()
+        .then(payload => ({status: response.status, body: payload})
+            )).then(payload => {
+        if (payload.status === 200) {
+            updateTag(newTag)
+        } else {
+            
+        }
+    }).catch(err => console.log(err))
+
+
+}
+
+function updateTag(tag) {
+    let tagELem = document.getElementById('mtag-inherit').cloneNode(true)
+    let presentTags = document.getElementsByClassName('mmtags')
+
+    for (let i = presentTags.length - 1; i >= 0; i--) {
+        console.log(presentTags[i].textContent)
+        if (presentTags[i].textContent === tag)
+            return
+    }
+   
+    tagELem.textContent = tag
+    tagELem.href = `tagged_meetups.html?tag=${tag}` 
+    document.getElementById('tags-buttons').appendChild(tagELem)
+    tagELem.style.display = 'inline-block'
+}
+
+function displaySingleMeetup(meetupItem) {
+     let day = new Date(meetupItem.happeningOn)
+            .toString()
+            .split(' ')
+    let parentTags = document.getElementById('tags-buttons')
+
+    document.getElementsByClassName("meet-up-title")[0].textContent = meetupItem.topic
+    document.getElementById('location-text').textContent = meetupItem.location
+    document.getElementById('time-text').textContent = day.slice(0, 4).join(' ') + ', ' + day.slice(4, 5)
+    document.getElementById('new-tag').addEventListener('click', () => addNewTag(meetupItem.id))
+    document.getElementById('submit-rsvp').addEventListener('click', () => sendRSVP(meetupItem.id))
+
+    meetupItem.tags.forEach(tag => {
+        let tagELem = document.getElementById('mtag-inherit').cloneNode(true)
+        
+        tagELem.textContent = tag
+        tagELem.href = `tagged_meetups.html?tag=${tag}`
+        parentTags.appendChild(tagELem)
+        tagELem.style.display = 'inline-block'
+        })
+}
+
+function getMeetupQuestions() {
+    /* Renders questions to a meetup in the question display area
+    */
+
+    let meetup_id = new URLSearchParams(window.location.search).get('id')
+
+    handler.get(`meetups/${meetup_id}/questions`)
+        .then(response => response.json()
+        .then (payload => ({status: response.status, body: payload})
+        )).then (
+        payload => {
+            if (payload.status === 200) {
+                questions = payload.body.data
+                displayQuestions(questions)
+            } else {
+
+            }
+        }).catch(err => console.log(err))
+}
+
+function displayQuestions(questionsList) {
+    /*
+        Renders details of each fetched question to the
+        question display elements.
+    */
+
+    let title = document.getElementById('question-card-inherit')
+    let parent = document.getElementById('meetup-ques-display')
+
+    if (questionsList.length === 0) {
+        document.getElementById('no-questions-records').style.display = 'block'
+        return
+    }
+
+    questionsList.forEach(question => {
+        let qsCard = title.cloneNode(true)
+        let body = qsCard.getElementsByClassName('question-body-cl')[0]
+        let tags = qsCard.getElementsByClassName('qtags')
+
+        body.textContent = question.body.slice(0, 220) + '...'
+        body.href = `comment_question.html?question=${question.id}&title=${question.title}`
+        qsCard.getElementsByClassName('up-vote')[0].addEventListener(
+            'click', () => sendVote(question.id, 'upvote'))
+        qsCard.getElementsByClassName('down-vote')[0].addEventListener(
+            'click', () => sendVote(question.id, 'downvote'))
+        qsCard.getElementsByClassName('vote-count')[0].textContent = question.votes
+
+        for (let i = tags.length - 1; i >= 0; i--) {
+            let word = 
+            tags[i].textContent = question.title
+            .split(' ')[
+            Math.floor(Math.random() * tags.length)]
+        }
+        parent.appendChild(qsCard)
+        qsCard.style.display = 'block'
+    })
+}
+
+function sendVote(qId, vote) {
+    /*
+        Sends a PATCH request to UPvote or DOWN vote a particular
+        question.
+    */
+
+    handler.patch(`questions/${qId}/${vote}`)
+    .then(response => response.json()
+        .then (payload => ({status: response.status, body: payload})
+        )).then (
+        payload => {
+            console.log(payload)
+            if (payload.status === 200) {
+                window.location.reload()
+            } else {
+
+            }
+        }).catch(err => console.log(err))
+}
+
+function showTaggedMeetups() {
+    let meetupTag = new URLSearchParams(window.location.search).get('tag')
+    document.getElementById('tag-title-text').textContent = `${meetupTag} Meetups`
+
+    handler.get(`meetup/${meetupTag}`)
+    .then(response => response.json()
+        .then (payload => ({status: response.status, body: payload})
+        )).then (
+        payload => {
+            if (payload.status === 200) {
+                let meetups = payload.body.data
+                displayMeetups(meetups)
+            } else {
+
+            }
+        }).catch(err => console.log(err))
+}
+
+function sendRSVP(meetupId) {
+    /*
+        POSTs a user RSVP to a meetup
+    */
+    let rsvp = document.getElementById('select-rs').value
+    let rsvpEl = document.getElementById('current-rsvp')
+    let data = {'response': rsvp}
+
+    handler.post(`meetups/${meetupId}/response`, data)
+    .then(response => response.json()
+        .then(payload => ({status: response.status, body: payload})
+            )).then(payload => {
+        if (payload.status === 201) {
+            document.getElementById('current-rsvp').textContent = rsvp
+            localStorage.setItem('meetupRSVP', rsvp)
+            styleRsvpDisplay(rsvpEl, rsvp)
+        } else if (payload.status === 409){
+            rsvpEl.textContent = rsvp
+            styleRsvpDisplay(rsvpEl, rsvp)
+        }
+    }).catch(err => console.log(err))
+}
+
+function showRsvpStatus() {
+    /*Get rsvp of current logged in user*/
+    let rsvpEl = document.getElementById('current-rsvp')
+    let response = localStorage.getItem('meetupRSVP')
+    
+    rsvpEl.textContent = response
+    styleRsvpDisplay(rsvpEl, response)
+}
+
+function styleRsvpDisplay(rsvpItem, answer) {
+    /*
+        Changes color of user rsvp depending on
+        given response.
+    */
+
+    let ans = answer.toLowerCase()
+
+    if (ans === 'yes')
+        rsvpItem.style.color = '#098903'
+    else if (ans === 'no')
+        rsvpItem.style.color = '#B31100'
+    else
+        rsvpItem.style.color = '#C07D07'
+}
+
+function createQuestion() {
+        let send = document.getElementsByClassName('createq-holder')[0]
+
+
+    send.addEventListener('click', () => {
+        let text = document.getElementById('text-question').value
+        let meetupId = new URLSearchParams(window.location.search).get('id')
+        let data = {
+            title: text.split(' ').slice(0, 50).join(' '),
+            body: text}
+
+        handler.post(`meetups/${meetupId}/questions`, data)
+            .then(response => response.json()
+                .then(payload => ({status: response.status, body: payload})
+                )).then(payload => {
+
+                if (payload.status === 201) {
+                   showQuestionError("Question Created", 'success')
+                } else if(payload.status === 409){
+                    let msg = "You've posted this question"
+                    showQuestionError(msg)                    
+                } else {
+                    showQuestionError("Just enter something readable, cool?")
+                }
+
+            }).catch(err => console.log(err))
+    })
+}
+
+function showQuestionError(msg, success) {
+    let elem = document.getElementById('invalidq')
+    elem.style.visibility = 'visible'
+    let txt = document.getElementById('invalidq-entry')
+
+    txt.textContent = msg
+    if (success) {
+        document.getElementById('invalidq-entry').style.color = '#5ECDEF'
+        elem.style.border = '1px solid #9FE7FD'
+    }
+
+    setTimeout(() => {
+        elem.style.visibility = 'hidden'
+        
+        txt.style.color = '#8A0000'
+        elem.style.border = '1px solid #E76200'
+
+    }, 3000)
+}
+
+function showComments() {
+    /*
+        Fetches comments all comments to a question.
+    */
+
+    let question_id = new URLSearchParams(window.location.search).get('question')
+
+     handler.get(`questions/${question_id}/comment`)
+    .then(response => response.json()
+        .then(payload => ({status: response.status, body: payload})
+            )).then(payload => {
+        if (payload.status === 200) {
+            displayComments(payload.body.data)
+        } else {
+        
+        }
+    }).catch(err => console.log(err))
+}
+
+function displayComments(commentList) {
+    /*
+        Renders details of each fetched comment to the
+        comments display page.
+    */
+
+    let title = document.getElementById('comments-inherit')
+    let parent = document.getElementById('comments-cont')
+    let qtitle = new URLSearchParams(window.location.search).get('title')
+    let qId = new URLSearchParams(window.location.search).get('question')
+
+    document.getElementById('com-header').textContent = qtitle
+
+    if (commentList.length === 0) {
+        document.getElementsByClassName('no-comments-rec')[0].style.display = 'block'
+        return
+    }
+
+    commentList.forEach(comment => {
+        let cCard = title.cloneNode(true)
+        let body = cCard.getElementsByClassName('comment-text')[0]
+
+        body.textContent = comment.body
+        parent.appendChild(cCard)
+        cCard.style.display = 'block'
+        })
+
+    document.getElementById('footer-cq').style.position = 'relative'
+}
+
+function submitComment() {
+     let send = document.getElementById('send-comment')
+     let questId = new URLSearchParams(window.location.search).get('question')
+
+    send.addEventListener('click', () => {
+        let questId = new URLSearchParams(window.location.search).get('question')
+        let text = document.getElementById('text--comment').value
+        let data = {body: text}
+
+        handler.post(`questions/${questId}/comment`, data)
+            .then(response => response.json()
+                .then(payload => ({status: response.status, body: payload})
+                )).then(payload => {
+                console.log(payload)
+                if (payload.status === 201) {
+                    window.location.reload()
+                } else {
+                    showQuestionError("Just enter something readable, cool?")
+                }
+
+            }).catch(err => console.log(err))
+    })
 }

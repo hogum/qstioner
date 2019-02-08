@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questioner Meet-up All Questions</title>
+    <title>Questioner Meet-up</title>
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="static/css/admin_dashboard.css">
     <link rel="stylesheet" href="static/css/meetup_questions.css">
@@ -22,21 +22,74 @@
                 </div>
         </div>
         <div class="action-sign">
-            <h4><span class="meet-up-title">Meet-up Spam</span> Questions</h4>
+            <h4><span class="meet-up-title">Meet-up Spam</span></h4>
         </div>
-         <div class="create-mbutton">
-            <a id="create-meetup" href="#">Add Question</a>
+         <div id="meetup-images">
+            <p id="no-images">No images for this meetup</p>
+            <img class="images--meetup" src="static/images/default_meetup1.jpg" alt="">
+                        <img src="static/images/default_meetup1.jpg" alt="">
+            <img class="images--meetup" src="static/images/default_meetup1.jpg" alt="">
+            <img class="images--meetup" src="static/images/default_meetup1.jpg" alt="">
+            <img class="images--meetup" src="static/images/default_meetup1.jpg" alt="">
+            <img class="images--meetup" src="static/images/default_meetup1.jpg" alt="">
+            <img class="images--meetup" src="static/images/default_meetup1.jpg" alt="">
+            <img class="images--meetup" src="static/images/default_meetup1.jpg" alt="">
+            <img class="images--meetup" src="static/images/default_meetup1.jpg" alt="">
+            <img class="images--meetup" src="static/images/default_meetup1.jpg" alt="">
+            <img class="images--meetup" src="static/images/default_meetup1.jpg" alt="">
+            <img class="images--meetup" src="static/images/default_meetup1.jpg" alt="">
+            <img class="images--meetup" src="static/images/default_meetup1.jpg" alt="">
+            <img class="images--meetup" src="static/images/default_meetup1.jpg" alt="">
+
+        </div>
+        <div id="update-image">
+            <input type="file" name="image" value="" accept="image/*" placeholder="add image"><p id="imgs">add image</p>
+        </div>
+        <div id="meetup-dtails">
+            <p class="mlocation detail">Location: <span id="location-text"></span></p>
+            <p class="mdate detail">Time: <span id="time-text"></span></p>
+            <p></p>
+        </div>
+        <div class="rsvp-option">
+            <p class="rsvp-label">Send RSVP</p>
+            <p><select id="select-rs" name="rsvp">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+              <option value="maybe">Maybe</option>
+            </select>
+            </p>
+            <p><input id="submit-rsvp" type="submit" value="Send"></p>
+            <p class="current-rs">Current RSVP:</p>
+            <p id="current-rsvp">None</p>
         </div>
         <div class="container-admin">
-            <div class="meet-up-contents">
-                <div class="admin-cards">
-                        <div class="question-card-card">
+            <div id="mtags">
+                <div id="tags-buttons">    
+                    <span> <a id="mtag-inherit" class="mmtags inherited" href="#">tag</a></span>
+                    <span class="mmtags">tag</span>
+                    <span class="mmtags">tag</span>
+                    <span class="mmtags">tag</span>
+                    <span class="mmtags">tag</span>
+                </div>
+                    <div class="edit-t">
+                        <span id="tag-text"> <input  id="tag-input" type="text" title="Enter a valid tag" name="tag" value="" placeholder="add tag"> </span>
+                        <span id="new-tag">Add tag</span>
+                    </div>
+
+                </div>
+            <div class="meet-up-contents" id="meetup-ques-display">
+                <div id="no-questions-records">
+                    <p>This meetup has no Questions to display</p>
+                </div>
+                
+                <div class="admin-cards inheritq" id="question-card-inherit">
+                        <div class="question-card-card qinherit">
                             <div class="qcard-text">
-                                <p><a href="comment_question.html">Here is a question about asking questions. How do you start a question about asking questions. What's the limit of the question no longer being a question to a question and how to make a question to a question a question... <a class="after-p" href="#"></a></a></p>
+                                <p><a id="question-body" class="question-body-cl" href="comment_question.html">Here is a question about asking questions. How do you start a question about asking questions. What's the limit of the question no longer being a question to a question and how to make a question to a question a question... <a class="after-p" href="#"></a></a></p>
                             </div>
                             <div class="qicons">
-                                <p class="vote"><a href="#" class="avote-link" title="upvote"><span>&#128077;</span><span class="qvotes-up number">34</span></a></p>
-                                <p class="vote"><a href="#" class="avote-link" title="downvote"><span>👎</span><span class="qvotes-down number">4</span></a></p>
+                                <p class="vote"><span class="vote-count">45</span><a href="#" class="avote-link" title="upvote"><span class="up-vote">&#128077;</span><span class="qvotes-up number"></span></a></p>
+                                <p class="vote"><a href="#" class="avote-link" title="downvote"><span class="down-vote">👎</span><span class="qvotes-down number"></span></a></p>
                                 <p>&#128483 87</p>
                                 <p class="qtags">tag</p>
                                 <p class="qtags">tag</p>
@@ -45,7 +98,7 @@
                         </div>
                     </div>
                     
-                                    <div class="admin-cards">
+                    <div class="admin-cards inheritq">
                         <div class="question-card-card">
                             <div class="qcard-text">
                                 <p><a href="comment_question.html">Here is a question about asking questions. How do you start a question about asking questions. What's the limit of the question no longer being a question to a question and how to make a question to a question a question... <a class="after-p" href="#"></a></a></p>
@@ -61,7 +114,7 @@
                         </div>
                     </div>
 
-                                    <div class="admin-cards">
+                    <div class="admin-cards inheritq">
                         <div class="question-card-card">
                             <div class="qcard-text">
                                 <p><a href="comment_question.html">Here is a question about asking questions. How do you start a question about asking questions. What's the limit of the question no longer being a question to a question and how to make a question to a question a question... <a class="after-p" href="#"></a></a></p>
@@ -77,8 +130,19 @@
                         </div>
                     </div>
             </div><!-- meet-up-contents -->
+            <div id="invalidq">
+             <p id="invalidq-entry">invalid</p>   
+            </div>
+            <div id="input-question">
+                <textarea id="text-question" name="question-area" placeholder="Have a Question in mind?"
+                title="Question should not be blank"></textarea>
+            </div>
+            <div class="createq-holder">
+                <a id="create-question-button" href="#">Create new Question</a>
+            </div>
         </div><!-- container-admin -->
     </div>
+    <script src="static/js/application.js" type="text/javascript" charset="utf-8"></script>
 </body>
 <footer>
     <div class="footer-text">

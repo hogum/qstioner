@@ -67,6 +67,10 @@
     transition: all .4s ease;
 }
 
+.admin-cards {
+    width: 100%;
+}
+
 .admin-cards .question-card-card .qcard-text:hover {
     background-color: #D8D9D8;
     color: #333;
@@ -226,4 +230,327 @@
 
 footer {
     position: relative;
+}
+
+/*
+========================
+New Question
+======================== */
+
+#input-question, .createq-holder {
+    margin-right: 1.5%;
+    margin-left: 1.5%;
+    width: 97%;
+}
+
+#input-question {
+}
+
+#invalidq {
+    visibility: hidden;
+    text-align: center;
+    font-size: 12px;
+    color: #C34A30;
+    border: 1px solid #E76200;
+    border-radius: 4px;
+    margin-right: 1.5%;
+    margin-left: 1.5%;
+    width: 97%;
+    margin-bottom: .1em;
+    margin-top: 1.2em;
+}
+
+#invalidq-entry {
+    margin: 0;
+    color: #8A0000;
+}
+
+#text-question {
+    width: 100%;
+    height: 18vw;
+    padding: 12px;
+    border: 1px solid #999;
+    overflow: auto;
+    resize: none;
+    font-family: 'Open Sans';
+    background-color: #fff;
+    margin-bottom: 2px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.createq-holder {
+    border: 1px solid #222;
+    background-color: #0DB102;
+    text-align: center;
+    border: 1.2px solid #34D55B;
+    border-radius: 4px;
+    background-color: #fff;
+    background-color: #0DB102;
+    color: #ff8C00;
+    color: #fff;
+    margin-bottom: 1.6em;
+    padding: 4px 12px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                    transition: all .7s ease;
+}
+
+.createq-holder:hover {
+    background-color: #79D534;
+    background-color: #10C803;
+    color: #fff;
+    cursor: pointer;
+    border-color: #333;
+}
+
+#create-question-button {
+    color: #fff;
+}
+
+#meetup-images {
+    text-align: center;
+    width: 98%;
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    height: 14em;
+    border: 1px solid #999;
+    border-radius: 5px 5px 0 0;
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+    -ms-overflow-style: none; /* IE 11 */
+}
+
+#update-image {
+    margin-right: 1.5%;
+    margin-left: 1.5%;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: #E0E1E2;
+    padding: 4px;
+    border-radius: 0 0 5px 5px;
+    color: #777;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                    transition: all .4s ease;
+    position: relative;
+}
+
+#update-image:hover {
+    background-color: #D3D3D3;
+}
+
+#meetup-images::-webkit-scrollbar {
+    width: 0px;  /* clear scrollbar space */
+    background: transparent;  /* just make scrollbar invisible */
+}
+
+#meetup-images img {
+    height: 13em;
+    -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+    margin-top: .5em;
+    margin-left: .5em;
+    margin-right: .5em;
+    display: inline-block;
+}
+
+#no-images {
+    font-size: 13.6px;
+    display: none;
+}
+
+#mtags {
+    width: 100%;
+}
+
+.mmtags {
+    color: darkblue;
+    display: inline-block;
+    background-color: #FDFDFD;
+    border-radius: 3px;
+    font-size: 12px;
+    padding: 0 8px;
+    -webkit-box-shadow:0 0 5px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow:0 0 5px rgba(0, 0, 0, 0.5);
+            box-shadow:0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+#new-tag, #tag-text {
+    display: block;
+}
+.mmtags:hover {
+    cursor: pointer;
+}
+
+#meetup-dtails {
+ margin-right: 1.5%;
+    margin-left: 1.5%;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14.5px;
+    color: #555;
+}
+
+#new-tag {
+    border: 1px solid #444;
+    border-radius: 2px;
+    font-size: 11px;
+    color: #fff;
+    padding: 0 8px;
+    background-color: #0B82C9;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                    transition: all .4s ease;
+}
+
+#new-tag:hover {
+    cursor: pointer;
+    background-color: #0B6DA8;
+}
+.edit-t {
+   display: inline-block;
+   width: 100%;
+}
+
+#new-tag, #tag-text {
+       float: right;
+       margin: 0 3px;
+}
+
+#tag-text {
+    
+}
+
+#tag-input {
+    background-color: #fff;
+    border: 1px solid #888;
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-size: 12px;
+    width: 87px;
+}
+
+#new-tag:hover #tag-text {
+    display: block;
+}
+
+.rsvp-option {
+    display: inline-block;
+    margin-right: 1.5%;
+    margin-left: 1.5%;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+.rsvp-option > p {
+    float: left;
+    margin: 0 5px;
+}
+
+.rsvp-option .current-rs {
+    margin-left: 9.6em;
+    font-weight: 900;
+}
+
+#current-rsvp {
+    text-transform: uppercase;
+    font-family: Lato;
+    font-weight: 900;
+}
+
+.rsvp-option p:first-child {
+    font-weight: 900;
+    color: #155;
+}
+
+#select-rs {
+    background-color: #E2F4FF;
+    border: 1px solid #00A0FF;
+    border-radius: 2px;
+}
+
+#submit-rsvp {
+    background-color: #D4EAF7;
+    border: 1px solid #4798C8;
+    padding: 3px 10px;
+    border-radius: 4px;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                    transition: all .4s ease;
+}
+
+#submit-rsvp:hover {
+    background-color: #B0DEF9;
+    border-color: #0E5D8B;
+    cursor: pointer;
+}
+
+input[type=file] {
+    width: 100%;
+    position: absolute;
+    left:0;
+    opacity: 0;
+    background-color: #D3D3D3;
+
+}
+
+input[type=file]:hover {
+    cursor: pointer;
+}
+
+#imgs {
+    margin: 0;
+    padding: 0;
+    background-color: initial;
+}
+
+@media screen and (max-width: 494px) {
+    .edit-t {
+        margin-top: .5em;
+        width: 100%;
+        display: inline-block;
+        float: none;
+    }
+    #new-tag, #tag-text {
+       float: right;
+       margin: 0 3px;
+    }
+}
+
+.mmtags {
+    display: none;
+    margin: 2px;
+}
+
+.inheritq {
+    display: none;
+}
+
+#no-questions-records {
+    display: none;
+    font-weight: 900;
+    font-size: 12.5px;
+    margin-top: 3em;
+}
+
+::-webkit-scrollbar {
+    width: 0px;  /* clear scrollbar space */
+    background: transparent;  /* just make scrollbar invisible */
 }
