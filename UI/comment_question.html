@@ -25,11 +25,15 @@
                 </div>
         </div>
 
-        <div class="container-comments">
+        <div class="container-comments" id="comments-parent">
             <div class="question-title">
-                <h4>By means of an impediment to the milk shakes, so that it feels the consequences of them, and that He hath pulled down a football</h4>
+                <h4 id="com-header">By means of an impediment to the milk shakes, so that it feels the consequences of them, and that He hath pulled down a football</h4>
             </div>
-            <div class="comments-show">
+            <div class="no-comments-rec">
+                <p>This Questions has no Comments</p>
+            </div>
+            <div id="comments-cont">
+            <div class="comments-show inheritq" id="comments-inherit">
                 <div class="comment-comm">
                     <p class="comment-text">Changes persisted equipped with milk, homework has to be present. Cookies are not to be empty, the others are. He says it, fearing that for it is any thing, let him be hungry about it. I understand him to that company of food, and two manner of women, whom to listen to.</p>
                     <div class="c-time">
@@ -38,7 +42,7 @@
                 </div>
             </div>
             
-              <div class="comments-show">
+              <div class="comments-show inheritq">
                 <div class="comment-comm">
                     <p class="comment-text">Changes persisted equipped with milk, homework has to be present. Cookies are not to be empty, the others are. He says it, fearing that for it is any thing, let him be hungry about it. I understand him to that company of food, and two manner of women, whom to listen to.</p>
                     <div class="c-time">
@@ -46,20 +50,21 @@
                     </div>
                 </div>
             </div>
+        </div>
 
             <div class="add-comm">
                 <div class="comm-input">
                     <form action="" method="" accept-charset="utf-8">
-                        <textarea placeholder="Write a new comment" name="comment-in"></textarea>
-                        <input class="submit-comment" type="submit" name="" value="Add Comment">
+                        <textarea id="text--comment" placeholder="Write a new comment" name="comment-in"></textarea>
+                        <a id="send-comment" class="submit-comment" href="#" name="">Add Comment</a>
                     </form>
                 </div>
             </div>
         </div><!-- container -->
-
     </div>
+    <script src="static/js/application.js" type="text/javascript" charset="utf-8"></script>
 </body>
-<footer>
+<footer id="footer-cq">
     <div class="footer-text">
             &#169; <span class="year">2019</span>
             <p>We just discovered <a href="#">what's sweeter than cookies.</a> Come share with us</p>
