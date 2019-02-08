@@ -542,6 +542,7 @@ function getSingleMeetup() {
         }).catch(err => console.log(err))
 }
 
+document.getElementById('tag-input').addEventListener('keyup', )
 function addNewTag(meetupId) {
     /**
         Sends a request to add a tag to a meetup item
@@ -549,8 +550,9 @@ function addNewTag(meetupId) {
     
     let newTag = document.getElementById('tag-input').value
     let data = {}
+    const pattern = new RegExp('^[0-9]+$')
 
-    if (! newTag)
+    if (! newTag || pattern.test(newTag))
         return
 
     handler.post(`meetup/${meetupId}/${newTag}`, data)
@@ -567,6 +569,7 @@ function addNewTag(meetupId) {
 
 
 }
+
 
 function updateTag(tag) {
     let tagELem = document.getElementById('mtag-inherit').cloneNode(true)
