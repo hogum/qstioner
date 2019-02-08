@@ -178,6 +178,7 @@ function clearSigninPrompts() {
     if ((handler.getCurrentUser()) && (handler.getCurrentUser !== 'Guest')) {
         let signPrompt = document.getElementById('sign-in')
 
+        console.log(signPrompt)
         if (signPrompt)
             signPrompt.style.display = 'none'
     }
@@ -532,7 +533,7 @@ function createMeetupNodes(meetupCard, element, item) {
 if (window.location.href.includes('meetup_questions.html')) {
 
     getSingleMeetup()
-    // getMeetupQuestions()
+    getMeetupQuestions()
     showRsvpStatus()
 }
 
@@ -624,17 +625,17 @@ function displaySingleMeetup(meetupItem) {
 }
 
 function getMeetupQuestions() {
-    /* Renders meetup questions in the question display area
+    /* Renders questions to a meetup in the question display area
     */
 
-    let question_id = 1
     let meetup_id = new URLSearchParams(window.location.search).get('id')
 
-    handler.get(`meetups/${meetup_id}/questions/${question_id}`)
+    handler.get(`meetups/${meetup_id}/questions`)
         .then(response => response.json()
         .then (payload => ({status: response.status, body: payload})
         )).then (
         payload => {
+            console.log(payload)
             if (payload.status === 200) {
                 questions = payload.body.data
                 displayQuestions(questions)
@@ -645,9 +646,60 @@ function getMeetupQuestions() {
 }
 
 function displayQuestions(questionsList) {
-    questionsList.forEach( question => {
-        //
+    /*
+        Renders details of each fetched question to the
+        question display elements.
+    */
+
+    let title = document.getElementById('question-card-inherit')
+    let parent = document.getElementById('meetup-ques-display')
+
+    if (questionsList.length === 0)
+        document.getElementById('no-questions-records').style.display = 'block'
+        return
+
+    questionsList.forEach(question => {
+        let qsCard = title.cloneNode(true)
+        let body = qsCard.getElementById('question-body')
+        let tags = qsCard.getElementsByClassName('qtags')
+        let parent = document.getElementById('meetup-ques-display')
+
+
+        body.textContent = question.body
+        body.href = `comment_question.html?question=${question.id}`
+        qsCard.getElementById('up-vote').addEventListener(
+            'click', () => sendVote(question.id, 'upvote'))
+        qsCard.getElementById('down-vote').addEventListener(
+            'click', () => sendVote(question.id, 'downvote'))
+
+        for (let i = tags.length - 1; i >= 0; i--) {
+            let word = 
+            tags[i].textContent = question.title
+            .split(' ')[
+            Math.floor(Math.random() * tags.length)]
+        }
+        parent.appendChild(qsCard)
+        qsCard.style.display = 'block'
     })
+}
+
+function sendVote(qId, vote) {
+    /*
+        Sends a PATCH request to UPvote or DOWN vote a particular
+        question.
+    */
+
+    handler.patch(`questions/${qId}/vote`)
+    .then(response => response.json()
+        .then (payload => ({status: response.status, body: payload})
+        )).then (
+        payload => {
+            console.log(payload)
+            if (payload.status === 200) {
+            } else {
+
+            }
+        }).catch(err => console.log(err))
 }
 
 function showTaggedMeetups() {
@@ -701,7 +753,13 @@ function showRsvpStatus() {
 }
 
 function styleRsvpDisplay(rsvpItem, answer) {
+    /*
+        Changes color of user rsvp depending on
+        given response.
+    */
+
     let ans = answer.toLowerCase()
+
     if (ans === 'yes')
         rsvpItem.style.color = '#098903'
     else if (ans === 'no')
@@ -709,3 +767,4 @@ function styleRsvpDisplay(rsvpItem, answer) {
     else
         rsvpItem.style.color = '#C07D07'
 }
+
