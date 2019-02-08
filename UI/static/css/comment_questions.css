@@ -67,8 +67,9 @@ body {
     border: 1px solid #0DB102;
     background-color: #fff;
     background-color: #0DB102;
+    margin-top: 2em;
     color: #fff;
-    padding: 6px 8px;
+    padding: 3.4px 6px;
     -webkit-transition: all .6s ease;
         -moz-transition: all .6s ease;
             -ms-transition: all .6s ease;
@@ -84,9 +85,16 @@ body {
 
 .comm-input {
     text-align: left;
+    margin-top: 3em;
+}
+
+.no-comments-rec {
+    display: none;
+    text-align: center;
+    margin-top: 3.7em;
 }
 
 footer {
-    margin-top: 9vw;
-    position: relative;
+    position: absolute;
+    margin-top: 2em;
 }
