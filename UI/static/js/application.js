@@ -556,6 +556,11 @@ if (window.location.href.includes('tagged_meetups.html')) {
     showTaggedMeetups()
 }
 
+if (window.location.href.includes('comment_question.html')) {
+    showComments()
+    submitComment()
+}
+
 function getSingleMeetup() {
     /* Renders meetup details in meetup display page
     */
@@ -679,7 +684,7 @@ function displayQuestions(questionsList) {
         let tags = qsCard.getElementsByClassName('qtags')
 
         body.textContent = question.body.slice(0, 220) + '...'
-        body.href = `comment_question.html?question=${question.id}`
+        body.href = `comment_question.html?question=${question.id}&title=${question.title}`
         qsCard.getElementsByClassName('up-vote')[0].addEventListener(
             'click', () => sendVote(question.id, 'upvote'))
         qsCard.getElementsByClassName('down-vote')[0].addEventListener(
@@ -815,7 +820,6 @@ function createQuestion() {
 function showQuestionError(msg, success) {
     let elem = document.getElementById('invalidq')
     elem.style.visibility = 'visible'
-    console.log(success)
     let txt = document.getElementById('invalidq-entry')
 
     txt.textContent = msg
@@ -831,4 +835,77 @@ function showQuestionError(msg, success) {
         elem.style.border = '1px solid #E76200'
 
     }, 3000)
+}
+
+function showComments() {
+    /*
+        Fetches comments all comments to a question.
+    */
+
+    let question_id = new URLSearchParams(window.location.search).get('question')
+
+     handler.get(`questions/${question_id}/comment`)
+    .then(response => response.json()
+        .then(payload => ({status: response.status, body: payload})
+            )).then(payload => {
+        if (payload.status === 200) {
+            displayComments(payload.body.data)
+        } else {
+        
+        }
+    }).catch(err => console.log(err))
+}
+
+function displayComments(commentList) {
+    /*
+        Renders details of each fetched comment to the
+        comments display page.
+    */
+
+    let title = document.getElementById('comments-inherit')
+    let parent = document.getElementById('comments-cont')
+    let qtitle = new URLSearchParams(window.location.search).get('title')
+    let qId = new URLSearchParams(window.location.search).get('question')
+
+    document.getElementById('com-header').textContent = qtitle
+
+    if (commentList.length === 0) {
+        document.getElementsByClassName('no-comments-rec')[0].style.display = 'block'
+        return
+    }
+
+    commentList.forEach(comment => {
+        let cCard = title.cloneNode(true)
+        let body = cCard.getElementsByClassName('comment-text')[0]
+
+        body.textContent = comment.body
+        parent.appendChild(cCard)
+        cCard.style.display = 'block'
+        })
+
+    document.getElementById('footer-cq').style.position = 'relative'
+}
+
+function submitComment() {
+     let send = document.getElementById('send-comment')
+     let questId = new URLSearchParams(window.location.search).get('question')
+
+    send.addEventListener('click', () => {
+        let questId = new URLSearchParams(window.location.search).get('question')
+        let text = document.getElementById('text--comment').value
+        let data = {body: text}
+
+        handler.post(`questions/${questId}/comment`, data)
+            .then(response => response.json()
+                .then(payload => ({status: response.status, body: payload})
+                )).then(payload => {
+                console.log(payload)
+                if (payload.status === 201) {
+                    window.location.reload()
+                } else {
+                    showQuestionError("Just enter something readable, cool?")
+                }
+
+            }).catch(err => console.log(err))
+    })
 }
