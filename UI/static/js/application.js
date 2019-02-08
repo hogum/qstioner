@@ -409,7 +409,7 @@ function showDashboardMeetups(cardTemplate, meetupsList) {
             .toString()
             .split(' ')
         let imageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)]
-        let title = card.getElementsByClassName('acard-name')[0]
+        let title = card.getElementsByClassName('meetup-link')[0]
 
         title.textContent = meetup.topic
         title.href = `meetup_questions.html?id=${meetup.id}`
@@ -434,7 +434,7 @@ function displayMeetups(meetupsList) {
 
     if (adminCard)
         showDashboardMeetups(adminCard, meetupsList)
-        return
+
 
     meetupsList.forEach(meetup => {
         let meetupCard = meetCard.cloneNode(true)
@@ -472,6 +472,7 @@ function createMeetupElements(meetupCard, classItem, detail, meetup_id) {
     */
 
     card =  meetupCard.getElementsByClassName(classItem)[0]
+    console.log(card)
 
     // Image
     if(classItem === 'maincard--card') {
@@ -516,11 +517,10 @@ function createMeetupNodes(meetupCard, element, item) {
 
 }
 
-if (window.location.href.split('/').pop() === 'meetup_questions.html') {
-    console.log(window.location.href.split('/').pop(), 'meetup_questions')
+if (window.location.href.includes('meetup_questions.html')) {
 
     getSingleMeetup()
-    getMeetupQuestions()
+    // getMeetupQuestions()
 } 
 
 function getSingleMeetup() {
@@ -535,7 +535,7 @@ function getSingleMeetup() {
         payload => {
             if (payload.status === 200) {
                 meetup = payload.body.data
-                displaySingleMeetup(meetup)
+                displaySingleMeetup(meetup[0])
             } else {
 
             }
@@ -543,17 +543,20 @@ function getSingleMeetup() {
 }
 
 function displaySingleMeetup(meetupItem) {
-     let day = new Date(meetup.happening_on)
+    console.log(meetupItem)
+     let day = new Date(meetupItem.happeningOn)
             .toString()
             .split(' ')
     let parentTags = document.getElementById('matgs')
 
-    document.getElementsByClassName("meet-up-title")[0].value = meetupItem.title
-    document.getElementById('location-text').value = meetupItem.location
-    document.getElementById('time-text').value = day.slice(0, 4).join(' ')
+    document.getElementsByClassName("meet-up-title")[0].textContent = meetupItem.topic
+    document.getElementById('location-text').textContent = meetupItem.location
+    document.getElementById('time-text').textContent = day.slice(0, 4).join(' ') + ', ' + day.slice(4, 5)
     meetupItem.tags.forEach(tag => {
-        let tagELem = document.getElementsByClassName('mmatgs')
-        tagELem.value = tag
+        console.log(tag)
+        let tagELem = document.getElementById('mtag-inherit')
+        console.log(tagELem)
+        tagELem.textContent = tag
         parentTags.appendChild(tagELem)
         tagELem.style.display = 'block'
         })
@@ -564,7 +567,7 @@ function getMeetupQuestions() {
     */
 
     let question_id = 1
-    let meetup_id = 1
+    let meetup_id = new URLSearchParams(window.location.search).get('id')
 
     handler.get(`meetups/${meetup_id}/questions/${question_id}`)
         .then(response => response.json()
