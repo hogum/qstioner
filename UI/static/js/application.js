@@ -1,5 +1,5 @@
- let path  = 'http://localhost:5000/api/v1/';
- // const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
+ // let path  = 'http://localhost:5000/api/v1/';
+ const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
 
 function showNav() {
     // Toggles the nav bar button for responsiveness.
