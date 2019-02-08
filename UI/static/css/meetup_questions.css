@@ -67,6 +67,10 @@
     transition: all .4s ease;
 }
 
+.admin-cards {
+    width: 100%;
+}
+
 .admin-cards .question-card-card .qcard-text:hover {
     background-color: #D8D9D8;
     color: #333;
@@ -240,7 +244,25 @@ New Question
 }
 
 #input-question {
-    margin-top: 2em;
+}
+
+#invalidq {
+    visibility: hidden;
+    text-align: center;
+    font-size: 12px;
+    color: #C34A30;
+    border: 1px solid #E76200;
+    border-radius: 4px;
+    margin-right: 1.5%;
+    margin-left: 1.5%;
+    width: 97%;
+    margin-bottom: .1em;
+    margin-top: 1.2em;
+}
+
+#invalidq-entry {
+    margin: 0;
+    color: #8A0000;
 }
 
 #text-question {
@@ -252,6 +274,9 @@ New Question
     resize: none;
     font-family: 'Open Sans';
     background-color: #fff;
+    margin-bottom: 2px;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 .createq-holder {
     border: 1px solid #222;
@@ -396,11 +421,13 @@ New Question
     background-color: #0B6DA8;
 }
 .edit-t {
-    float: right;
+   display: inline-block;
+   width: 100%;
 }
 
 #new-tag, #tag-text {
-   display: inline-block;
+       float: right;
+       margin: 0 3px;
 }
 
 #tag-text {
@@ -521,4 +548,9 @@ input[type=file]:hover {
     font-weight: 900;
     font-size: 12.5px;
     margin-top: 3em;
+}
+
+::-webkit-scrollbar {
+    width: 0px;  /* clear scrollbar space */
+    background: transparent;  /* just make scrollbar invisible */
 }
