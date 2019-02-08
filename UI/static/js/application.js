@@ -673,22 +673,39 @@ function sendRSVP(meetupId) {
         POSTs a user RSVP to a meetup
     */
     let rsvp = document.getElementById('select-rs').value
+    let rsvpEl = document.getElementById('current-rsvp')
     let data = {'response': rsvp}
 
     handler.post(`meetups/${meetupId}/response`, data)
     .then(response => response.json()
         .then(payload => ({status: response.status, body: payload})
             )).then(payload => {
-        console.log(payload)
         if (payload.status === 201) {
             document.getElementById('current-rsvp').textContent = rsvp
             localStorage.setItem('meetupRSVP', rsvp)
-        } else {
-            
+            styleRsvpDisplay(rsvpEl, rsvp)
+        } else if (payload.status === 409){
+            rsvpEl.textContent = rsvp
+            styleRsvpDisplay(rsvpEl, rsvp)
         }
     }).catch(err => console.log(err))
 }
 
 function showRsvpStatus() {
-    document.getElementById('current-rsvp').textContent = localStorage.getItem('meetupRSVP')
+    /*Get rsvp of current logged in user*/
+    let rsvpEl = document.getElementById('current-rsvp')
+    let response = localStorage.getItem('meetupRSVP')
+    
+    rsvpEl.textContent = response
+    styleRsvpDisplay(rsvpEl, response)
+}
+
+function styleRsvpDisplay(rsvpItem, answer) {
+    let ans = answer.toLowerCase()
+    if (ans === 'yes')
+        rsvpItem.style.color = '#098903'
+    else if (ans === 'no')
+        rsvpItem.style.color = '#B31100'
+    else
+        rsvpItem.style.color = '#C07D07'
 }
