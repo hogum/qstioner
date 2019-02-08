@@ -147,7 +147,7 @@ function protectRoutes() {
 }
 
 protectRoutes()
-
+clearSigninPrompts()
 let registrationForm = document.getElementById("registration-form")
 
 if (registrationForm)
@@ -168,6 +168,19 @@ function validateRegPass(passA, passB) {
         return false
     }
     return true
+}
+
+function clearSigninPrompts() {
+    /*
+        Removes sign in prompts for logged in user
+    */
+
+    if ((handler.getCurrentUser()) && (handler.getCurrentUser !== 'Guest')) {
+        let signPrompt = document.getElementById('sign-in')
+
+        if (signPrompt)
+            signPrompt.style.display = 'none'
+    }
 }
 
 function registerUser(event) {
@@ -480,8 +493,8 @@ function createMeetupElements(meetupCard, classItem, detail, meetup_id) {
         // Needs to store uploaded server images
 
         
-        card.style.background = 'url(' 
-        + detail[0].split(' ').shift() + ') center no-repeat'
+        // card.style.background = 'url(' 
+        // + detail[0].split(' ').shift() + ') center no-repeat'
         return
         
      } else if (classItem === 'see-more-mdetails') {
@@ -521,7 +534,11 @@ if (window.location.href.includes('meetup_questions.html')) {
 
     getSingleMeetup()
     // getMeetupQuestions()
-} 
+}
+
+if (window.location.href.includes('tagged_meetups.html')) {
+    showTaggedMeetups()
+}
 
 function getSingleMeetup() {
     /* Renders meetup details in meetup display page
@@ -569,7 +586,6 @@ function addNewTag(meetupId) {
 
 }
 
-
 function updateTag(tag) {
     let tagELem = document.getElementById('mtag-inherit').cloneNode(true)
     let presentTags = document.getElementsByClassName('mmtags')
@@ -581,7 +597,7 @@ function updateTag(tag) {
     }
    
     tagELem.textContent = tag
-    tagELem.href = `tagged_mmetups.html?tag=${tag}` 
+    tagELem.href = `tagged_meetups.html?tag=${tag}` 
     document.getElementById('tags-buttons').appendChild(tagELem)
     tagELem.style.display = 'inline-block'
 }
@@ -601,6 +617,7 @@ function displaySingleMeetup(meetupItem) {
         let tagELem = document.getElementById('mtag-inherit').cloneNode(true)
         
         tagELem.textContent = tag
+        tagELem.href = `tagged_meetups.html?tag=${tag}`
         parentTags.appendChild(tagELem)
         tagELem.style.display = 'inline-block'
         })
@@ -631,4 +648,22 @@ function displayQuestions(questionsList) {
     questionsList.forEach( question => {
         //
     })
+}
+
+function showTaggedMeetups() {
+    let meetupTag = new URLSearchParams(window.location.search).get('tag')
+    document.getElementById('tag-title-text').textContent = `${meetupTag} Meetups`
+
+    handler.get(`meetup/${meetupTag}`)
+    .then(response => response.json()
+        .then (payload => ({status: response.status, body: payload})
+        )).then (
+        payload => {
+            if (payload.status === 200) {
+                let meetups = payload.body.data
+                displayMeetups(meetups)
+            } else {
+
+            }
+        }).catch(err => console.log(err))
 }
