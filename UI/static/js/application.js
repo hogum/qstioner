@@ -102,7 +102,7 @@ class Handler {
     }
 }
 
-let handler = new Handler();
+let handler = new Handler()
 
 
 function protectRoutes() {
@@ -379,7 +379,7 @@ function retrieveAllMeetups() {
                             meetups = payload.body.data
                             displayMeetups(meetups)
                         } else {
-                            // window.location.href = 'sign-in.html'
+                            //window.location.href = 'sign-in.html'
                         }
                     }).catch(err => console.log(err))
 }
@@ -409,13 +409,15 @@ function showDashboardMeetups(cardTemplate, meetupsList) {
             .toString()
             .split(' ')
         let imageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)]
-        let ipa = `static/images/${imageUrl}`
+        let title = card.getElementsByClassName('acard-name')[0]
 
-        card.getElementsByClassName('acard-name')[0].textContent = meetup.topic
+        title.textContent = meetup.topic
+        title.href = `meetup_questions.html?id=${meetup.id}`
         card.getElementsByClassName('acard-date')[0].textContent = meetupTime
             .slice(1, 3)
             .join(' ')
         card.getElementsByClassName('centre-photo')[0].src = `static/images/${imageUrl}`
+        card.getElementsByClassName('edit-meets-location')[0].href = `edit_meetups.html?id=${meetup.id}`
         parent.appendChild(card)
         card.style.display = 'block'
     })
@@ -440,7 +442,7 @@ function displayMeetups(meetupsList) {
             .toString()
             .split(' ')
 
-        createMeetupElements(meetupCard, 'meetup-title', meetup.topic)
+        createMeetupElements(meetupCard, 'meetup-title', meetup.topic, meetup.id)
         createMeetupElements(meetupCard, 'meetup-location', meetup.location)
         createMeetupElements(meetupCard, 'maincard--card', meetup.images)
       
@@ -463,7 +465,7 @@ function displayMeetups(meetupsList) {
     })
 }
 
-function createMeetupElements(meetupCard, classItem, detail) {
+function createMeetupElements(meetupCard, classItem, detail, meetup_id) {
     /*
     Find child classes of meetup display card
     and appends new meetup data to them
@@ -476,19 +478,19 @@ function createMeetupElements(meetupCard, classItem, detail) {
         // Fails
         // Needs to store uploaded server images
 
-        /*
+        
         card.style.background = 'url(' 
         + detail[0].split(' ').shift() + ') center no-repeat'
         return
-        */
+        
      } else if (classItem === 'see-more-mdetails') {
-        card.href = "meetup_questions.html"
+        card.href = `meetup_questions.html?id=${detail}`
         card.addEventListener("click", function() {
-            window.location.href = 'meetup_questions.html'
+            // window.location.href = 'meetup_questions.html'
         })
         return
     } else if (classItem === 'meetup-title') {
-        card.href = 'meetup_questions.html'
+        card.href = `meetup_questions.html?id=${meetup_id}`
         card.textContent = detail
         return
     } else
@@ -525,7 +527,7 @@ function getSingleMeetup() {
     /* Renders meetup details in meetup display page
     */
 
-    let meetup_id = 1
+    let meetup_id = new URLSearchParams(window.location.search).get('id')
     handler.get(`meetups/${meetup_id}`)
         .then(response => response.json()
         .then (payload => ({status: response.status, body: payload})
