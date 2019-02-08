@@ -501,6 +501,6 @@ input[type=file]:hover {
     }
 }
 
-.mmtags:not(.inherited) {
+.mmtags {
     display: none;
 }
