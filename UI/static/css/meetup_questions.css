@@ -350,6 +350,7 @@ New Question
 
 .mmtags {
     color: darkblue;
+    display: inline-block;
     background-color: #FDFDFD;
     border: 1px solid #444;
     border-radius: 3px;
@@ -360,6 +361,9 @@ New Question
             box-shadow:0 0 5px rgba(0, 0, 0, 0.5);
 }
 
+#new-tag, #tag-text {
+    display: block;
+}
 .mmtags:hover {
     cursor: pointer;
 }
@@ -377,9 +381,9 @@ New Question
 #new-tag {
     border: 1px solid #444;
     border-radius: 2px;
-    font-size: 12px;
-    padding: 3.0px 8px;
+    font-size: 11px;
     color: #fff;
+    padding: 0 8px;
     background-color: #0B82C9;
     -webkit-transition: all .4s ease;
         -moz-transition: all .4s ease;
@@ -392,13 +396,16 @@ New Question
     cursor: pointer;
     background-color: #0B6DA8;
 }
+.edit-t {
+    float: right;
+}
 
 #new-tag, #tag-text {
+   display: inline-block;
 }
 
 #tag-text {
-        margin-left: 6em;
-
+    
 }
 
 #tag-input {
@@ -479,4 +486,18 @@ input[type=file]:hover {
     margin: 0;
     padding: 0;
     background-color: initial;
+}
+
+@media screen and (max-width: 494px) {
+    .edit-t {
+        margin-top: .5em;
+        border: 1px solid #333;
+        width: 100%;
+        display: inline-block;
+        float: none;
+    }
+    #new-tag, #tag-text {
+       float: right;
+       margin: 0 3px;
+    }
 }
