@@ -503,4 +503,5 @@ input[type=file]:hover {
 
 .mmtags {
     display: none;
+    margin: 2px;
 }

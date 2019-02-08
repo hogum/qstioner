@@ -542,23 +542,64 @@ function getSingleMeetup() {
         }).catch(err => console.log(err))
 }
 
+function addNewTag(meetupId) {
+    /**
+        Sends a request to add a tag to a meetup item
+    **/
+    
+    let newTag = document.getElementById('tag-input').value
+    let data = {}
+
+    if (! newTag)
+        return
+
+    handler.post(`meetup/${meetupId}/${newTag}`, data)
+    .then(response => response.json()
+        .then(payload => ({status: response.status, body: payload})
+            )).then(payload => {
+        console.log(payload)
+        if (payload.status === 200) {
+            updateTag(newTag)
+        } else {
+            
+        }
+    }).catch(err => console.log(err))
+
+
+}
+
+function updateTag(tag) {
+    let tagELem = document.getElementById('mtag-inherit').cloneNode(true)
+    let presentTags = document.getElementsByClassName('mmtags')
+
+    for (let i = presentTags.length - 1; i >= 0; i--) {
+        console.log(presentTags[i].textContent)
+        if (presentTags[i].textContent === tag)
+            return
+    }
+   
+    tagELem.textContent = tag
+    document.getElementById('tags-buttons').appendChild(tagELem)
+    tagELem.style.display = 'inline-block'
+}
+
 function displaySingleMeetup(meetupItem) {
-    console.log(meetupItem)
      let day = new Date(meetupItem.happeningOn)
             .toString()
             .split(' ')
-    let parentTags = document.getElementById('matgs')
+    let parentTags = document.getElementById('tags-buttons')
 
     document.getElementsByClassName("meet-up-title")[0].textContent = meetupItem.topic
     document.getElementById('location-text').textContent = meetupItem.location
     document.getElementById('time-text').textContent = day.slice(0, 4).join(' ') + ', ' + day.slice(4, 5)
+    document.getElementById('new-tag').addEventListener('click', () => addNewTag(meetupItem.id))
+
     meetupItem.tags.forEach(tag => {
-        console.log(tag)
-        let tagELem = document.getElementById('mtag-inherit')
-        console.log(tagELem)
+        let tagELem = document.getElementById('mtag-inherit').cloneNode(true)
+        
         tagELem.textContent = tag
         parentTags.appendChild(tagELem)
-        tagELem.style.display = 'block'
+        tagELem.style.display = 'inline-block'
         })
 }
 
