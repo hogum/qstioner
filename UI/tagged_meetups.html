@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="static/css/tagged_meetups.css">
     <link rel="shortcut icon" type="image/png" href="static/images/fav.jpeg"/>
-    <script src="static/js/application.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -22,9 +21,9 @@
                 </div>
                 <div class="nav-nav" id="navbar">        
                     
-                    <li><a class="header-links" href="index.html">meet-ups</a></li>
+                    <li><a class="header-links" href="index.html"></a></li>
                     <li><a class="header-links" href="community.html">Community</a></li>
-                    <li><a class="active header-links" href="trending.html">trending</a></li>
+                    <li><a class="active header-links" href="trending.html">Tagged</a></li>
                     <li class="sgnin">
                         <a id="sign-in" href="sign-in.html">Sign in</a>
                     </li>
@@ -37,7 +36,7 @@
             </ul>
 
         </header><!-- /header -->
-        <div class="attention tagged-meet">
+        <div class="attention" id="tagged-meet">
             <div class="attention-slides">
                 <p class="attention-text parag-1">This is your last chance. After this, even the conference foods won't be as sweet as the discussions.</p>
             </div>
@@ -50,13 +49,14 @@
         </div><!-- attention-->
 
         <div class="content container-content">
+              <div id="tag-title"><p id="tag-title-text">Tag meetups</p></div>
+
             <div class="main-pane pane" id="tagged-main">
                 
 
                 <!--Pad more cards to help design the flex-->
                 <!-- Every class "extra" -->
-              <h4 id="no-content-trending">No trending meetups yet</h4>
-              <div id="tag-title"><p id="tag-title-text">Tag <span>MEETUPS</span></p></div>
+              <h4 id="no-content-trending">Oops! No meetups match this tag</h4>
               <div class="main-card initial-inherit" id="main-card--id">
                     <div id="main-img-card">
                         <div class="maincard--card">
@@ -111,5 +111,6 @@
             <p>We just discovered <a href="#">what's sweeter than cookies.</a> Come share with us</p>
         </div>
     </footer>
+    <script src="static/js/application.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>
