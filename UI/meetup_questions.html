@@ -85,11 +85,11 @@
                 <div class="admin-cards inheritq" id="question-card-inherit">
                         <div class="question-card-card">
                             <div class="qcard-text">
-                                <p><a id="question-body" href="comment_question.html">Here is a question about asking questions. How do you start a question about asking questions. What's the limit of the question no longer being a question to a question and how to make a question to a question a question... <a class="after-p" href="#"></a></a></p>
+                                <p><a id="question-body" class="question-body-cl" href="comment_question.html">Here is a question about asking questions. How do you start a question about asking questions. What's the limit of the question no longer being a question to a question and how to make a question to a question a question... <a class="after-p" href="#"></a></a></p>
                             </div>
                             <div class="qicons">
-                                <p class="vote">45<a href="#" class="avote-link" title="upvote"><span id="up-vote">&#128077;</span><span class="qvotes-up number"></span></a></p>
-                                <p class="vote"><a href="#" class="avote-link" title="downvote"><span id="down-vote">👎</span><span class="qvotes-down number"></span></a></p>
+                                <p class="vote">45<a href="#" class="avote-link" title="upvote"><span class="up-vote">&#128077;</span><span class="qvotes-up number"></span></a></p>
+                                <p class="vote"><a href="#" class="avote-link" title="downvote"><span class="down-vote">👎</span><span class="qvotes-down number"></span></a></p>
                                 <p>&#128483 87</p>
                                 <p class="qtags">tag</p>
                                 <p class="qtags">tag</p>
@@ -130,8 +130,12 @@
                         </div>
                     </div>
             </div><!-- meet-up-contents -->
+            <div id="invalidq">
+             <p id="invalidq-entry">invalid</p>   
+            </div>
             <div id="input-question">
-                <textarea id="text-question" name="question-area" placeholder="Have a Question in mind?"></textarea>
+                <textarea id="text-question" name="question-area" placeholder="Have a Question in mind?"
+                title="Question should not be blank"></textarea>
             </div>
             <div class="createq-holder">
                 <a id="create-question-button" href="#">Create new Question</a>
