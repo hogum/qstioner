@@ -70,6 +70,21 @@ class Handler {
         });
     }
 
+    patch (url, data) {
+        let absPath = path + url        
+
+        return fetch(absPath, {
+                method: 'PATCH',
+                headers: {
+                'Content-type': 'application/json',
+                'Acess-Control-Allow-Origin': '*',
+                'Acess-Control-Request-Method': 'POST',
+                'Authorization': 'Bearer ' + this.retrieveToken()
+            },
+            body : JSON.stringify(data)
+        });
+    }
+
     saveToken(authToken) {
         // Ssaves auth token to local storage
         localStorage.setItem("userToken", authToken)
@@ -669,6 +684,7 @@ function displayQuestions(questionsList) {
             'click', () => sendVote(question.id, 'upvote'))
         qsCard.getElementsByClassName('down-vote')[0].addEventListener(
             'click', () => sendVote(question.id, 'downvote'))
+        qsCard.getElementsByClassName('vote-count')[0].textContent = question.votes
 
         for (let i = tags.length - 1; i >= 0; i--) {
             let word = 
@@ -687,13 +703,14 @@ function sendVote(qId, vote) {
         question.
     */
 
-    handler.patch(`questions/${qId}/vote`)
+    handler.patch(`questions/${qId}/${vote}`)
     .then(response => response.json()
         .then (payload => ({status: response.status, body: payload})
         )).then (
         payload => {
             console.log(payload)
             if (payload.status === 200) {
+                window.location.reload()
             } else {
 
             }
