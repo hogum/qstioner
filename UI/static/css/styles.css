@@ -802,3 +802,32 @@ color:#fff;
  #no-content-trending {
     display: none;
 }
+
+/*
+===========================
+
+Tagged
+===========================*/
+
+#tag-title {
+  font-weight: 900;
+  display: block;
+  text-align: center;
+  color: #333;
+  text-transform: uppercase;
+}
+
+.tagged-meet {
+}
+#tagged-side {
+  display: none;
+}
+
+#tagged-main {
+  width: 100%;
+}
+
+.tagged-b::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}

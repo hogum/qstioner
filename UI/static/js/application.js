@@ -542,7 +542,6 @@ function getSingleMeetup() {
         }).catch(err => console.log(err))
 }
 
-document.getElementById('tag-input').addEventListener('keyup', )
 function addNewTag(meetupId) {
     /**
         Sends a request to add a tag to a meetup item
@@ -582,6 +581,7 @@ function updateTag(tag) {
     }
    
     tagELem.textContent = tag
+    tagELem.href = `tagged_mmetups.html?tag=${tag}` 
     document.getElementById('tags-buttons').appendChild(tagELem)
     tagELem.style.display = 'inline-block'
 }
