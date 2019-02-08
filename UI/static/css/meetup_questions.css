@@ -440,6 +440,13 @@ New Question
     margin-left: 9.6em;
     font-weight: 900;
 }
+
+#current-rsvp {
+    text-transform: uppercase;
+    font-family: Lato;
+    font-weight: 900;
+}
+
 .rsvp-option p:first-child {
     font-weight: 900;
     color: #155;
