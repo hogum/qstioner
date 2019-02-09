@@ -114,11 +114,11 @@ class Handler {
         let absPath = path + url        
 
         return fetch(absPath, {
-                method: 'POST',
+                method: 'PATCH',
                 headers: {
                 'Content-type': 'application/json',
                 'Acess-Control-Allow-Origin': '*',
-                'Acess-Control-Request-Method': 'POST',
+                'Acess-Control-Request-Method': 'PATCH',
                 'Authorization': 'Bearer ' + this.retrieveToken()
             },
             body : JSON.stringify(data)
@@ -573,9 +573,11 @@ function createMeetupElements(meetupCard, classItem, detail, meetup_id) {
         // Needs to store uploaded server images
 
         
-        card.style.background = 'url(' 
-        + detail[0].split(' ').shift() + ') center no-repeat'
-        return
+        if (detail) {
+            card.style.background = 'url(' 
+            + detail[0].split(' ').shift() + ') center no-repeat'
+            return
+        }
         
      } else if (classItem === 'see-more-mdetails') {
         card.href = `meetup_questions.html?id=${meetup_id}`
@@ -710,11 +712,13 @@ function displaySingleMeetup(meetupItem) {
         parentTags.appendChild(tagELem)
         tagELem.style.display = 'inline-block'
         })
-    meetupItem.images.forEach(image => {
-        let imageEl = document.getElementById('images-meetup-inherit').cloneNode(true)
-        imageEl.src = image
-        document.getElementById('meetup-images').appendChild(imageEl)
-    })
+    if (meetupItem.images) {
+        meetupItem.images.forEach(image => {
+            let imageEl = document.getElementById('images-meetup-inherit').cloneNode(true)
+            imageEl.src = image
+            document.getElementById('meetup-images').appendChild(imageEl)
+        })
+    }
 }
 
 function getMeetupQuestions() {
@@ -1012,7 +1016,7 @@ function listenForScroll(event) {
   let lastDivOffset = lastDiv.offsetTop + lastDiv.clientHeight
   let pageOffset = maindiv.offsetTop + maindiv.clientHeight
 
-  console.log('divo', lastDivOffset)
+  // console.log('divo', lastDivOffset)
   if(lastDivOffset >= 80000)
     showJoinUsMod()
 }
@@ -1096,4 +1100,47 @@ function updateMeetupImages(image) {
     
     element.src = image
     document.getElementById('meetup-images').appendChild(element)
+}
+
+function displayUserMeetups() {
+    let user = handler.getCurrentUser()
+
+    handler.get(`meetips/${user}/rsvp`)
+    .then(response => response.json()
+                .then(payload => ({status: response.status, body: payload})
+                )).then(payload => {
+        console.log(payload)
+                if (payload.status === 200) {
+                    displayUserMeetups(payload.body)        
+                } else {
+                    
+                }
+
+            }).catch(err => console.log(err))
+}
+
+function displayUserMeetups(Useritems) {
+    /*
+        Renders user rsvp-ed meetups in
+        user dashboard
+    */
+    let card = document.getElementById('user-dashcard--inherit').cloneNode('true')
+    let parent = document.getElementById('user-card--parent')
+
+    Useritems.forEach(response => {
+        let card = document.getElementById('user-dashcard--inherit').cloneNode('true')
+        let day = new Date(response[1].happening_on)
+            .toString()
+            .split(' ')
+        let mId = response[1].id
+
+        card.getElementById('meetup-title-user').textContent = response[1].topic
+        card.getElementsByClassName('acard-date').textContent = day.slice(0, 3).join(' ')
+        card.getElementById('edit-meetup-button').href = `edit_meetups.html?id=${mId}`
+
+        parent.appendChild(card)
+        card.style.display = 'block'
+
+    })
+
 }
