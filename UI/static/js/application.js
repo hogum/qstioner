@@ -348,6 +348,7 @@ function createMeetup(event) {
     let location = meetupDetails.elements['location'].value
     let tagsString = meetupDetails.elements['tag'].value
     let images = meetupDetails.elements['image'].value
+    let description = meetupDetails.elements['description'].value
     happeningOn = day + 'T' + time + ':00'
     tags = tagsString.split(',')
 
@@ -356,7 +357,8 @@ function createMeetup(event) {
         happeningOn: happeningOn,
         tags: tags,
         location: location,
-        images: images
+        images: images,
+        description: description
     }
 
     handler.post('meetups', data)
@@ -411,7 +413,6 @@ function retrieveAllMeetups() {
             .then (payload => ({status: response.status, body: payload})
                 )).then (
                     payload => {
-                        console.log(payload)
                         if (payload.status === 200) {
                             meetups = payload.body.data
                             displayMeetups(meetups)
@@ -482,6 +483,7 @@ function displayMeetups(meetupsList) {
         createMeetupElements(meetupCard, 'meetup-title', meetup.topic, meetup.id)
         createMeetupElements(meetupCard, 'meetup-location', meetup.location)
         createMeetupElements(meetupCard, 'maincard--card', meetup.images)
+        createMeetupElements(meetCard, 'meetup-descript', meetup.description.slice(0, 130) + '...')
       
         /* Day Mon DD YYYY */
         createMeetupElements(meetupCard, 'owner', day.slice(0, 4).join(' '))
@@ -493,7 +495,7 @@ function displayMeetups(meetupsList) {
             + ', '
             + day[3]
             .slice(1, 3))
-        createMeetupElements(meetupCard, 'see-more-mdetails', meetup.id)
+        createMeetupElements(meetupCard, 'see-more-mdetails', 'meet', meetup.id)
         // createMeetupElements(meetup.tags)
 
         parent.appendChild(meetupCard)
@@ -521,10 +523,7 @@ function createMeetupElements(meetupCard, classItem, detail, meetup_id) {
         return
         
      } else if (classItem === 'see-more-mdetails') {
-        card.href = `meetup_questions.html?id=${detail}`
-        card.addEventListener("click", function() {
-            // window.location.href = 'meetup_questions.html'
-        })
+        card.href = `meetup_questions.html?id=${meetup_id}`
         return
     } else if (classItem === 'meetup-title') {
         card.href = `meetup_questions.html?id=${meetup_id}`
@@ -781,8 +780,10 @@ function showRsvpStatus() {
     let rsvpEl = document.getElementById('current-rsvp')
     let response = localStorage.getItem('meetupRSVP')
     
-    rsvpEl.textContent = response
-    styleRsvpDisplay(rsvpEl, response)
+    if(response) {
+        rsvpEl.textContent = response
+        styleRsvpDisplay(rsvpEl, response)
+    }
 }
 
 function styleRsvpDisplay(rsvpItem, answer) {
@@ -819,6 +820,9 @@ function createQuestion() {
 
                 if (payload.status === 201) {
                    showQuestionError("Question Created", 'success')
+                   setTimeout(() => {
+                    window.location.reload()
+                   }, 3000)
                 } else if(payload.status === 409){
                     let msg = "You've posted this question"
                     showQuestionError(msg)                    
