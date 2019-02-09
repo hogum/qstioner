@@ -67,7 +67,23 @@ class Handler {
                 'Authorization': 'Bearer ' + this.retrieveToken()
             },
             body : JSON.stringify(data)
-        });
+        })
+    }
+
+    postImage(url, data) {
+        const formData = new FormData()
+        let absPath = path + url        
+
+        formData.append('blob', new Blob([data]))
+        return fetch(absPath, {
+                method: 'POST',
+                headers: {
+                'content-type': 'multipart/form-data',
+                'Acess-Control-Request-Method': 'POST',
+                'Authorization': 'Bearer ' + this.retrieveToken()
+            },
+            body : formData
+        })
     }
 
     patch (url, data) {
@@ -558,6 +574,7 @@ if (window.location.href.includes('meetup_questions.html')) {
     getMeetupQuestions()
     showRsvpStatus()
     createQuestion()
+    postImageToMeetup()
 }
 
 if (window.location.href.includes('tagged_meetups.html')) {
@@ -1000,5 +1017,28 @@ function getModalUser() {
         let regForm = document.getElementById('registration-form')
         regForm.elements['email'].value = userEmail
         localStorage.removeItem('modalUser')
+    }
+}
+
+function postImageToMeetup() {
+    /*
+        Adds images to an existing meetup records
+    */
+    let meetupId = new URLSearchParams(window.location.search).get('id')
+    let upload = document.getElementById('new-meet-img')
+
+    upload.onchange = () => {
+        handler.postImage(`meetups/${meetupId}/images`, {image: upload.value})
+            .then(response => response.json()
+                .then(payload => ({status: response.status, body: payload})
+                )).then(payload => {
+                console.log(payload)
+                if (payload.status === 200) {
+                                      
+                } else {
+                    
+                }
+
+            }).catch(err => console.log(err))
     }
 }
