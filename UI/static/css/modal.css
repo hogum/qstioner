@@ -25,6 +25,7 @@
 }
 
 .wrapper-sign-in-mod {
+    display: none;
     position: absolute;
     left: 40%;
     top: 60%;
@@ -38,7 +39,7 @@
 }
 
 
-input#email {
+input#email-mod {
     margin: 10px;
     margin-top: 12px;
     padding: 0;
@@ -53,6 +54,7 @@ input#email {
 }
 
 .sign-button {
+    text-align: center;
     margin-top: 20px;
     color: #fff;
     background: #fff;
@@ -96,4 +98,19 @@ input#email {
 input.sign-button {
     width: 100%;
     margin-left: 0;
+}
+
+#close-mod {
+    margin: 0;
+    padding: 0;
+    float: right;
+}
+
+#mod--close-button {
+    font-weight: 900;
+    font-size: 15px;
+}
+
+#mod--close-button:hover {
+    cursor: pointer;
 }
