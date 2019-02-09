@@ -909,3 +909,18 @@ function submitComment() {
             }).catch(err => console.log(err))
     })
 }
+
+const itemsCh = document.getElementsByClassName("main-pane")[0].childElementCount
+
+document.getElementsByClassName("main-pane")[0].addEventListener("scroll", function(event) {
+    let parent = document.getElementsByClassName("main-pane")[0]
+    console.log(itemsCh)
+    let child = 1
+    for (let i = 1; i<= itemsCh; i++) {
+        child = i
+       let newDiv = document.querySelector(`.main-pane > div:nth-child(${child})`).cloneNode(true)
+       parent.appendChild(newDiv)
+   }
+
+ 
+})
