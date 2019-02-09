@@ -44,17 +44,21 @@
         </header><!-- /header -->
 
         <div class="container-user">
+            <div id="no-records-user-meetups">
+                <p id="no-rec-user-text">Hmmm... Dashboard seems lonely. RSVP a meetup to see something here</p>
+            </div>
         <div class="container-admin user">
              <div class="search-meetups">
                 <input type="search" name="search-meetups-input" value="" placeholder="Search active meet-ups">
             </div>
             <div class="meet-up-contents" id="user-card--parent">
-                <div class="admin-cards" id="user-dashcard--inherit">
+                <div class="admin-cards inherited" id="user-dashcard--inherit">
                     <div class="admin-card-card">
                         <div class="acard-text">
-                            <p class="acard-name"><a id="meetup-title-user" href="meetup_questions.html" title="See this meet-up's details">Meet-up Spam</a></p>
+                            <p class="acard-name"><a class="meetup-title-user" href="meetup_questions.html" title="See this meet-up's details">Meet-up Spam</a></p>
+                            <p class="rsvp-user">GOING: <span class="rsvp-user-res">NO</span></p>
                             <p class="acard-date">Jan 12</p>
-                            <p class="edit"><a id="edit-meetup-button" href="edit_meetups.html" title="Edit or delete this meetup">edit</a></p>
+                            <p class="edit"><a class="edit-meetup-button" href="edit_meetups.html" title="Edit or delete this meetup">edit</a></p>
                         </div>
                         <div class="acard-center"></div>
                         <div class="seprator">
@@ -73,7 +77,7 @@
                     </div>
                 </div>
 
-               <div class="admin-cards">
+               <div class="admin-cards inherited">
                     <div class="admin-card-card">
                         <div class="acard-text">
                             <p class="acard-name"><a href="meetup_questions.html" title="See this meet-up's details">Meet-up Spam</a></p>
@@ -97,7 +101,7 @@
                     </div>
                 </div>
 
-                <div class="admin-cards">
+                <div class="admin-cards inherited">
                     <div class="admin-card-card">
                         <div class="acard-text">
                             <p class="acard-name"><a href="meetup_questions.html" title="See this meet-up's details">Meet-up Spam</a></p>
@@ -123,8 +127,8 @@
             </div><!-- meetup-contents -->
         </div><!-- /Container-admin -->
         <div class="user-info">
-            <p>Questions Asked <span class="number qasked">3</span></p>
-            <p>Questions commented <span class="number qcommented">12</span></p>
+            <p>Questions Asked <span class="number qasked">0</span></p>
+            <p>Questions commented <span class="number qcommented">0</span></p>
         </div>
         </div>
     </div><!-- /wrapper -->
@@ -132,7 +136,7 @@
     <script src="static/js/application.js" type="text/javascript" charset="utf-8"></script>
 
 </body>
-<footer>
+<footer id="user-page-footer">
    <div class="footer-text">
         &#169; <span class="year">2019</span>
         <p>We just discovered <a href="#">what's sweeter than cookies.</a> Come share with us</p>
