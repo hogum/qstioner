@@ -44,7 +44,7 @@ input {
 }
 
 
-input#username,#pass,#confirm-pass,#name,#email,#description {
+input#username,#pass,#confirm-pass,#name,#email,#meet-description {
     margin: 10px;
     margin-top: 12px;
     padding: 0px;
@@ -101,16 +101,21 @@ input#username,#pass,#confirm-pass,#name,#email,#description {
     cursor: pointer;
 }
 
-input,#pass,#confirm-pass,#name,#email,#description {
+input,#pass,#confirm-pass,#name,#email,#description, #meet-description {
     padding: 8px;
 }
 
-input#username:hover,#pass:hover,#confirm-pass:hover,#name:hover,#email:hover {
+input#username:hover,#pass:hover,#confirm-pass:hover,#name:hover,#email:hover,  #meet-description:hover {
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
 }
 
-input#username:focus,#pass:focus,#confirm-pass:focus,#name:focus,#email:focus {
+input#username:focus,#pass:focus,#confirm-pass:focus,#name:focus,#email:focus, #meet-description:focus {
     box-shadow: 0 0 10px rgba(20, 150, 128, 1);
+}
+
+#meet-description {
+    height: 9em;
+    resize: none;
 }
 
 .check {

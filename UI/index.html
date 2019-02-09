@@ -7,6 +7,7 @@
     <title>Questioner</title>
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="shortcut icon" type="image/png" href="static/images/fav.jpeg"/>
+    <link rel="stylesheet" href="static/css/modal.css">
 </head>
 <body>
     <div class="wrapper">
@@ -48,6 +49,20 @@
         </div><!-- attention-->
 
         <div class="content container-content">
+          <div class="wrapper-sign-in-mod">
+            <div id="container-sign-in-mod">
+                <div id="close-mod"><span id="mod--close-button">&times</span></div>
+                <div id="action-mod">Join Questioner and Meet Fun people and Many many cool meetups</div>
+                <form action="" method="post" id="signin-form-modal">
+                    <label for="email">You Just need Your Email:</label>
+                    <input type="email" id="email-mod" name="email" required="required">
+                    <div id="bottom">
+                        <input class="sign-button" id="sign-in-modal-button" value="Yes! I'm In" >
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
             <div class="main-pane pane">
                 <div class="main-card" id="main-card--id">
                     <div id="main-img-card">
@@ -57,7 +72,7 @@
                             <div class="owner"><a href="#">schedule date</a></div>
                           </div>
                           <div class="mmaincard-contents">
-                            <p>    
+                            <p class="meetup-descript">    
                             An event inspired by the beauty of single mothers coming together. Touch peel and stand, okay that's
                            all the seriousness I can offer... </p>
                             <a class="see-more-mdetails" href="#">Check it Out<span class="card-tags"></span></a>

@@ -67,7 +67,48 @@ class Handler {
                 'Authorization': 'Bearer ' + this.retrieveToken()
             },
             body : JSON.stringify(data)
-        });
+        })
+    }
+
+    postImage(url, data) {
+        let XHR = new XMLHttpRequest()
+        let absPath = path + url
+        let urlData = ""
+        let urlPairs = []
+        let item
+
+        let formData = new FormData()
+
+        for (item in data) {
+            urlPairs.push(encodeURIComponent(item)
+                + '='
+                + encodeURIComponent(data[item]))
+        }
+        urlData = urlPairs.join('&').replace(/%20g/, '+')
+        console.log(urlData)
+
+        formData.append('image', data.image)
+
+        XHR.addEventListener('load', ()=> {
+            console.log('Data sent')
+        })
+        XHR.addEventListener('error', ()=> {
+            console.log('Send data failed')
+        })
+        XHR.open('POST', path + url)
+        XHR.setRequestHeader(
+            "Content-Type", "application/x-www-form-urlencoded"
+            )
+        XHR.send(data)
+
+        return fetch(absPath, {
+                method: 'POST',
+                headers: {
+                'Authorization': 'Bearer ' + this.retrieveToken(),
+                'Acess-Control-Allow-Origin': "http://localhost:5000"
+            },
+            body: formData
+    })
     }
 
     patch (url, data) {
@@ -78,7 +119,7 @@ class Handler {
                 headers: {
                 'Content-type': 'application/json',
                 'Acess-Control-Allow-Origin': '*',
-                'Acess-Control-Request-Method': 'POST',
+                'Acess-Control-Request-Method': 'PATCH',
                 'Authorization': 'Bearer ' + this.retrieveToken()
             },
             body : JSON.stringify(data)
@@ -101,6 +142,14 @@ class Handler {
 
     getCurrentUser() {
         return localStorage.getItem("currentUser")
+    }
+
+    saveItem(item, value) {
+        return localStorage.setItem(item, value)
+    }
+
+    retrieveItem(item) {
+        return localStorage.getItem(item)
     }
 
     confirmAuthorizedAccess() {
@@ -202,11 +251,11 @@ function registerUser(event) {
     // Posts user registration form details
     event.preventDefault();
 
-    let firstname = registrationForm.elements['name'].value;
-    let username = registrationForm.elements['username'].value;
-    let email = registrationForm.elements['email'].value;
-    let password = registrationForm.elements['password'].value;
-    let retypedPass = registrationForm.elements['confirm-password'].value;
+    let firstname = registrationForm.elements['name'].value
+    let username = registrationForm.elements['username'].value
+    let email = registrationForm.elements['email'].value
+    let password = registrationForm.elements['password'].value
+    let retypedPass = registrationForm.elements['confirm-password'].value
     let submitOption = document.getElementById('sign-up-button')
     submitOption.value = 'Signing up...'
     submitOption.disabled = true
@@ -306,8 +355,9 @@ function signIn(event) {
                     let userPage = isAdmin ? 'admin_page.html' : 'user_page.html'
 
                     setTimeout(() => {
+                        clearFilledForm(signInPage)
                         window.location.href = userPage;
-                    }, 2000)
+                    }, 000)
 
                 } else {
                     // Show wrong credentials error
@@ -332,6 +382,7 @@ if (meetupDetails)
 function createMeetup(event) {
     // Posts a meetup from given meetups details
     event.preventDefault()
+    let meetId = ''
 
     let topic = meetupDetails.elements['name'].value
     let day = meetupDetails.elements['date'].value
@@ -339,6 +390,7 @@ function createMeetup(event) {
     let location = meetupDetails.elements['location'].value
     let tagsString = meetupDetails.elements['tag'].value
     let images = meetupDetails.elements['image'].value
+    let description = meetupDetails.elements['description'].value
     happeningOn = day + 'T' + time + ':00'
     tags = tagsString.split(',')
 
@@ -347,7 +399,7 @@ function createMeetup(event) {
         happeningOn: happeningOn,
         tags: tags,
         location: location,
-        images: images
+        description: description
     }
 
     handler.post('meetups', data)
@@ -359,15 +411,29 @@ function createMeetup(event) {
         let timeOut = 15000
 
         if (payload.status === 201) {
+            console.log(payload)
             warningMessage.style.display = 'none'
             showMessage(successMessage)
             addCloseOption()
             clearFilledForm(meetupDetails)
+            meetId = payload.body.data[0].id
         } else {
             let msg = payload.body.message ? payload.body.message : payload.body.message[0]
             showMessage(warningMessage, msg, timeOut)
         }
     }).catch(err => console.log(err))
+
+    handler.postImage(`meetups/${meetId}/images`, {image: images})
+        .then(response => response.json()
+                .then(payload => ({status: response.status, body: payload})
+                )).then(payload => {
+                if (payload.status === 200) {
+                    updateMeetupImages(payload.body.data)        
+                } else {
+                    
+                }
+
+            }).catch(err => console.log(err))
 }
 
 function addCloseOption() {
@@ -402,7 +468,6 @@ function retrieveAllMeetups() {
             .then (payload => ({status: response.status, body: payload})
                 )).then (
                     payload => {
-                        console.log(payload)
                         if (payload.status === 200) {
                             meetups = payload.body.data
                             displayMeetups(meetups)
@@ -473,6 +538,7 @@ function displayMeetups(meetupsList) {
         createMeetupElements(meetupCard, 'meetup-title', meetup.topic, meetup.id)
         createMeetupElements(meetupCard, 'meetup-location', meetup.location)
         createMeetupElements(meetupCard, 'maincard--card', meetup.images)
+        createMeetupElements(meetupCard, 'meetup-descript', meetup.description.slice(0, 130) + '...')
       
         /* Day Mon DD YYYY */
         createMeetupElements(meetupCard, 'owner', day.slice(0, 4).join(' '))
@@ -484,12 +550,13 @@ function displayMeetups(meetupsList) {
             + ', '
             + day[3]
             .slice(1, 3))
-        createMeetupElements(meetupCard, 'see-more-mdetails', meetup.id)
+        createMeetupElements(meetupCard, 'see-more-mdetails', 'meet', meetup.id)
         // createMeetupElements(meetup.tags)
 
         parent.appendChild(meetupCard)
         meetupCard.style.display = 'block'
 
+        itemsCh ++ // Counts child elements in meetup display
     })
 }
 
@@ -507,15 +574,14 @@ function createMeetupElements(meetupCard, classItem, detail, meetup_id) {
         // Needs to store uploaded server images
 
         
-        // card.style.background = 'url(' 
-        // + detail[0].split(' ').shift() + ') center no-repeat'
-        return
+        if (detail) {
+            card.style.background = 'url(' 
+            + detail[0].split(' ').shift() + ') center no-repeat'
+            return
+        }
         
      } else if (classItem === 'see-more-mdetails') {
-        card.href = `meetup_questions.html?id=${detail}`
-        card.addEventListener("click", function() {
-            // window.location.href = 'meetup_questions.html'
-        })
+        card.href = `meetup_questions.html?id=${meetup_id}`
         return
     } else if (classItem === 'meetup-title') {
         card.href = `meetup_questions.html?id=${meetup_id}`
@@ -550,6 +616,7 @@ if (window.location.href.includes('meetup_questions.html')) {
     getMeetupQuestions()
     showRsvpStatus()
     createQuestion()
+    postImageToMeetup()
 }
 
 if (window.location.href.includes('tagged_meetups.html')) {
@@ -559,6 +626,14 @@ if (window.location.href.includes('tagged_meetups.html')) {
 if (window.location.href.includes('comment_question.html')) {
     showComments()
     submitComment()
+}
+
+if (window.location.href.includes('sign-up.html')) {
+        getModalUser()
+}
+
+if (window.location.href.includes('user_page.html')) {
+    displayUserRSVPMeetups()
 }
 
 function getSingleMeetup() {
@@ -642,6 +717,13 @@ function displaySingleMeetup(meetupItem) {
         parentTags.appendChild(tagELem)
         tagELem.style.display = 'inline-block'
         })
+    if (meetupItem.images) {
+        meetupItem.images.forEach(image => {
+            let imageEl = document.getElementById('images-meetup-inherit').cloneNode(true)
+            imageEl.src = image
+            document.getElementById('meetup-images').appendChild(imageEl)
+        })
+    }
 }
 
 function getMeetupQuestions() {
@@ -768,8 +850,10 @@ function showRsvpStatus() {
     let rsvpEl = document.getElementById('current-rsvp')
     let response = localStorage.getItem('meetupRSVP')
     
-    rsvpEl.textContent = response
-    styleRsvpDisplay(rsvpEl, response)
+    if(response) {
+        rsvpEl.textContent = response
+        styleRsvpDisplay(rsvpEl, response)
+    }
 }
 
 function styleRsvpDisplay(rsvpItem, answer) {
@@ -806,6 +890,9 @@ function createQuestion() {
 
                 if (payload.status === 201) {
                    showQuestionError("Question Created", 'success')
+                   setTimeout(() => {
+                    window.location.reload()
+                   }, 3000)
                 } else if(payload.status === 409){
                     let msg = "You've posted this question"
                     showQuestionError(msg)                    
@@ -908,4 +995,168 @@ function submitComment() {
 
             }).catch(err => console.log(err))
     })
+}
+
+let itemPane = document.getElementsByClassName("main-pane")[0]
+let itemsCh
+
+if (itemPane){
+    itemsCh = itemPane.childElementCount
+    itemPane.addEventListener('scroll', listenForScroll)
+}
+
+function listenForScroll(event) {
+    /*
+        Appends child meetup display elements in container for infinite scroll
+    */
+    let parent = document.getElementsByClassName("main-pane")[0]
+    let child = 1
+    for (let i = 1; i<= itemsCh; i++) {
+        child = i
+       let newDiv = document.querySelector(`.main-pane > div:nth-child(${child})`).cloneNode(true)
+       parent.appendChild(newDiv)
+   }
+  let lastDiv = document.querySelector(".main-pane > div:last-child")
+  let maindiv = document.querySelector(".main-pane");
+  let lastDivOffset = lastDiv.offsetTop + lastDiv.clientHeight
+  let pageOffset = maindiv.offsetTop + maindiv.clientHeight
+
+  // console.log('divo', lastDivOffset)
+  if(lastDivOffset >= 80000)
+    showJoinUsMod()
+}
+
+function showJoinUsMod() {
+    /*
+        Displays registration prompt Modal to new user.
+    */
+
+    if ((handler.getCurrentUser()) && (handler.getCurrentUser !== 'Guest'))
+        return
+
+    let Signmodal = document.getElementsByClassName('wrapper-sign-in-mod')[0]
+    let closeButton = document.getElementById('mod--close-button')
+
+    Signmodal.style.display = 'block'
+
+    closeButton.addEventListener(
+        'click', () => {
+            Signmodal.style.display = 'none'
+        })
+    let submitButton = document.getElementById('sign-in-modal-button')
+
+    submitButton.addEventListener('click', () => submitModal())
+}
+
+function submitModal() {
+    /*
+        Sends submit requests to register new user.
+    */
+    let userEmail = document.getElementById('email-mod').value
+    console.log(userEmail)
+    
+    handler.saveItem('modalUser', userEmail)
+    document.getElementsByClassName('wrapper-sign-in-mod')[0].style.display = 'none'
+    window.location.href = 'sign-up.html'
+}
+
+function getModalUser() {
+    /*
+        Assigns given email in modal form to user registration form
+    */
+
+    let userEmail = handler.retrieveItem('modalUser')
+    if(userEmail) {
+        let regForm = document.getElementById('registration-form')
+        regForm.elements['email'].value = userEmail
+        localStorage.removeItem('modalUser')
+    }
+}
+
+function postImageToMeetup() {
+    /*
+        Adds images to an existing meetup records
+    */
+    let meetupId = new URLSearchParams(window.location.search).get('id')
+    let upload = document.getElementById('new-meet-img')
+
+    upload.onchange = () => {
+        handler.postImage(`meetups/${meetupId}/images`, {image: upload.files[0]})
+            .then(response => response.json()
+                .then(payload => ({status: response.status, body: payload})
+                )).then(payload => {
+                if (payload.status === 200) {
+                    updateMeetupImages(payload.body.data)        
+                } else {
+                    
+                }
+
+            }).catch(err => console.log(err))
+    }
+}
+
+function updateMeetupImages(image) {
+    /*
+        Updates uploaded image to present meetups
+        display images.
+    */
+
+    let element = document.getElementById('images-meetup-inherit').cloneNode(true)
+    
+    element.src = image
+    document.getElementById('meetup-images').appendChild(element)
+}
+
+function displayUserRSVPMeetups() {
+    let user = handler.getCurrentUser()
+
+    handler.get(`meetups/${user}/rsvp`)
+    .then(response => response.json()
+                .then(payload => ({status: response.status, body: payload})
+                )).then(payload => {
+                if (payload.status === 200) {
+                    displayUserMeetups(payload.body.data)        
+                } else {
+                    
+                }
+
+            }).catch(err => console.log(err))
+}
+
+function displayUserMeetups(Useritems) {
+    /*
+        Renders user rsvp-ed meetups in
+        user dashboard
+    */
+
+    let card = document.getElementById('user-dashcard--inherit').cloneNode('true')
+    let parent = document.getElementById('user-card--parent')
+
+    if (Useritems.length === 0) {
+        document.getElementById('no-records-user-meetups').style.display = 'block'
+        return
+    }
+
+    Useritems.forEach(response => {
+        let card = document.getElementById('user-dashcard--inherit').cloneNode('true')
+        let day = new Date(response[1].happeningOn)
+            .toString()
+            .split(' ')
+        let mId = response[1].id
+        let title = card.getElementsByClassName('meetup-title-user')[0]
+        let rsvp = card.getElementsByClassName('rsvp-user-res')[0]
+
+        title.textContent = response[1].topic
+        title.href = `meetup_questions.html?id=${mId}`
+        card.getElementsByClassName('acard-date')[0].textContent = day.slice(0, 3).join(' ')
+        card.getElementsByClassName('edit-meetup-button')[0].href = `edit_meetups.html?id=${mId}`
+        rsvp.textContent = response[0]
+
+        styleRsvpDisplay(rsvp, response[0])
+        parent.appendChild(card)
+        card.style.display = 'block'
+        document.getElementById('user-page-footer').style.position = 'relative'
+
+    })
+
 }

@@ -185,6 +185,23 @@ Overrride Inherited Content
     border-radius: 3px 0; 
 }
 
+#no-records-user-meetups {
+    display: none;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 900;
+    color: #777;
+    margin-top: 3em;
+}
+
+.rsvp-user-res {
+    text-transform: uppercase;
+}
+
+.admin-cards {
+    display: none;
+}
+
 footer {
-    position: relative;
+    position: absolute;
 }
