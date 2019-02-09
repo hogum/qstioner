@@ -103,6 +103,14 @@ class Handler {
         return localStorage.getItem("currentUser")
     }
 
+    saveItem(item, value) {
+        return localStorage.setItem(item, value)
+    }
+
+    retrieveItem(item) {
+        return localStorage.getItem(item)
+    }
+
     confirmAuthorizedAccess() {
 
          if ((!this.getCurrentUser()) || (this.getCurrentUser() === 'Guest')) {
@@ -202,11 +210,11 @@ function registerUser(event) {
     // Posts user registration form details
     event.preventDefault();
 
-    let firstname = registrationForm.elements['name'].value;
-    let username = registrationForm.elements['username'].value;
-    let email = registrationForm.elements['email'].value;
-    let password = registrationForm.elements['password'].value;
-    let retypedPass = registrationForm.elements['confirm-password'].value;
+    let firstname = registrationForm.elements['name'].value
+    let username = registrationForm.elements['username'].value
+    let email = registrationForm.elements['email'].value
+    let password = registrationForm.elements['password'].value
+    let retypedPass = registrationForm.elements['confirm-password'].value
     let submitOption = document.getElementById('sign-up-button')
     submitOption.value = 'Signing up...'
     submitOption.disabled = true
@@ -561,6 +569,10 @@ if (window.location.href.includes('comment_question.html')) {
     submitComment()
 }
 
+if (window.location.href.includes('sign-up.html')) {
+        getModalUser()
+}
+
 function getSingleMeetup() {
     /* Renders meetup details in meetup display page
     */
@@ -910,17 +922,74 @@ function submitComment() {
     })
 }
 
-const itemsCh = document.getElementsByClassName("main-pane")[0].childElementCount
+let itemPane = document.getElementsByClassName("main-pane")[0]
+let itemsCh
 
-document.getElementsByClassName("main-pane")[0].addEventListener("scroll", function(event) {
+if (itemPane){
+    itemsCh = itemPane.childElementCount
+    itemPane.addEventListener('scroll', listenForScroll)
+}
+
+function listenForScroll(event) {
+    /*
+        Appends child meetup display elements in container for infinite scroll
+    */
     let parent = document.getElementsByClassName("main-pane")[0]
-    console.log(itemsCh)
     let child = 1
     for (let i = 1; i<= itemsCh; i++) {
         child = i
        let newDiv = document.querySelector(`.main-pane > div:nth-child(${child})`).cloneNode(true)
        parent.appendChild(newDiv)
    }
+  let lastDiv = document.querySelector(".main-pane > div:last-child")
+  let maindiv = document.querySelector(".main-pane");
+  let lastDivOffset = lastDiv.offsetTop + lastDiv.clientHeight
+  let pageOffset = maindiv.offsetTop + maindiv.clientHeight
 
- 
-})
+  console.log('divo', lastDivOffset)
+  if(lastDivOffset >= 80000)
+    showJoinUsMod()
+}
+
+function showJoinUsMod() {
+    /*
+        Displays registration prompt Modal to new user.
+    */
+
+    let Signmodal = document.getElementsByClassName('wrapper-sign-in-mod')[0]
+    let closeButton = document.getElementById('mod--close-button')
+
+    Signmodal.style.display = 'block'
+
+    closeButton.addEventListener(
+        'click', () => {
+            Signmodal.style.display = 'none'
+        })
+    let submitButton = document.getElementById('sign-in-modal-button')
+
+    submitButton.addEventListener('click', () => submitModal())
+}
+
+function submitModal() {
+    /*
+        Sends submit requests to register new user.
+    */
+    let userEmail = document.getElementById('email-mod').value
+    console.log(userEmail)
+    
+    handler.saveItem('modalUser', userEmail)
+    document.getElementsByClassName('wrapper-sign-in-mod')[0].style.display = 'none'
+    window.location.href = 'sign-up.html'
+}
+
+function getModalUser() {
+    /*
+        Assigns given email in modal form to user registration form
+    */
+
+    let userEmail = handler.retrieveItem('modalUser')
+    if(userEmail) {
+        let regForm = document.getElementById('registration-form')
+        regForm.elements['email'].value = userEmail
+    }
+}
