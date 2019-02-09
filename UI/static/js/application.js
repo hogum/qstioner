@@ -1,5 +1,5 @@
- // let path  = 'http://localhost:5000/api/v1/';
- const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
+ let path  = 'http://localhost:5000/api/v1/';
+ // const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
 
 function showNav() {
     // Toggles the nav bar button for responsiveness.
@@ -71,26 +71,50 @@ class Handler {
     }
 
     postImage(url, data) {
-        const formData = new FormData()
-        let absPath = path + url        
+        let XHR = new XMLHttpRequest()
+        let absPath = path + url
+        let urlData = ""
+        let urlPairs = []
+        let item
 
-        formData.append('blob', new Blob([data]))
+        let formData = new FormData()
+
+        for (item in data) {
+            urlPairs.push(encodeURIComponent(item)
+                + '='
+                + encodeURIComponent(data[item]))
+        }
+        urlData = urlPairs.join('&').replace(/%20g/, '+')
+        console.log(urlData)
+
+        formData.append('image', data.image)
+
+        XHR.addEventListener('load', ()=> {
+            console.log('Data sent')
+        })
+        XHR.addEventListener('error', ()=> {
+            console.log('Send data failed')
+        })
+        XHR.open('POST', path + url)
+        XHR.setRequestHeader(
+            "Content-Type", "application/x-www-form-urlencoded"
+            )
+        XHR.send(data)
+
         return fetch(absPath, {
                 method: 'POST',
                 headers: {
-                'content-type': 'multipart/form-data',
-                'Acess-Control-Request-Method': 'POST',
                 'Authorization': 'Bearer ' + this.retrieveToken()
             },
-            body : formData
-        })
+            body: formData
+    })
     }
 
     patch (url, data) {
         let absPath = path + url        
 
         return fetch(absPath, {
-                method: 'PATCH',
+                method: 'POST',
                 headers: {
                 'Content-type': 'application/json',
                 'Acess-Control-Allow-Origin': '*',
@@ -357,6 +381,7 @@ if (meetupDetails)
 function createMeetup(event) {
     // Posts a meetup from given meetups details
     event.preventDefault()
+    let meetId = ''
 
     let topic = meetupDetails.elements['name'].value
     let day = meetupDetails.elements['date'].value
@@ -373,7 +398,6 @@ function createMeetup(event) {
         happeningOn: happeningOn,
         tags: tags,
         location: location,
-        images: images,
         description: description
     }
 
@@ -386,15 +410,29 @@ function createMeetup(event) {
         let timeOut = 15000
 
         if (payload.status === 201) {
+            console.log(payload)
             warningMessage.style.display = 'none'
             showMessage(successMessage)
             addCloseOption()
             clearFilledForm(meetupDetails)
+            meetId = payload.body.data[0].id
         } else {
             let msg = payload.body.message ? payload.body.message : payload.body.message[0]
             showMessage(warningMessage, msg, timeOut)
         }
     }).catch(err => console.log(err))
+
+    handler.postImage(`meetups/${meetId}/images`, {image: images})
+        .then(response => response.json()
+                .then(payload => ({status: response.status, body: payload})
+                )).then(payload => {
+                if (payload.status === 200) {
+                    updateMeetupImages(payload.body.data)        
+                } else {
+                    
+                }
+
+            }).catch(err => console.log(err))
 }
 
 function addCloseOption() {
@@ -499,7 +537,7 @@ function displayMeetups(meetupsList) {
         createMeetupElements(meetupCard, 'meetup-title', meetup.topic, meetup.id)
         createMeetupElements(meetupCard, 'meetup-location', meetup.location)
         createMeetupElements(meetupCard, 'maincard--card', meetup.images)
-        createMeetupElements(meetCard, 'meetup-descript', meetup.description.slice(0, 130) + '...')
+        createMeetupElements(meetupCard, 'meetup-descript', meetup.description.slice(0, 130) + '...')
       
         /* Day Mon DD YYYY */
         createMeetupElements(meetupCard, 'owner', day.slice(0, 4).join(' '))
@@ -517,6 +555,7 @@ function displayMeetups(meetupsList) {
         parent.appendChild(meetupCard)
         meetupCard.style.display = 'block'
 
+        itemsCh ++ // Counts child elements in meetup display
     })
 }
 
@@ -534,8 +573,8 @@ function createMeetupElements(meetupCard, classItem, detail, meetup_id) {
         // Needs to store uploaded server images
 
         
-        // card.style.background = 'url(' 
-        // + detail[0].split(' ').shift() + ') center no-repeat'
+        card.style.background = 'url(' 
+        + detail[0].split(' ').shift() + ') center no-repeat'
         return
         
      } else if (classItem === 'see-more-mdetails') {
@@ -671,6 +710,11 @@ function displaySingleMeetup(meetupItem) {
         parentTags.appendChild(tagELem)
         tagELem.style.display = 'inline-block'
         })
+    meetupItem.images.forEach(image => {
+        let imageEl = document.getElementById('images-meetup-inherit').cloneNode(true)
+        imageEl.src = image
+        document.getElementById('meetup-images').appendChild(imageEl)
+    })
 }
 
 function getMeetupQuestions() {
@@ -1028,17 +1072,28 @@ function postImageToMeetup() {
     let upload = document.getElementById('new-meet-img')
 
     upload.onchange = () => {
-        handler.postImage(`meetups/${meetupId}/images`, {image: upload.value})
+        handler.postImage(`meetups/${meetupId}/images`, {image: upload.files[0]})
             .then(response => response.json()
                 .then(payload => ({status: response.status, body: payload})
                 )).then(payload => {
-                console.log(payload)
                 if (payload.status === 200) {
-                                      
+                    updateMeetupImages(payload.body.data)        
                 } else {
                     
                 }
 
             }).catch(err => console.log(err))
     }
+}
+
+function updateMeetupImages(image) {
+    /*
+        Updates uploaded image to present meetups
+        display images.
+    */
+
+    let element = document.getElementById('images-meetup-inherit').cloneNode(true)
+    
+    element.src = image
+    document.getElementById('meetup-images').appendChild(element)
 }
