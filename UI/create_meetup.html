@@ -63,10 +63,13 @@
                     title="And time?">
                     <label for="image">Image:</label>
                     <input type="file" class="imagein" id="username" name="image" placeholder="Add an event-image" title="Having a picture is always cool" accept="image/*">
+                    <label for="description">Description of Meetup:</label>
+                    <textarea type="text" id="meet-description" name="name" minlength="3" required="required" 
+                    pattern="[a-zA-Z0-9 -_#] title="Call your meet-up something cool"></textarea>
                     <label for="location">Location of Meet-up:</label>
                     <input type="text" id="pass" name="location" required="required" placeholder="e.g Kivuli gardens, Nairobi">
                     <label for="tag">Add Tags  - (Make finding your event easier):</label>
-                    <input type="text" id="confirm-pass" name="tag" required="required" pattern="^[A-Za-z0-9_ ?/.,':;]+$" title="Tags make finding your event easier" placeholder="e.g Soap, Health, Fast-cars">
+                    <input type="text" id="confirm-pass" name="tag" required="required" pattern="^[A-Za-z0-9_ ?/.,':;]+$" title="Separate tags with commas e.g Soap, Health, Fast-cars" placeholder="Use commas e.g Soap, Health">
                     <div id="bottom">
                         <input class="sign-button" id="sign-up-button" type="submit" value="Create Meet-Up">           
                         <a class="bottom-right" href="default.html"></a>
