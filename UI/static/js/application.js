@@ -104,7 +104,8 @@ class Handler {
         return fetch(absPath, {
                 method: 'POST',
                 headers: {
-                'Authorization': 'Bearer ' + this.retrieveToken()
+                'Authorization': 'Bearer ' + this.retrieveToken(),
+                'Acess-Control-Allow-Origin': "http://localhost:5000"
             },
             body: formData
     })
