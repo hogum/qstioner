@@ -314,8 +314,9 @@ function signIn(event) {
                     let userPage = isAdmin ? 'admin_page.html' : 'user_page.html'
 
                     setTimeout(() => {
+                        clearFilledForm(signInPage)
                         window.location.href = userPage;
-                    }, 2000)
+                    }, 000)
 
                 } else {
                     // Show wrong credentials error
@@ -956,6 +957,9 @@ function showJoinUsMod() {
         Displays registration prompt Modal to new user.
     */
 
+    if ((handler.getCurrentUser()) && (handler.getCurrentUser !== 'Guest'))
+        return
+
     let Signmodal = document.getElementsByClassName('wrapper-sign-in-mod')[0]
     let closeButton = document.getElementById('mod--close-button')
 
@@ -991,5 +995,6 @@ function getModalUser() {
     if(userEmail) {
         let regForm = document.getElementById('registration-form')
         regForm.elements['email'].value = userEmail
+        localStorage.removeItem('modalUser')
     }
 }
