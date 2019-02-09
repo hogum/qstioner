@@ -631,6 +631,10 @@ if (window.location.href.includes('sign-up.html')) {
         getModalUser()
 }
 
+if (window.location.href.includes('user_page.html')) {
+    displayUserRSVPMeetups()
+}
+
 function getSingleMeetup() {
     /* Renders meetup details in meetup display page
     */
@@ -1102,16 +1106,15 @@ function updateMeetupImages(image) {
     document.getElementById('meetup-images').appendChild(element)
 }
 
-function displayUserMeetups() {
+function displayUserRSVPMeetups() {
     let user = handler.getCurrentUser()
 
-    handler.get(`meetips/${user}/rsvp`)
+    handler.get(`meetups/${user}/rsvp`)
     .then(response => response.json()
                 .then(payload => ({status: response.status, body: payload})
                 )).then(payload => {
-        console.log(payload)
                 if (payload.status === 200) {
-                    displayUserMeetups(payload.body)        
+                    displayUserMeetups(payload.body.data)        
                 } else {
                     
                 }
@@ -1124,22 +1127,34 @@ function displayUserMeetups(Useritems) {
         Renders user rsvp-ed meetups in
         user dashboard
     */
+
     let card = document.getElementById('user-dashcard--inherit').cloneNode('true')
     let parent = document.getElementById('user-card--parent')
 
+    if (Useritems.length === 0) {
+        document.getElementById('no-records-user-meetups').style.display = 'block'
+        return
+    }
+
     Useritems.forEach(response => {
         let card = document.getElementById('user-dashcard--inherit').cloneNode('true')
-        let day = new Date(response[1].happening_on)
+        let day = new Date(response[1].happeningOn)
             .toString()
             .split(' ')
         let mId = response[1].id
+        let title = card.getElementsByClassName('meetup-title-user')[0]
+        let rsvp = card.getElementsByClassName('rsvp-user-res')[0]
 
-        card.getElementById('meetup-title-user').textContent = response[1].topic
-        card.getElementsByClassName('acard-date').textContent = day.slice(0, 3).join(' ')
-        card.getElementById('edit-meetup-button').href = `edit_meetups.html?id=${mId}`
+        title.textContent = response[1].topic
+        title.href = `meetup_questions.html?id=${mId}`
+        card.getElementsByClassName('acard-date')[0].textContent = day.slice(0, 3).join(' ')
+        card.getElementsByClassName('edit-meetup-button')[0].href = `edit_meetups.html?id=${mId}`
+        rsvp.textContent = response[0]
 
+        styleRsvpDisplay(rsvp, response[0])
         parent.appendChild(card)
         card.style.display = 'block'
+        document.getElementById('user-page-footer').style.position = 'relative'
 
     })
 
