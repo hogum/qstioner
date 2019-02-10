@@ -248,7 +248,9 @@ function clearSigninPrompts() {
 }
 
 function registerUser(event) {
-    // Posts user registration form details
+    /*
+        Posts user registration form details */
+
     event.preventDefault();
 
     let firstname = registrationForm.elements['name'].value
@@ -290,11 +292,38 @@ function registerUser(event) {
             // Show success message on Registration
             // missing
 
-            setTimeout(() => {
-                registrationForm.reset()
-                window.location.href = 'user_page.html';
-                successMessage.style.display = 'none'
-            }, 2500)
+        let newUser = {
+            "email": email,
+            "password": password
+        }
+
+        // Sign in User
+        handler.post('auth/login', newUser)
+        .then(response => response.json().then (
+            payload => ({status: response.status, body: payload})
+            )).then(payload => {
+                let message = undefined;
+                if (payload.status === 200) {
+                    message = "Success"
+                    handler.saveToken(payload.body.data[0].token)
+
+                    // Assign guest name for failed login sessions
+                    let user = payload.body.data[0].user ? payload.body.data[0].user.split(' ')[1] : "Guest";
+                    localStorage.setItem("currentUser", user)
+
+                    let isAdmin = payload.body.data[0].isadmin
+
+                    let userPage = isAdmin ? 'admin_page.html' : 'user_page.html'
+
+                    setTimeout(() => {
+                        registrationForm.reset()
+                        handler.saveItem('currentUser', user)
+                        window.location.href = `user_page.html?user=${user}`
+                        successMessage.style.display = 'none'
+                    }, 00)
+                }
+            }).catch(err => console.log(err))
+
         } else {
             submitOption.value = 'Sign Up'
             submitOption.disabled = false
@@ -1165,7 +1194,15 @@ function updateMeetupImages(image) {
 }
 
 function displayUserRSVPMeetups() {
+    /*
+        Displays meetups user has RSVP-ed for on the 
+        uuser dashboard.
+    */ 
     let user = handler.getCurrentUser()
+
+    if(! user) {
+        user = new URLSearchParams(window.location.search).get('user')
+    }
 
     handler.get(`meetups/${user}/rsvp`)
     .then(response => response.json()
