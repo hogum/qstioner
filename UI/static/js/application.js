@@ -152,6 +152,10 @@ class Handler {
         return localStorage.getItem(item)
     }
 
+    removeItem(item) {
+        return localStorage.removeItem(item)
+    }
+
     confirmAuthorizedAccess() {
 
          if ((!this.getCurrentUser()) || (this.getCurrentUser() === 'Guest')) {
@@ -168,12 +172,14 @@ class Handler {
 
 let handler = new Handler()
 
-
 function protectRoutes() {
     // Checks visited files in protected have
     // a current user session
 
-    const protectedRoutes = ['create_meetup.html']
+    const protectedRoutes = ['create_meetup.html', 'user_page.html',
+                             'admin_page.html', 'tagged_meetups.html',
+                             'community.html']
+
     let previous = localStorage.getItem('previous')
     let url = window.location.href
     let currentRoute = url.substr(url.lastIndexOf('/') + 1)
@@ -403,6 +409,20 @@ function signIn(event) {
         }).catch(err => console.log(err))
 }
 
+function logoutUser() {
+    /* 
+        Logs out current user by clearing current localstorage
+        auth details.
+    */
+
+    let logoutButton = document.getElementsByClassName('logoutdiv')[0]
+
+    logoutButton.addEventListener('click', () => {
+        handler.removeItem('userToken')
+        handler.removeItem('currentUser')
+        window.location.href = 'sign-in.html'
+    })
+}
 
 let meetupDetails = document.getElementById('meetup-new--create')
 if (meetupDetails)
@@ -714,6 +734,10 @@ if (window.location.href.includes('user_page.html')) {
 
 if (window.location.href.includes('index.html') || window.location.href.includes('trending.html')) {
     requestLogin()
+}
+
+if (window.location.href.includes('admin_page.html') || window.location.href.includes('user_page.html')) {
+    logoutUser()
 }
 
 function getSingleMeetup() {
