@@ -318,7 +318,7 @@ function registerUser(event) {
                     setTimeout(() => {
                         registrationForm.reset()
                         handler.saveItem('currentUser', user)
-                        window.location.href = `user_page.html?user=${user}`
+                        window.location.href = `${userPage}?user=${user}`
                         successMessage.style.display = 'none'
                     }, 00)
                 }
