@@ -564,6 +564,7 @@ function displayMeetups(meetupsList) {
 
         itemsCh ++ // Counts child elements in meetup display
     })
+    requestLogin()
 }
 
 function createMeetupElements(meetupCard, classItem, detail, meetup_id) {
@@ -588,13 +589,53 @@ function createMeetupElements(meetupCard, classItem, detail, meetup_id) {
         
      } else if (classItem === 'see-more-mdetails') {
         card.href = `meetup_questions.html?id=${meetup_id}`
+        card.addEventListener('click', () => {
+             if ((!handler.getCurrentUser()) || (handler.getCurrentUser() === 'Guest')) {
+                showJoinUsMod()
+            }
+        })
         return
     } else if (classItem === 'meetup-title') {
         card.href = `meetup_questions.html?id=${meetup_id}`
         card.textContent = detail
+        card.addEventListener('click', () => {
+             if ((!handler.getCurrentUser()) || (handler.getCurrentUser() === 'Guest')) {
+                showJoinUsMod()
+            }
+        })
         return
     } else
         card.textContent = detail
+}
+
+function requestLogin() {
+    let element =document.getElementsByClassName('meetup-title')
+    let seeMeetupButtons = document.getElementsByClassName('see-more-mdetails')
+
+    for (let i = element.length - 1; i >= 0; i--) {
+        element[i].addEventListener('click', (event) => {
+            event.preventDefault()
+
+            if ((!handler.getCurrentUser()) || (handler.getCurrentUser() === 'Guest')) {
+                showJoinUsMod()
+            }
+            else {
+                window.location.href = element[i].href
+            }
+        })
+    }
+
+    for (let i = seeMeetupButtons.length - 1; i >= 0; i--) {
+        seeMeetupButtons[i].addEventListener('click', (event) => {
+            event.preventDefault()
+
+            if ((!handler.getCurrentUser()) || (handler.getCurrentUser() === 'Guest')) {
+                showJoinUsMod()
+            } else {
+                window.location.href = seeMeetupButtons[i].href
+            }
+        })
+    }
 }
 
 function createMeetupNodes(meetupCard, element, item) {
@@ -640,6 +681,10 @@ if (window.location.href.includes('sign-up.html')) {
 
 if (window.location.href.includes('user_page.html')) {
     displayUserRSVPMeetups()
+}
+
+if (window.location.href.includes('index.html') || window.location.href.includes('trending.html')) {
+    requestLogin()
 }
 
 function getSingleMeetup() {
