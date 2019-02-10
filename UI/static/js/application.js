@@ -382,7 +382,6 @@ if (meetupDetails)
 function createMeetup(event) {
     // Posts a meetup from given meetups details
     event.preventDefault()
-    let meetId = ''
 
     let topic = meetupDetails.elements['name'].value
     let day = meetupDetails.elements['date'].value
@@ -411,28 +410,33 @@ function createMeetup(event) {
         let timeOut = 15000
 
         if (payload.status === 201) {
-            console.log(payload)
             warningMessage.style.display = 'none'
             showMessage(successMessage)
             addCloseOption()
             clearFilledForm(meetupDetails)
-            meetId = payload.body.data[0].id
+            let meetId = payload.body.data[0].id
+            sendImage(meetId, images)
         } else {
             let msg = payload.body.message ? payload.body.message : payload.body.message[0]
             showMessage(warningMessage, msg, timeOut)
         }
     }).catch(err => console.log(err))
+}
 
-    handler.postImage(`meetups/${meetId}/images`, {image: images})
+function sendImage(meetId, images) {
+    /*  Uploads selected image file to meetup
+        after meetup is created
+    */
+
+     handler.postImage(`meetups/${meetId}/images`, {image: images})
         .then(response => response.json()
                 .then(payload => ({status: response.status, body: payload})
                 )).then(payload => {
                 if (payload.status === 200) {
-                    updateMeetupImages(payload.body.data)        
+                    // updateMeetupImages(payload.body.data)        
                 } else {
                     
                 }
-
             }).catch(err => console.log(err))
 }
 
@@ -528,6 +532,8 @@ function displayMeetups(meetupsList) {
     if (adminCard)
         showDashboardMeetups(adminCard, meetupsList)
 
+    if (! meetCard)
+        return
 
     meetupsList.forEach(meetup => {
         let meetupCard = meetCard.cloneNode(true)
