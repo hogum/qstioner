@@ -1072,8 +1072,8 @@ function listenForScroll(event) {
   let lastDivOffset = lastDiv.offsetTop + lastDiv.clientHeight
   let pageOffset = maindiv.offsetTop + maindiv.clientHeight
 
-  // console.log('divo', lastDivOffset)
-  if(lastDivOffset >= 80000)
+  console.log('divo', lastDivOffset)
+  if(lastDivOffset >= 50000)
     showJoinUsMod()
 }
 
@@ -1088,11 +1088,14 @@ function showJoinUsMod() {
     let Signmodal = document.getElementsByClassName('wrapper-sign-in-mod')[0]
     let closeButton = document.getElementById('mod--close-button')
 
-    Signmodal.style.display = 'block'
+    Signmodal.style.opacity = '1'
+    Signmodal.style.visibility = 'visible'
 
     closeButton.addEventListener(
         'click', () => {
-            Signmodal.style.display = 'none'
+            Signmodal.style.opacity = '0'
+            // Signmodal.style.display = 'none'
+            Signmodal.style.visibility = 'hidden'
         })
     let submitButton = document.getElementById('sign-in-modal-button')
 
@@ -1104,10 +1107,13 @@ function submitModal() {
         Sends submit requests to register new user.
     */
     let userEmail = document.getElementById('email-mod').value
-    console.log(userEmail)
+    if (! userEmail) {
+        return false
+    }
     
     handler.saveItem('modalUser', userEmail)
-    document.getElementsByClassName('wrapper-sign-in-mod')[0].style.display = 'none'
+    document.getElementsByClassName('wrapper-sign-in-mod')[0].style.opacity = '0'
+    document.getElementsByClassName('wrapper-sign-in-mod')[0].style.visibility = 'hidden'
     window.location.href = 'sign-up.html'
 }
 
