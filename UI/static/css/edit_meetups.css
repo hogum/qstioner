@@ -68,6 +68,15 @@
     color: #fff;
 }
 
+.edit-meetup-item {
+    color: #fff;
+    background-color: #33A4FF;
+    border: 1px solid #33A4FF;
+    padding: 3px 8.6px;
+    margin-left: 1em;
+    border-radius: 3px;
+}
+
 @media screen and (max-width: 767px) {
     .delete-ups p {
         padding: 6px 13px;
