@@ -740,6 +740,10 @@ if (window.location.href.includes('admin_page.html') || window.location.href.inc
     logoutUser()
 }
 
+if (window.location.href,includes('edit_meetups.html')) {
+    editMeetups()
+}
+
 function getSingleMeetup() {
     /* Renders meetup details in meetup display page
     */
@@ -1277,4 +1281,27 @@ function displayUserMeetups(Useritems) {
 
     })
 
+}
+
+function editMeetups() {
+    /*Allows users to make changes to existing meetup
+    details.*/
+
+    let editButton = document.getElementsByClassName('edit-meetup-item')[0]
+    let delButton = document.getElementsByClassName('del-button')[0]
+    let meetDetail = document.getElementsByClassName('descr--meet')[0]
+    let meetTitle = document.getElementsByClassName('del-text-display')[0]
+    let mId = new URLSearchParams(window.location.search).get('id')
+
+    handler.get(`meetups/${mId}`)
+    .then(response => response.json()
+        .then(payload => ({status: response.status, body: payload})
+            )).then (payload => {
+            if(payload.status === 200) {
+                meetTitle.textContent = payload.body.data.topic
+                meetDetail.textContent = payload.body.data.description
+            }
+    }).catch(err => console.log(err))
+
+    
 }
