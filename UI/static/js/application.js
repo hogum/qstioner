@@ -52,7 +52,7 @@ class Handler {
                 'Acess-Control-Request-Method': 'GET',
                 'Authorization': 'Bearer ' + this.retrieveToken()
             },
-        });
+        })
     }
 
     post (url, data) {
@@ -64,6 +64,32 @@ class Handler {
                 'Content-type': 'application/json',
                 'Acess-Control-Allow-Origin': '*',
                 'Acess-Control-Request-Method': 'POST',
+                'Authorization': 'Bearer ' + this.retrieveToken()
+            },
+            body : JSON.stringify(data)
+        })
+    }
+
+    delete(url) {
+        return fetch(path + url, {
+                method: 'DELETE',
+                headers: {
+                'Content-type': 'application/json',
+                'Acess-Control-Allow-Origin': '*',
+                'Acess-Control-Request-Method': 'DELETE',
+                'Authorization': 'Bearer ' + this.retrieveToken()
+            },
+        })
+
+    put(url, data) {
+        let absPath = path + url        
+
+        return fetch(absPath, {
+                method: 'PUT',
+                headers: {
+                'Content-type': 'application/json',
+                'Acess-Control-Allow-Origin': '*',
+                'Acess-Control-Request-Method': 'PUT',
                 'Authorization': 'Bearer ' + this.retrieveToken()
             },
             body : JSON.stringify(data)
@@ -1292,6 +1318,7 @@ function editMeetups() {
     let meetDetail = document.getElementsByClassName('descr--meet')[0]
     let meetTitle = document.getElementsByClassName('del-text-display')[0]
     let mId = new URLSearchParams(window.location.search).get('id')
+    let meetUp
 
     handler.get(`meetups/${mId}`)
     .then(response => response.json()
@@ -1300,8 +1327,46 @@ function editMeetups() {
             if(payload.status === 200) {
                 meetTitle.textContent = payload.body.data.topic
                 meetDetail.textContent = payload.body.data.description
+                meetUp = payload.body.data
             }
     }).catch(err => console.log(err))
 
-    
+    editButton.addEventListener('click', () => showEditForm(meetUp))
+    delButton.addEventListener('click' () => deleteMeetup(mId))
+}
+
+function deleteMeetup(meetId) {
+    /*Deletes selected meetup*/
+
+    handler.delete(`meetups/${meetId}`)
+    .then(response => response.json()
+        .then(payload => ({status: response.status, body: payload})
+            )).then (payload => {
+            if(payload.status === 200) {
+                // Show success message
+            } else {
+
+                // oops! something misbehaved
+            }
+
+    }).catch(err => console.log(err))
+}
+
+function showEditForm(meetupItem) {
+    /*   Allows users to enter new details to
+        making changes to meetuo details.
+    */
+
+    handler.put(`meeups/${meetupItem.id}`, data)
+    .then(response => response.json()
+        .then(payload => ({status: response.status, body: payload})
+            )).then (payload => {
+            if(payload.status === 200) {
+                // Show success message
+            } else {
+
+                // Show response error
+            }
+
+    }).catch(err => console.log(err))
 }
