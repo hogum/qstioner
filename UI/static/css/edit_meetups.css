@@ -33,11 +33,11 @@
 }
 
 .delete-ups p {
-    float: left;
+   display: inline-block;
     padding: 10px 30px;
 }
 
-.delete-ups p:last-child {
+.delete-ups p:nth-child(3) {
     float: right;
 }
 
@@ -46,14 +46,15 @@
     color: #544;
 }
 
-.delete-ups p:last-child a {
+.delete-ups p:nth-child(3) a {
     border: 1.2px solid #FF5733;
     border-radius: 4px;
     font-weight: 900;
     background-color: #D70000;
     color: #ff8C00;
     color: #fff;
-    padding: 7px 14px;
+    font-size: 12px;
+    padding: 6px 13px;
     -webkit-transition: all .7s ease;
         -moz-transition: all .7s ease;
             -ms-transition: all .7s ease;
@@ -61,7 +62,7 @@
                     transition: all .7s ease;
 }
 
-.delete-ups p:last-child a:hover {
+.delete-ups p:nth-child(3) a:hover {
     background-color: #79D534;
     background-color: #F82B2B;
     border-color: #000;
@@ -74,7 +75,33 @@
     border: 1px solid #33A4FF;
     padding: 3px 8.6px;
     margin-left: 1em;
-    border-radius: 3px;
+    font-size: 12px;
+    border-radius: 3.6px;
+    padding: 6px 15px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                    transition: all .7s ease;
+}
+
+.edit-meetup-item:hover {
+    cursor: pointer;
+    background-color: #1978B9;
+    border-color: #333;
+}
+
+.descr--meet {
+    float: none;
+    border: 1px solid #fff;
+    font-size: 11px;
+    width: 98%;
+    margin-top: 0;
+    margin-left: 1%;
+    margin-right: 1%;
+    border-radius: 4px;
+    margin-bottom: .1em;
+    background-color: #EEF3F6;
 }
 
 @media screen and (max-width: 767px) {
