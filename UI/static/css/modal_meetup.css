@@ -10,6 +10,11 @@
     margin-right: 0%;
 }
 
+.wrapper-sign-in-mod {
+    opacity: 1;
+    visibility: visible;
+}
+
 #container-sign-in {
     left: -50%;
     top: -50%;
@@ -99,6 +104,68 @@
     color: #03225D;
     border: 1px solid #0048A2;
 }
+#bottom-mod-confirm {
+    
+}
+
+.sign-button-confirm {
+    width: 5em;
+    text-align: center;
+    margin-left: 1em;
+    margin-right: 1em;
+    border-radius: 4px;
+}
+
+.sign-button-confirm:hover {
+    cursor: pointer;
+}
+
+#container-sign-in-mod {
+    height: 12.5em;
+    border: 1px solid #FF8C00;
+
+}
+
+#sign-in-modal-button-no, #sign-in-modal-button-yes {
+    display: inline-block;
+}
+
+#sign-in-modal-button-no {
+    float: right;
+    border: 1px solid #07AC13;
+    color: #555;
+    background-color: #fff;
+    padding: 7px 10px;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                   transition: all .4s ease;
+    font-weight: 900;
+}
+
+#sign-in-modal-button-yes {
+    border: 1px solid #E5A70B;
+    color: #AC8E07;
+    background-color: #fff;
+    padding: 7px 10px;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                   transition: all .4s ease;
+    font-weight: 800;
+}
+
+#sign-in-modal-button-no:hover {
+    color: #07AC13;
+    border-color: #666;
+}
+
+#sign-in-modal-button-yes:hover {
+    color: #B23604;
+}
+
 
 footer {
     position:  absolute;

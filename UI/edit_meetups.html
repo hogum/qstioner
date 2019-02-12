@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="static/css/admin_dashboard.css">
     <link rel="stylesheet" href="static/css/edit_meetups.css">
     <link rel="stylesheet" href="static/css/new_meetup.css">
+    <link rel="stylesheet" href="static/css/modal.css">
     <link rel="stylesheet" href="static/css/modal_meetup.css">
     <link rel="shortcut icon" type="imagess/png" href="static/images/fav.jpeg"/>
 </head>
@@ -19,7 +20,21 @@
                 <p><a href="admin_page.html">admin profile</a></p>
             </div>
         </div>
-
+        <div class="wrapper-sign-in-mod confirm-modal">
+            <div id="container-sign-in-mod">
+                <div id="close-mod"><span id="mod--close-button"></span></div>
+                <div id="action-mod">Are you sure you want to perform this action?</div>
+                <form action="" method="post" id="signin-form-modal">
+                    <label for="email"></label>
+                    <input type="hidden" id="email-mod" name="email" required="required">
+                    <div id="bottom-mod-confirm">
+                        <input class="sign-button-confirm" id="sign-in-modal-button-yes" value="Sure" readonly>
+                        <input class="sign-button-confirm" id="sign-in-modal-button-no" value="Cancel" readonly>
+                        
+                    </div>
+                </form>
+            </div>
+        </div><!--modal-->
         <header id="header" class="header-nav">
               <ul>
                 <div class="qlogo">
@@ -75,7 +90,6 @@
                     </div>
                 </form>
             </div><!-- /wrapper-sign-in-->
-        </div>
         </div>
         <div class="container-admin">
             <div class="call-action-delete">

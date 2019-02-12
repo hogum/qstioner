@@ -1326,7 +1326,6 @@ function editMeetups() {
         .then(payload => ({status: response.status, body: payload})
             )).then (payload => {
         console.log(payload)
-        console.log(meetTitle)
             if(payload.status === 200) {
                 meetTitle.textContent = payload.body.data[0].topic
                 meetDetail.textContent = payload.body.data[0].description
@@ -1334,12 +1333,15 @@ function editMeetups() {
             }
     }).catch(err => console.log(err))
 
+    console.log(meetUp)
     editButton.addEventListener('click', () => showEditForm(meetUp))
     delButton.addEventListener('click', () => deleteMeetup(mId))
 }
 
 function deleteMeetup(meetId) {
     /*Deletes selected meetup*/
+
+    // Show confirm delete modal 
 
     handler.delete(`meetups/${meetId}`)
     .then(response => response.json()
@@ -1430,4 +1432,9 @@ function showEditForm(meetupItem) {
 
         }).catch(err => console.log(err))
     })
+}
+
+function confirmUserOption() {
+    let no = document.getElementById('no--option')
+    let yes = document.getElementById('yes--option')
 }
