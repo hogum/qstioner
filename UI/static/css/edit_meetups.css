@@ -49,7 +49,7 @@
     color: #544;
 }
 
-.delete-ups p:nth-child(3) a {
+#del-button {
     border: 1.2px solid #FF5733;
     border-radius: 4px;
     font-weight: 900;
@@ -65,11 +65,12 @@
                     transition: all .7s ease;
 }
 
-.delete-ups p:nth-child(3) a:hover {
+#del-button:hover {
     background-color: #79D534;
     background-color: #F82B2B;
     border-color: #000;
     color: #fff;
+    cursor: pointer;
 }
 
 .edit-meetup-item {
@@ -130,6 +131,14 @@
      .edit-meetup-item {
         padding: 3.3px 9px;
      }
+}
+
+#edit-meetup-success-close {
+    position: absolute;
+    right: 1em;
+    font-size: 18px;
+    color: #111;
+    cursor: pointer;
 }
 
 footer {

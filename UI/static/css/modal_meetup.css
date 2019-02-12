@@ -11,8 +11,11 @@
 }
 
 .wrapper-sign-in-mod {
-    opacity: 1;
-    visibility: visible;
+    -webkit-transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+      transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+       -moz-transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+            -ms-transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+                -o-transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
 }
 
 #container-sign-in {
@@ -34,10 +37,10 @@
 }
 
 #meet-cred--warning, #meet-cred--success {
-    display: none;
     padding-bottom: 5px;
     border-radius: 5px;
     font-size: .86em;
+    display: none;
 }
 
 #bottom {
@@ -85,6 +88,8 @@
    font-size: 12px;
    text-align: center;
    padding: 5px 0;
+   width: 99%;
+   display: none;
 }
 
 #sign-up-button {
