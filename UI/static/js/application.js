@@ -80,7 +80,7 @@ class Handler {
                 'Authorization': 'Bearer ' + this.retrieveToken()
             },
         })
-
+}
     put(url, data) {
         let absPath = path + url        
 
@@ -766,7 +766,7 @@ if (window.location.href.includes('admin_page.html') || window.location.href.inc
     logoutUser()
 }
 
-if (window.location.href,includes('edit_meetups.html')) {
+if (window.location.href.includes('edit_meetups.html')) {
     editMeetups()
 }
 
@@ -1315,7 +1315,7 @@ function editMeetups() {
     */
 
     let editButton = document.getElementsByClassName('edit-meetup-item')[0]
-    let delButton = document.getElementsByClassName('del-button')[0]
+    let delButton = document.getElementById('del-button')
     let meetDetail = document.getElementsByClassName('descr--meet')[0]
     let meetTitle = document.getElementsByClassName('del-text-display')[0]
     let mId = new URLSearchParams(window.location.search).get('id')
@@ -1325,15 +1325,17 @@ function editMeetups() {
     .then(response => response.json()
         .then(payload => ({status: response.status, body: payload})
             )).then (payload => {
+        console.log(payload)
+        console.log(meetTitle)
             if(payload.status === 200) {
-                meetTitle.textContent = payload.body.data.topic
-                meetDetail.textContent = payload.body.data.description
+                meetTitle.textContent = payload.body.data[0].topic
+                meetDetail.textContent = payload.body.data[0].description
                 meetUp = payload.body.data
             }
     }).catch(err => console.log(err))
 
     editButton.addEventListener('click', () => showEditForm(meetUp))
-    delButton.addEventListener('click' () => deleteMeetup(mId))
+    delButton.addEventListener('click', () => deleteMeetup(mId))
 }
 
 function deleteMeetup(meetId) {
@@ -1362,19 +1364,28 @@ function showEditForm(meetupItem) {
     let fullTIme = meetupItem.happeningOn
     let time = fullTIme.split('T')
 
+    document.getElementsByClassName('wrapper-sign-in').addEventListener('click', () => {
+        document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
+    })
+    document.getElementById('cancel-edit').addEventListener('click', () => {
+        document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
 
+        return false
+    })
+
+    editForm.style.display = 'block'
     editForm.elements['name'].value = meetupItem.topic
-    editForm.elements['date'].value = meetupItem.happeningOn
-    editForm.elements['time'].value = meetupItem.happeningOn
+    editForm.elements['date'].value = time[0]
+    editForm.elements['time'].value = time[1].splice(0, -3)
     editForm.elements['description'].value = meetupItem.description
     editForm.elements['location'].value = meetupItem.location
-    editForm.elements['tag'].value = meetupItem.tags. toString()
+    // editForm.elements['tag'].value = meetupItem.tags.toString()
 
-    time[0] + time[1].splice(0, -3)
+    let submitButt = document.getElementById('sign-up-button')
 
-
-    document.getElementById('sign-up-button').addEventListener('submit', (event) => {
+    submitButt.addEventListener('submit', (event) => {
         event.preventDefault()
+        submitButt.disabled = true
 
         let topic = editForm.elements['name'].value
         let day = editForm.elements['date'].value
@@ -1382,22 +1393,41 @@ function showEditForm(meetupItem) {
         let location = editForm.elements['location'].value
         let description = editForm.elements['description'].value
         let happeningOn = day + 'T' + time + ':00'
+        // let tags = editForm.elements['tag'].value.split(',')
 
         let data = {
-
+            topic: topic,
+            happeningOn: happeningOn,
+            location: location,
+            description: description
         }
 
         handler.put(`meetups/${meetupItem.id}`, data)
         .then(response => response.json()
             .then(payload => ({status: response.status, body: payload})
                 )).then (payload => {
+                let successMessage = document.getElementById('meet-cred--success')
+                let errMessage = document.getElementById('meet-cred--warning')
+                console.log(payload)
                 if(payload.status === 200) {
-                    // Show success message
+                    submitButt.disabled = false
+                    errMessage.style.display = 'none'
+                    successMessage.style.display = 'block'
+
+                    setTimeout(() => {
+                        successMessage.style.display = 'none'
+                    })
                 } else {
 
-                    // Show response error
+                    errMessage.textContent = payload.body.message ? payload.body.message : payload.body.message[0]
+                    errMessage.style.display = 'block'
+                    submitButt.disabled = false
+
+                    setTimeout(() => {
+                        errMessage.style.display = 'none'
+                    })
                 }
 
         }).catch(err => console.log(err))
-    }
+    })
 }
