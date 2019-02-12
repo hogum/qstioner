@@ -1,0 +1,14 @@
+.wrapper-sign-in {
+    box-sizing: border-box;
+    justify-content: center;
+    display: flex;
+    width: 60%;
+    left: -50%;
+    top: -50%;
+    margin-top: 5em;
+}
+
+#container-sign-in {
+    left: 50%;
+    top: 50%;
+}
