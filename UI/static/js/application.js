@@ -1311,7 +1311,8 @@ function displayUserMeetups(Useritems) {
 
 function editMeetups() {
     /*Allows users to make changes to existing meetup
-    details.*/
+    details
+    */
 
     let editButton = document.getElementsByClassName('edit-meetup-item')[0]
     let delButton = document.getElementsByClassName('del-button')[0]
@@ -1357,16 +1358,46 @@ function showEditForm(meetupItem) {
         making changes to meetuo details.
     */
 
-    handler.put(`meeups/${meetupItem.id}`, data)
-    .then(response => response.json()
-        .then(payload => ({status: response.status, body: payload})
-            )).then (payload => {
-            if(payload.status === 200) {
-                // Show success message
-            } else {
+    let editForm = document.getElementById('meetup-edit--create')
+    let fullTIme = meetupItem.happeningOn
+    let time = fullTIme.split('T')
 
-                // Show response error
-            }
 
-    }).catch(err => console.log(err))
+    editForm.elements['name'].value = meetupItem.topic
+    editForm.elements['date'].value = meetupItem.happeningOn
+    editForm.elements['time'].value = meetupItem.happeningOn
+    editForm.elements['description'].value = meetupItem.description
+    editForm.elements['location'].value = meetupItem.location
+    editForm.elements['tag'].value = meetupItem.tags. toString()
+
+    time[0] + time[1].splice(0, -3)
+
+
+    document.getElementById('sign-up-button').addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        let topic = editForm.elements['name'].value
+        let day = editForm.elements['date'].value
+        let time = editForm.elements['time'].value
+        let location = editForm.elements['location'].value
+        let description = editForm.elements['description'].value
+        let happeningOn = day + 'T' + time + ':00'
+
+        let data = {
+
+        }
+
+        handler.put(`meetups/${meetupItem.id}`, data)
+        .then(response => response.json()
+            .then(payload => ({status: response.status, body: payload})
+                )).then (payload => {
+                if(payload.status === 200) {
+                    // Show success message
+                } else {
+
+                    // Show response error
+                }
+
+        }).catch(err => console.log(err))
+    }
 }
