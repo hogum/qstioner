@@ -46,7 +46,11 @@
         </header><!-- /header -->
           <div class="wrapper-sign-in">
             <div id="container-sign-in">       
-                <form action="" method="post" id="meetup-new--create">
+                <form action="" method="post" id="meetup-edit--create">
+                    <p id="meet-cred--warning"> Wrong email or Password</p>
+                    <p id="meet-cred--success">
+                       Your changes have been saved
+                    </p>
                     <p id="meetup-detail-error"> Err illegal detail!</p>
                     <label for="name">Title:</label>
                     <input type="text" id="name" name="name" minlength="4" required="required" title="Call your meet-up something cool">
@@ -63,11 +67,11 @@
                     title="Tell everyone what this meetup's about"></textarea>
                     <label for="location">Location of Meet-up:</label>
                     <input type="text" id="pass" name="location" required="required" placeholder="e.g Kivuli gardens, Nairobi">
-                    <label for="tag">Add Tags  - (Make finding your event easier):</label>
-                    <input type="text" id="confirm-pass" name="tag" required="required" pattern="^[A-Za-z0-9_ ?/.,':;]+$" title="Separate tags with commas e.g Soap, Health, Fast-cars" placeholder="Use commas e.g Soap, Health">
+                    <label for="tag"></label>
+                    <input type="hidden" id="confirm-pass" name="tag" required="required" pattern="^[A-Za-z0-9_ ?/.,':;]+$" title="Separate tags with commas e.g Soap, Health, Fast-cars" placeholder="Use commas e.g Soap, Health">
                     <div id="bottom">
-                        <input class="sign-button" id="sign-up-button" type="submit" value="Create Meet-Up">           
-                        <a class="bottom-right" href="default.html"></a>
+                        <input class="sign-button" id="sign-up-button" type="submit" value="Save">           
+                        <p class="bottom-right" id="cancel-edit">Cancel</p>
                     </div>
                 </form>
             </div><!-- /wrapper-sign-in-->

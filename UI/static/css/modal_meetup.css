@@ -1,7 +1,7 @@
 .wrapper-sign-in {
+    display: none;
     box-sizing: border-box;
     justify-content: center;
-    display: flex;
     width: 60%;
     left: 60%;
     top: 25%;
@@ -19,7 +19,97 @@
     margin-bottom: 4em;
 }
 
+#meet-cred--warning {
+    padding-top: 5px;
+    text-align: center;
+    font-weight: 450;
+    color: #FF2D00;
+    background-color: #fff;
+    border: 1px solid #FF0000;
+}
+
+#meet-cred--warning, #meet-cred--success {
+    display: none;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    font-size: .86em;
+}
+
+#bottom {
+}
+
+#sign-up-button, #cancel-edit {
+   display: inline-block;
+}
+
+#cancel-edit {
+    float: right;
+    margin-top: 1.52em;
+    border: 1px solid #888;
+    border-radius: 4px;
+    padding: 3px 9px;
+    color: #FF3000;
+    font-weight: 600;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                   transition: all .4s ease;
+    margin-right: 3em;
+    user-select: none;
+}
+
+#cancel-edit:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: #C52703;
+    border-color: #666;
+}
+
+#meet-cred--success {
+    padding: 10px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                   transition: all .7s ease;
+   border-radius: 5px;
+   background-color: #fff;
+   color: #138F08;
+   border: 1px solid #06FF00;
+   font-size: 12px;
+   text-align: center;
+   padding: 5px 0;
+}
+
+#sign-up-button {
+    color: #00369C;
+    width: 5em;
+    background-color: #fff;
+    padding: 7px 10px;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                   transition: all .4s ease;
+    margin-left: 3em;
+}
+
+#sign-up-button:hover {
+    color: #03225D;
+    border: 1px solid #0048A2;
+}
+
 footer {
     position:  absolute;
-    bottom: 0;
+    bottom: -25em;
+}
+
+@media screen and (max-width: 530px) {
+    #sign-up-button {
+        margin-left: 0;
+    }
+    #cancel-edit {
+        margin-right: 0;
+    }
 }
