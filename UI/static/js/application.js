@@ -1319,8 +1319,6 @@ function editMeetups() {
     let meetDetail = document.getElementsByClassName('descr--meet')[0]
     let meetTitle = document.getElementsByClassName('del-text-display')[0]
     let mId = new URLSearchParams(window.location.search).get('id')
-    let meetUp
-
     handler.get(`meetups/${mId}`)
     .then(response => response.json()
         .then(payload => ({status: response.status, body: payload})
@@ -1329,19 +1327,20 @@ function editMeetups() {
             if(payload.status === 200) {
                 meetTitle.textContent = payload.body.data[0].topic
                 meetDetail.textContent = payload.body.data[0].description
-                meetUp = payload.body.data
+                meetUp = payload.body.data[0]
+                editButton.addEventListener('click', () => showEditForm(meetUp))
+                delButton.addEventListener('click', () => deleteMeetup(mId))
             }
     }).catch(err => console.log(err))
-
-    console.log(meetUp)
-    editButton.addEventListener('click', () => showEditForm(meetUp))
-    delButton.addEventListener('click', () => deleteMeetup(mId))
 }
 
 function deleteMeetup(meetId) {
     /*Deletes selected meetup*/
 
-    // Show confirm delete modal 
+    // Show confirm delete modal
+    let choice = confirmUserOption()
+    if (! choice)
+        return
 
     handler.delete(`meetups/${meetId}`)
     .then(response => response.json()
@@ -1357,38 +1356,8 @@ function deleteMeetup(meetId) {
     }).catch(err => console.log(err))
 }
 
-function showEditForm(meetupItem) {
-    /*   Allows users to enter new details to
-        making changes to meetuo details.
-    */
-
-    let editForm = document.getElementById('meetup-edit--create')
-    let fullTIme = meetupItem.happeningOn
-    let time = fullTIme.split('T')
-
-    document.getElementsByClassName('wrapper-sign-in').addEventListener('click', () => {
-        document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
-    })
-    document.getElementById('cancel-edit').addEventListener('click', () => {
-        document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
-
-        return false
-    })
-
-    editForm.style.display = 'block'
-    editForm.elements['name'].value = meetupItem.topic
-    editForm.elements['date'].value = time[0]
-    editForm.elements['time'].value = time[1].splice(0, -3)
-    editForm.elements['description'].value = meetupItem.description
-    editForm.elements['location'].value = meetupItem.location
-    // editForm.elements['tag'].value = meetupItem.tags.toString()
-
-    let submitButt = document.getElementById('sign-up-button')
-
-    submitButt.addEventListener('submit', (event) => {
-        event.preventDefault()
-        submitButt.disabled = true
-
+function updateMeetup() {
+        let editForm = document.getElementById('meetup-edit--create')
         let topic = editForm.elements['name'].value
         let day = editForm.elements['date'].value
         let time = editForm.elements['time'].value
@@ -1431,10 +1400,111 @@ function showEditForm(meetupItem) {
                 }
 
         }).catch(err => console.log(err))
+}
+
+function showEditForm(meetupItem) {
+    /*   Allows users to enter new details to
+        making changes to meetuo details.
+    */
+
+    let editForm = document.getElementById('meetup-edit--create')
+    let time = meetupItem.happeningOn.split('T')
+
+    //document.getElementsByClassName('wrapper-sign-in')[0].addEventListener('click', () => {
+     //   document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
+    // })
+    document.getElementById('cancel-edit').addEventListener('click', () => {
+        document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
+
+        return false
+    })
+
+    document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'block'
+    editForm.elements['name'].value = meetupItem.topic
+    editForm.elements['date'].value = time[0]
+    editForm.elements['time'].value = time[1].toString().slice(0, -3)
+    editForm.elements['description'].value = meetupItem.description
+    editForm.elements['location'].value = meetupItem.location
+    // editForm.elements['tag'].value = meetupItem.tags.toString()
+
+    let submitButt = document.getElementById('sign-up-button')
+
+    submitButt.addEventListener('submit', () => (event) => {
+        event.preventDefault()
+        submitButt.disabled = true
+
+        let topic = editForm.elements['name'].value
+        let day = editForm.elements['date'].value
+        let time = editForm.elements['time'].value
+        let location = editForm.elements['location'].value
+        let description = editForm.elements['description'].value
+        let happeningOn = day + 'T' + time + ':00'
+        // let tags = editForm.elements['tag'].value.split(',')
+
+        let data = {
+            topic: topic,
+            happeningOn: happeningOn,
+            location: location,
+            description: description
+        }
+
+        handler.post(`meetups/${meetupItem.id}`, data)
+        .then(response => response.json()
+            .then(payload => ({status: response.status, body: payload})
+                )).then (payload => {
+                let successMessage = document.getElementById('meet-cred--success')
+                let errMessage = document.getElementById('meet-cred--warning')
+                console.log(payload)
+                if(payload.status === 200) {
+                    submitButt.disabled = false
+                    errMessage.style.display = 'none'
+                    successMessage.style.display = 'block'
+
+                    setTimeout(() => {
+                        successMessage.style.display = 'none'
+                    })
+                } else {
+
+                    errMessage.textContent = payload.body.message ? payload.body.message : payload.body.message[0]
+                    errMessage.style.display = 'block'
+                    submitButt.disabled = false
+
+                    setTimeout(() => {
+                        errMessage.style.display = 'none'
+                    })
+                }
+
+        }).catch(err => console.log(err))
     })
 }
 
 function confirmUserOption() {
-    let no = document.getElementById('no--option')
-    let yes = document.getElementById('yes--option')
+    /*
+        Shows confirmation dialogue to user
+    */
+
+    let confirmModal = document.getElementsByClassName('wrapper-sign-in-mod')[0]
+    let no = document.getElementById('sign-in-modal-button-no')
+    let yes = document.getElementById('sign-in-modal-button-yes')
+    console.log(yes, no)
+
+    confirmModal.style.visibility = 'visible'
+    confirmModal.style.opacity = '1'
+
+    no.addEventListener('click', () => {
+        return false
+        hideConfirmModal()
+    })
+    yes.addEventListener('click', () => {
+        return true
+        hideConfirmModal()
+    })
+}
+
+function hideConfirmModal() {
+    /*Hides confrimation dialogue on user input*/
+    let element = document.getElementsByClassName('"wrapper-sign-in-mod')[0]
+
+    elements.style.visibility = 'hidden'
+    elements.style.opacity = '0'
 }
