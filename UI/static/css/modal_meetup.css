@@ -3,12 +3,21 @@
     justify-content: center;
     display: flex;
     width: 60%;
-    left: -50%;
-    top: -50%;
-    margin-top: 5em;
+    left: 50%;
+    top: 30%;
+    position: absolute;
 }
 
 #container-sign-in {
-    left: 50%;
-    top: 50%;
+    left: -50%;
+    top: -50%;
+    position: absolute;
+    z-index: 199;
+    border-radius: 5px 5px 4px 0;
+    margin-bottom: 4em;
+}
+
+footer {
+    position:  absolute;
+    bottom: 0;
 }
