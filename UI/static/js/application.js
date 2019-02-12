@@ -517,9 +517,20 @@ function sendImage(meetId, images) {
 
 function addCloseOption() {
     let notificationButton = document.getElementById('meetup-notifcation--close-button')
-    notificationButton.addEventListener("click", function(event) {
-        document.getElementById('create-meetup--success').style.display = 'none'
-    })
+        
+    if (notificationButton){
+        notificationButton.addEventListener("click", function(event) {
+            document.getElementById('create-meetup--success').style.display = 'none'
+        })
+    }
+
+    let editButton = document.getElementById('edit-meetup-success-close')
+    
+    if(editButton) {    
+        editButton.addEventListener('click', () => {
+            document.getElementById('meet-cred--success').style.display = 'none'
+        })
+    }
 }
 
 function findMeetupPages(page) {
@@ -1319,44 +1330,56 @@ function editMeetups() {
     let meetDetail = document.getElementsByClassName('descr--meet')[0]
     let meetTitle = document.getElementsByClassName('del-text-display')[0]
     let mId = new URLSearchParams(window.location.search).get('id')
+    
     handler.get(`meetups/${mId}`)
     .then(response => response.json()
         .then(payload => ({status: response.status, body: payload})
             )).then (payload => {
-        console.log(payload)
             if(payload.status === 200) {
                 meetTitle.textContent = payload.body.data[0].topic
                 meetDetail.textContent = payload.body.data[0].description
                 meetUp = payload.body.data[0]
-                editButton.addEventListener('click', () => showEditForm(meetUp))
-                delButton.addEventListener('click', () => deleteMeetup(mId))
+                editButton.addEventListener('click',(event) =>
+                    showEditForm(meetUp))
+                delButton.addEventListener('click', function(event) {
+                    confirmUserOption(deleteMeetup, mId)
+                })
             }
     }).catch(err => console.log(err))
 }
 
 function deleteMeetup(meetId) {
-    /*Deletes selected meetup*/
+    /*Deletes selected meetup Item*/
 
     // Show confirm delete modal
-    let choice = confirmUserOption()
-    if (! choice)
-        return
+    let successMessage = document.getElementById('meet-cred--success')
 
     handler.delete(`meetups/${meetId}`)
     .then(response => response.json()
         .then(payload => ({status: response.status, body: payload})
             )).then (payload => {
+        console.log(payload)
             if(payload.status === 200) {
                 // Show success message
+                 successMessage.style.display = 'block'
+                 addCloseOption()
+
             } else {
 
                 // oops! something misbehaved
+                successMessage.textContent = 'Your meetup seems to have relations'
+                successMessage.style.display = 'block'
+                successMessage.style = 'color: #FF6347; border-color: #FF6347;'
             }
 
     }).catch(err => console.log(err))
 }
 
-function updateMeetup() {
+function updateMeetup(event) {
+        event.preventDefault()
+
+        let meetupItem = new URLSearchParams(window.location.search).get('id')
+        let submitButt = document.getElementById('sign-up-button')
         let editForm = document.getElementById('meetup-edit--create')
         let topic = editForm.elements['name'].value
         let day = editForm.elements['date'].value
@@ -1372,8 +1395,9 @@ function updateMeetup() {
             location: location,
             description: description
         }
+        console.log(data)
 
-        handler.put(`meetups/${meetupItem.id}`, data)
+        handler.put(`meetups/${meetupItem}`, data)
         .then(response => response.json()
             .then(payload => ({status: response.status, body: payload})
                 )).then (payload => {
@@ -1385,9 +1409,10 @@ function updateMeetup() {
                     errMessage.style.display = 'none'
                     successMessage.style.display = 'block'
 
-                    setTimeout(() => {
-                        successMessage.style.display = 'none'
-                    })
+                    addCloseOption()
+                    document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
+
+
                 } else {
 
                     errMessage.textContent = payload.body.message ? payload.body.message : payload.body.message[0]
@@ -1396,11 +1421,16 @@ function updateMeetup() {
 
                     setTimeout(() => {
                         errMessage.style.display = 'none'
-                    })
+                    }, 5000)
                 }
 
         }).catch(err => console.log(err))
 }
+
+let editForm = document.getElementById('meetup-edit--create')
+
+if(editForm)
+    editForm.addEventListener("submit", updateMeetup)
 
 function showEditForm(meetupItem) {
     /*   Allows users to enter new details to
@@ -1413,10 +1443,9 @@ function showEditForm(meetupItem) {
     //document.getElementsByClassName('wrapper-sign-in')[0].addEventListener('click', () => {
      //   document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
     // })
+
     document.getElementById('cancel-edit').addEventListener('click', () => {
         document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
-
-        return false
     })
 
     document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'block'
@@ -1428,10 +1457,8 @@ function showEditForm(meetupItem) {
     // editForm.elements['tag'].value = meetupItem.tags.toString()
 
     let submitButt = document.getElementById('sign-up-button')
-
-    submitButt.addEventListener('submit', () => (event) => {
-        event.preventDefault()
-        submitButt.disabled = true
+    
+    /*editForm.addEventListener('submit', () => (event) => {
 
         let topic = editForm.elements['name'].value
         let day = editForm.elements['date'].value
@@ -1447,7 +1474,7 @@ function showEditForm(meetupItem) {
             location: location,
             description: description
         }
-
+        
         handler.post(`meetups/${meetupItem.id}`, data)
         .then(response => response.json()
             .then(payload => ({status: response.status, body: payload})
@@ -1475,10 +1502,10 @@ function showEditForm(meetupItem) {
                 }
 
         }).catch(err => console.log(err))
-    })
+    })*/
 }
 
-function confirmUserOption() {
+function confirmUserOption(fun, mId) {
     /*
         Shows confirmation dialogue to user
     */
@@ -1486,25 +1513,24 @@ function confirmUserOption() {
     let confirmModal = document.getElementsByClassName('wrapper-sign-in-mod')[0]
     let no = document.getElementById('sign-in-modal-button-no')
     let yes = document.getElementById('sign-in-modal-button-yes')
-    console.log(yes, no)
 
     confirmModal.style.visibility = 'visible'
     confirmModal.style.opacity = '1'
 
     no.addEventListener('click', () => {
-        return false
         hideConfirmModal()
+        return false
     })
     yes.addEventListener('click', () => {
-        return true
         hideConfirmModal()
+        fun(mId)
     })
 }
 
 function hideConfirmModal() {
     /*Hides confrimation dialogue on user input*/
-    let element = document.getElementsByClassName('"wrapper-sign-in-mod')[0]
+    let element = document.getElementsByClassName('wrapper-sign-in-mod')[0]
 
-    elements.style.visibility = 'hidden'
-    elements.style.opacity = '0'
+    element.style.visibility = 'hidden'
+    element.style.opacity = '0'
 }
