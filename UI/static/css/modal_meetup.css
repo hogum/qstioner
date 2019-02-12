@@ -3,9 +3,11 @@
     justify-content: center;
     display: flex;
     width: 60%;
-    left: 50%;
-    top: 30%;
+    left: 60%;
+    top: 25%;
     position: absolute;
+    margin-left: 0%;
+    margin-right: 0%;
 }
 
 #container-sign-in {
