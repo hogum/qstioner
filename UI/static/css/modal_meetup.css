@@ -120,15 +120,23 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 400px) {
+    .sign-button-confirm {
+        width: 5em;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
 #container-sign-in-mod {
     height: 12.5em;
     border: 1px solid #FF8C00;
-
 }
 
 #sign-in-modal-button-no, #sign-in-modal-button-yes {
     display: inline-block;
 }
+
 
 #sign-in-modal-button-no {
     float: right;

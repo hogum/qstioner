@@ -123,7 +123,6 @@
     .del-text-display, .edit-meetup-item, #del-button {
         float: none;
         width: 100%;
-        color: red;
     }
     #del-button {
         padding: 3.3px 6px;
