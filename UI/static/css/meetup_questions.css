@@ -554,3 +554,81 @@ input[type=file]:hover {
     width: 0px;  /* clear scrollbar space */
     background: transparent;  /* just make scrollbar invisible */
 }
+
+/*
+===========================
+    Edit Question
+============================= */
+
+.setting {
+    float: right;
+    font-size: .8em;
+     -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                    transition: all .4s ease;
+}
+
+.pop-items {
+    display: none;
+    border: 1px solid #888;
+    background-color: #fff;
+    color: #222;
+    margin-top: 1.6px;
+    border-radius: 3px;
+    text-align: left;
+}
+
+.pop-items div:nth-child(2) {
+    border-top: 1px solid #888;
+    background-color: #FF0000;
+    color: #fff;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                    transition: all .4s ease;
+}
+
+.pop-items div:nth-child(2):hover {
+    background-color: #C31111;
+}
+
+.pop-items > div {
+    padding: 0 3px;
+}
+
+.pop-items > div:hover {
+    cursor: pointer;
+}
+
+#edit-ques-button {
+    font-size: .8em;
+    padding: 3px;
+    border: 1px solid #888;
+    width: 3.5em;
+    padding: 0 4px;
+    text-align: center;
+    border-radius: 3px;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                    transition: all .4s ease;
+}
+
+.setting:hover .pop-items {
+    display: block;
+}
+
+.edit-icon {
+    font-size: 1.1em;
+}
+
+#edit-ques-button:hover {
+    border-color: #444;
+    cursor: pointer;
+    color: #3341FF;
+    background-color: #fff;
+}
