@@ -856,7 +856,7 @@ function displaySingleMeetup(meetupItem) {
 
     meetupItem.tags.forEach(tag => {
         let tagELem = document.getElementById('mtag-inherit').cloneNode(true)
-        
+    
         tagELem.textContent = tag
         tagELem.href = `tagged_meetups.html?tag=${tag}`
         parentTags.appendChild(tagELem)
@@ -921,6 +921,10 @@ function displayQuestions(questionsList) {
         let menuEdit = qsCard.getElementsByClassName('edit-pop--cls')[0]
         let menuDel = qsCard.getElementsByClassName('delete-pop--cls')[0]
         let menu = qsCard.getElementsByClassName('pop-items')[0]
+
+        if(question.user !== handler.getCurrentUser()) {
+            editBut.style.display = 'none'
+        }
 
         editBut.addEventListener('click', () => {
 
@@ -1155,14 +1159,14 @@ function showComments() {
         .then(payload => ({status: response.status, body: payload})
             )).then(payload => {
         if (payload.status === 200) {
-            displayComments(payload.body.data)
+            displayComments(payload.body.data, payload.body.user)
         } else {
         
         }
     }).catch(err => console.log(err))
 }
 
-function displayComments(commentList) {
+function displayComments(commentList, user) {
     /*
         Renders details of each fetched comment to the
         comments display page.
@@ -1187,6 +1191,10 @@ function displayComments(commentList) {
         let menuEdit = qsCard.getElementsByClassName('edit-pop--cls')[0]
         let menuDel = qsCard.getElementsByClassName('delete-pop--cls')[0]
         let menu = qsCard.getElementsByClassName('pop-items')[0]
+
+        if(user !== handler.getCurrentUser()) {
+            editBut.style.display = 'none'
+        }
 
         editBut.addEventListener('click', () => {
 
