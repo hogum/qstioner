@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="static/css/admin_dashboard.css">
     <link rel="stylesheet" href="static/css/meetup_questions.css">
+    <link rel="stylesheet" href="static/css/modal.css">
+    <link rel="stylesheet" href="static/css/modal_meetup.css">
     <link rel="shortcut icon" type="image/png" href="static/images/fav.jpeg"/>
 </head>
 <body>
@@ -21,6 +23,21 @@
                     <p><a href="meetup_questions.html">Questions </a></p>
                 </div>
         </div>
+        <div class="wrapper-sign-in-mod confirm-modal">
+            <div id="container-sign-in-mod">
+                <div id="close-mod"><span id="mod--close-button"></span></div>
+                <div id="action-mod">Are you sure you want to perform this action?</div>
+                <form action="" method="post" id="signin-form-modal">
+                    <label for="email"></label>
+                    <input type="hidden" id="email-mod" name="email" required="required">
+                    <div id="bottom-mod-confirm">
+                        <input class="sign-button-confirm" id="sign-in-modal-button-yes" value="Sure" readonly>
+                        <input class="sign-button-confirm" id="sign-in-modal-button-no" value="Cancel" readonly>
+                        
+                    </div>
+                </form>
+            </div>
+        </div><!--modal-->
         <div class="action-sign">
             <h4><span class="meet-up-title">Meet-up</span></h4>
         </div>
@@ -89,10 +106,10 @@
                                         edit✎
                                     </div>
                                     <div class="pop-items">
-                                        <div id="edit-pop">
+                                        <div id="edit-pop" class="edit-pop--cls">
                                             edit
                                         </div>
-                                        <div id="delete-pop">
+                                        <div id="delete-pop" class="delete-pop--cls">
                                             delete
                                         </div>
                                     </div>
