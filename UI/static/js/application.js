@@ -1572,7 +1572,6 @@ function hideConfirmModal() {
 }
 
 let editQuestionForm = document.getElementById('meetup-question--create')
-console.log(editQuestionForm)
 if(editQuestionForm)
     editQuestionForm.addEventListener("submit", updateQuestion)
 
@@ -1581,10 +1580,12 @@ function updateQuestion(event) {
         Sends PUT request for update user question
     */
     event.preventDefault()
-    
+
     let QuestionInput = document.getElementById('meetup-question--create')
     let text = QuestionInput.elements['description'].value
     let qId = QuestionInput.elements['question-id'].value
+    let successMessage = document.getElementById('meet-cred--success')
+    let errMessage = document.getElementById('meet-cred--warning')
 
     let data = {
             title: text.split(' ').slice(0, 50).join(' '),
@@ -1596,17 +1597,17 @@ function updateQuestion(event) {
                 .then(payload => ({status: response.status, body: payload})
                 )).then(payload => {
                 let errMessage = document.getElementById('meet-cred--warning')
-                console.log(payload)
                 if(payload.status === 200) {
                     // Show success
-                    //
+                    errMessage.style.display = 'none'
+                    successMessage.style.display = 'block'
+                    addCloseOption()
                     document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
 
                 } else {
 
                     errMessage.textContent = payload.body.message ? payload.body.message : payload.body.message[0]
                     errMessage.style.display = 'block'
-                    submitButt.disabled = false
 
                     setTimeout(() => {
                         errMessage.style.display = 'none'
