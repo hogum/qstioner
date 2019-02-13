@@ -919,15 +919,25 @@ function displayQuestions(questionsList) {
             'click', () => sendVote(question.id, 'downvote'))
         qsCard.getElementsByClassName('vote-count')[0].textContent = question.votes
         let editBut = qsCard.getElementsByClassName('edit-q-item')[0]
+        let menuEdit = qsCard.getElementsByClassName('edit-pop--cls')[0]
+        let menuDel = qsCard.getElementsByClassName('delete-pop--cls')[0]
+        let menu = qsCard.getElementsByClassName('pop-items')[0]
 
         editBut.addEventListener('click', () => {
-            let menu = qsCard.getElementsByClassName('pop-items')[0]
 
-            if(menu.style.display === 'none') {
-                menu.style.display = 'block'
-            } else {
+            if(menu.style.display === 'block') {
                 menu.style.display = 'none'
+            } else {
+                menu.style.display = 'block'
             }
+        })
+
+        menuDel.addEventListener('click', () => confirmUserOption(deleteQuestion, question.id))
+            // Confrim user delete here
+
+
+        menuEdit.addEventListener('click', () => {
+            console.log('edit')
         })
 
         for (let i = tags.length - 1; i >= 0; i--) {
@@ -939,6 +949,21 @@ function displayQuestions(questionsList) {
         parent.appendChild(qsCard)
         qsCard.style.display = 'block'
     })
+}
+
+function deleteQuestion(qId) {
+    handler.delete(`questions/${qId}`)
+            .then(response => response.json()
+                .then (payload => ({status: response.status, body: payload})
+                )).then (
+                payload => {
+                    console.log(payload)
+                    if (payload.status === 200) {
+                       
+                    } else {
+
+                    }
+                }).catch(err => console.log(err))
 }
 
 function sendVote(qId, vote) {
