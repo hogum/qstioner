@@ -94,7 +94,13 @@ body {
     margin-top: 3.7em;
 }
 
+.setting {
+    right: 2.6em;
+    padding-top: 2px;
+}
+
 footer {
     position: absolute;
     margin-top: 2em;
+    bottom: -10em;
 }
