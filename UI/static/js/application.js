@@ -937,7 +937,7 @@ function displayQuestions(questionsList) {
 
 
         menuEdit.addEventListener('click', () => {
-            console.log('edit')
+            showInputQuestion(question)
         })
 
         for (let i = tags.length - 1; i >= 0; i--) {
@@ -1432,7 +1432,6 @@ function updateMeetup(event) {
             location: location,
             description: description
         }
-        console.log(data)
 
         handler.put(`meetups/${meetupItem}`, data)
         .then(response => response.json()
@@ -1573,11 +1572,59 @@ function hideConfirmModal() {
     element.style.opacity = '0'
 }
 
-function editMeetupQuestion() {
-    console.log('edit')
+let editQuestionForm = document.getElementById('meetup-question--create')
 
-    document.getElementById('edit-ques-button').addEventListener('click', () => {
-    console.log('edit2')
+if(editQuestionForm)
+    editQuestionForm.addEventListener("submit", updateQuestion)
 
+function updateQuestion() {
+    /*
+        Sends PUT request for update user question
+    */
+    let text = document.getElementById('meetup-question--create').elements['description'].value
+
+    let data = {
+            title: text.split(' ').slice(0, 50).join(' '),
+            body: text
+        }
+
+    handler.put(`questions`, data)
+            .then(response => response.json()
+                .then(payload => ({status: response.status, body: payload})
+                )).then(payload => {
+                let errMessage = document.getElementById('meet-cred--warning')
+                console.log(payload)
+                if(payload.status === 200) {
+                    // Show success
+                    //
+                    document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
+
+                } else {
+
+                    errMessage.textContent = payload.body.message ? payload.body.message : payload.body.message[0]
+                    errMessage.style.display = 'block'
+                    submitButt.disabled = false
+
+                    setTimeout(() => {
+                        errMessage.style.display = 'none'
+                    }, 5000)
+                }
+
+            }).catch(err => console.log(err))
+}
+
+function showInputQuestion(questionItem) {
+    /*
+        Displays an input textarea for user to edit
+        an existing question item
+    */
+    let editForm = document.getElementById('meetup-question--create')
+
+    editForm.elements['description'].value = questionItem.body
+
+    document.getElementById('cancel-edit').addEventListener('click', () => {
+        document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
     })
+    document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'block'
+
 }
