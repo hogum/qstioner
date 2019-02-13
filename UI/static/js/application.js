@@ -947,18 +947,52 @@ function displayQuestions(questionsList) {
         }
         parent.appendChild(qsCard)
         qsCard.style.display = 'block'
+
+        document.body.addEventListener('click', () => {
+            qsCard.getElementsByClassName('pop-items')[0].style.display = 'none'
+        }, true)
     })
 }
 
 function deleteQuestion(qId) {
+    /*
+        Sends DELETE requests with ID of selected question
+    */
+
     handler.delete(`questions/${qId}`)
+            .then(response => response.json()
+                .then (payload => ({status: response.status, body: payload})
+                )).then (
+                payload => {
+                    if (payload.status === 200) {
+                       document.getElementById('meet-cred--success').style.display = 'block'
+                       addCloseOption()
+                       setTimeout(() => {
+                        window.location.reload()
+                       }, 4000)
+                    } else {
+
+                    }
+                }).catch(err => console.log(err))
+}
+
+function deleteComment(cId) {
+    /*
+        Sends user request to delete an existing comment
+    */
+
+    handler.delete(`comments/${cId}`)
             .then(response => response.json()
                 .then (payload => ({status: response.status, body: payload})
                 )).then (
                 payload => {
                     console.log(payload)
                     if (payload.status === 200) {
-                       
+                       document.getElementById('meet-cred--success').style.display = 'block'
+                       addCloseOption()
+                       setTimeout(() => {
+                        window.location.reload()
+                       }, 4000)
                     } else {
 
                     }
@@ -986,6 +1020,10 @@ function sendVote(qId, vote) {
 }
 
 function showTaggedMeetups() {
+    /*
+        Displays meetups sorted by a selected tag
+    */
+
     let meetupTag = new URLSearchParams(window.location.search).get('tag')
     document.getElementById('tag-title-text').textContent = `${meetupTag} Meetups`
 
@@ -1143,12 +1181,36 @@ function displayComments(commentList) {
     }
 
     commentList.forEach(comment => {
-        let cCard = title.cloneNode(true)
-        let body = cCard.getElementsByClassName('comment-text')[0]
+        let qsCard = title.cloneNode(true)
+        let body = qsCard.getElementsByClassName('comment-text')[0]
+        let editBut = qsCard.getElementsByClassName('edit-q-item')[0]
+        let menuEdit = qsCard.getElementsByClassName('edit-pop--cls')[0]
+        let menuDel = qsCard.getElementsByClassName('delete-pop--cls')[0]
+        let menu = qsCard.getElementsByClassName('pop-items')[0]
+
+        editBut.addEventListener('click', () => {
+
+            if(menu.style.display === 'block') {
+                menu.style.display = 'none'
+            } else {
+                menu.style.display = 'block'
+            }
+        })
+
+        menuDel.addEventListener('click', () => confirmUserOption(deleteComment, comment.id))
+            // Confrim user delete here
+
+
+        menuEdit.addEventListener('click', () => {
+            showInputComment(comment)
+        })
 
         body.textContent = comment.body
-        parent.appendChild(cCard)
-        cCard.style.display = 'block'
+        parent.appendChild(qsCard)
+        qsCard.style.display = 'block'
+        document.body.addEventListener('click', () => {
+            qsCard.getElementsByClassName('pop-items')[0].style.display = 'none'
+        }, true)
         })
 
     document.getElementById('footer-cq').style.position = 'relative'
@@ -1632,4 +1694,68 @@ function showInputQuestion(questionItem) {
     })
     document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'block'
 
+}
+
+let editCommentForm = document.getElementById('meetup-comment--create')
+if(editCommentForm)
+    editCommentForm.addEventListener("submit", updateComment)
+
+function updateComment() {
+    /*
+        Sends PUT request to save edited  user comment.
+    */
+
+     event.preventDefault()
+
+    let commentInput = document.getElementById('meetup-comment--create')
+    let text = commentInput.elements['description'].value
+    let commentId = commentInput.elements['comment-id'].value
+    let successMessage = document.getElementById('meet-cred--success')
+    let errMessage = document.getElementById('meet-cred--warning')
+
+    let data = {
+            body: text
+        }
+
+    handler.put(`comments/${commentId}`, data)
+            .then(response => response.json()
+                .then(payload => ({status: response.status, body: payload})
+                )).then(payload => {
+                console.log(payload)
+                let errMessage = document.getElementById('meet-cred--warning')
+                if(payload.status === 200) {
+                    // Show success
+                    errMessage.style.display = 'none'
+                    successMessage.style.display = 'block'
+                    addCloseOption()
+                    document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
+
+                } else {
+
+                    errMessage.textContent = payload.body.message ? payload.body.message : payload.body.message[0]
+                    errMessage.style.display = 'block'
+
+                    setTimeout(() => {
+                        errMessage.style.display = 'none'
+                    }, 5000)
+                }
+
+            }).catch(err => console.log(err))
+}
+
+function showInputComment(comment) {
+    /*
+        Displays the input field in which the user can edit
+        the selected comment item.
+    */
+
+    let editForm = document.getElementById('meetup-comment--create')
+
+    editForm.elements['description'].value = comment.body
+    editForm.elements['comment-id'].value = comment.id
+
+    document.getElementById('cancel-edit').addEventListener('click', () => {
+        document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
+    })
+    document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'block'
 }
