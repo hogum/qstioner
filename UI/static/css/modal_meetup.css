@@ -10,6 +10,11 @@
     margin-right: 0%;
 }
 
+.edit-qmodal {
+    top: 77%;
+    left: 55%;
+}
+
 .wrapper-sign-in-mod {
     -webkit-transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
       transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
