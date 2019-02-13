@@ -204,7 +204,7 @@ function protectRoutes() {
 
     const protectedRoutes = ['create_meetup.html', 'user_page.html',
                              'admin_page.html', 'tagged_meetups.html',
-                             'community.html']
+                             'community.html', 'meetup_questions.html']
 
     let previous = localStorage.getItem('previous')
     let url = window.location.href
@@ -750,6 +750,7 @@ if (window.location.href.includes('meetup_questions.html')) {
     showRsvpStatus()
     createQuestion()
     postImageToMeetup()
+    editMeetupQuestion()
 }
 
 if (window.location.href.includes('tagged_meetups.html')) {
@@ -917,6 +918,17 @@ function displayQuestions(questionsList) {
         qsCard.getElementsByClassName('down-vote')[0].addEventListener(
             'click', () => sendVote(question.id, 'downvote'))
         qsCard.getElementsByClassName('vote-count')[0].textContent = question.votes
+        let editBut = qsCard.getElementsByClassName('edit-q-item')[0]
+
+        editBut.addEventListener('click', () => {
+            let menu = qsCard.getElementsByClassName('pop-items')[0]
+
+            if(menu.style.display === 'none') {
+                menu.style.display = 'block'
+            } else {
+                menu.style.display = 'none'
+            }
+        })
 
         for (let i = tags.length - 1; i >= 0; i--) {
             let word = 
@@ -1529,8 +1541,18 @@ function confirmUserOption(fun, mId) {
 
 function hideConfirmModal() {
     /*Hides confrimation dialogue on user input*/
+
     let element = document.getElementsByClassName('wrapper-sign-in-mod')[0]
 
     element.style.visibility = 'hidden'
     element.style.opacity = '0'
+}
+
+function editMeetupQuestion() {
+    console.log('edit')
+
+    document.getElementById('edit-ques-button').addEventListener('click', () => {
+    console.log('edit2')
+
+    })
 }
