@@ -561,13 +561,9 @@ input[type=file]:hover {
 ============================= */
 
 .setting {
-    float: right;
     font-size: .8em;
-     -webkit-transition: all .4s ease;
-        -moz-transition: all .4s ease;
-            -ms-transition: all .4s ease;
-                -o-transition: all .4s ease;
-                    transition: all .4s ease;
+    position: absolute;
+    right: .3em;
 }
 
 .pop-items {
@@ -604,6 +600,7 @@ input[type=file]:hover {
 }
 
 #edit-ques-button {
+    user-select: none;
     font-size: .8em;
     padding: 3px;
     border: 1px solid #888;
@@ -616,10 +613,6 @@ input[type=file]:hover {
             -ms-transition: all .4s ease;
                 -o-transition: all .4s ease;
                     transition: all .4s ease;
-}
-
-.setting:hover .pop-items {
-    display: block;
 }
 
 .edit-icon {
