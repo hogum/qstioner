@@ -750,7 +750,6 @@ if (window.location.href.includes('meetup_questions.html')) {
     showRsvpStatus()
     createQuestion()
     postImageToMeetup()
-    editMeetupQuestion()
 }
 
 if (window.location.href.includes('tagged_meetups.html')) {
@@ -1573,22 +1572,26 @@ function hideConfirmModal() {
 }
 
 let editQuestionForm = document.getElementById('meetup-question--create')
-
+console.log(editQuestionForm)
 if(editQuestionForm)
     editQuestionForm.addEventListener("submit", updateQuestion)
 
-function updateQuestion() {
+function updateQuestion(event) {
     /*
         Sends PUT request for update user question
     */
-    let text = document.getElementById('meetup-question--create').elements['description'].value
+    event.preventDefault()
+    
+    let QuestionInput = document.getElementById('meetup-question--create')
+    let text = QuestionInput.elements['description'].value
+    let qId = QuestionInput.elements['question-id'].value
 
     let data = {
             title: text.split(' ').slice(0, 50).join(' '),
             body: text
         }
 
-    handler.put(`questions`, data)
+    handler.put(`questions/${qId}`, data)
             .then(response => response.json()
                 .then(payload => ({status: response.status, body: payload})
                 )).then(payload => {
@@ -1621,6 +1624,7 @@ function showInputQuestion(questionItem) {
     let editForm = document.getElementById('meetup-question--create')
 
     editForm.elements['description'].value = questionItem.body
+    editForm.elements['question-id'].value = questionItem.id
 
     document.getElementById('cancel-edit').addEventListener('click', () => {
         document.getElementsByClassName('wrapper-sign-in')[0].style.display = 'none'
