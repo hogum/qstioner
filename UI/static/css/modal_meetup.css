@@ -15,6 +15,11 @@
     left: 55%;
 }
 
+.edit-cmodal {
+    top: 40%;
+    left: 54.2%;
+}
+
 .wrapper-sign-in-mod {
     -webkit-transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
       transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
@@ -173,6 +178,10 @@
                 -o-transition: all .4s ease;
                    transition: all .4s ease;
     font-weight: 800;
+}
+
+.comment-edit-modal {
+    top: 40%;
 }
 
 #sign-in-modal-button-no:hover {

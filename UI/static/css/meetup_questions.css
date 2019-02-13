@@ -592,7 +592,7 @@ input[type=file]:hover {
 }
 
 .pop-items > div {
-    padding: 0 3px;
+    padding: 3px 3px;
 }
 
 .pop-items > div:hover {
