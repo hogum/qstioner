@@ -407,7 +407,7 @@ New Question
     border-radius: 2px;
     font-size: 11px;
     color: #fff;
-    padding: 0 8px;
+    padding: 3px 8px;
     background-color: #0B82C9;
     -webkit-transition: all .4s ease;
         -moz-transition: all .4s ease;
@@ -535,12 +535,33 @@ input[type=file]:hover {
 }
 
 .mmtags {
-    display: none;
     margin: 2px;
+    display: none;
 }
 
 .inheritq {
     display: none;
+}
+
+#tag-delete-button {
+    color: #000;
+    background-color: #C5C5C5;
+    border: 1px solid #C5C5C5;
+    border-left: none;
+    border-radius: 3px;
+    padding: 0;
+    padding-right: 3px;
+    padding-left: 2px;
+    font-size: 11.7px;
+    display: none;
+}
+
+#tag-delete-button:hover {
+    cursor: pointer;
+}
+
+.mtag-cont:hover > #tag-delete-button {
+    display: inline-block;
 }
 
 #no-questions-records {
