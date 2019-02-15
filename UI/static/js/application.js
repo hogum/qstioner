@@ -1,5 +1,5 @@
- let path  = 'http://localhost:5000/api/v1/';
- // const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
+ // let path  = 'http://localhost:5000/api/v1/';
+ const path = 'https://qstionerv2-api-heroku.herokuapp.com/api/v1/';
 
 function showNav() {
     // Toggles the nav bar button for responsiveness.
@@ -344,6 +344,7 @@ function registerUser(event) {
                     localStorage.setItem("currentUser", user)
 
                     let isAdmin = payload.body.data[0].isadmin
+                    handler.saveItem('isAdmin', isAdmin)
 
                     let userPage = isAdmin ? 'admin_page.html' : 'user_page.html'
 
@@ -412,6 +413,7 @@ function signIn(event) {
                     localStorage.setItem("currentUser", user)
 
                     let isAdmin = payload.body.data[0].isadmin
+                    handler.saveItem('isadmin', isAdmin)
 
                     let userPage = isAdmin ? 'admin_page.html' : 'user_page.html'
 
@@ -831,7 +833,6 @@ function updateTag(tag) {
     let presentTags = document.getElementsByClassName('mmtags')
 
     for (let i = presentTags.length - 1; i >= 0; i--) {
-        console.log(presentTags[i].textContent)
         if (presentTags[i].textContent === tag)
             return
     }
@@ -855,12 +856,29 @@ function displaySingleMeetup(meetupItem) {
     document.getElementById('submit-rsvp').addEventListener('click', () => sendRSVP(meetupItem.id))
 
     meetupItem.tags.forEach(tag => {
-        let tagELem = document.getElementById('mtag-inherit').cloneNode(true)
+        let tagContainner = document.getElementsByClassName('mtag-cont')[0].cloneNode(true)
+        let tagELem = tagContainner.getElementsByClassName('mmtags inherited')[0]
+        let tagDelete = tagContainner.getElementsByClassName('tag-cross')[0]
     
         tagELem.textContent = tag
         tagELem.href = `tagged_meetups.html?tag=${tag}`
-        parentTags.appendChild(tagELem)
+        parentTags.appendChild(tagContainner)
         tagELem.style.display = 'inline-block'
+
+        tagDelete.addEventListener('click', () => {
+            handler.delete(`meetup/${meetupItem.id}/${tag}`)
+             .then(response => response.json()
+                .then (payload => ({status: response.status, body: payload})
+                )).then (
+                payload => {
+                    if (payload.status === 200) {
+                       // Do nothing :)
+                       tagELem.style.display = 'none'
+                    } else {
+                        // Do more nothing
+                    }
+                }).catch(err => console.log(err))
+        })
         })
     if (meetupItem.images) {
         meetupItem.images.forEach(image => {
@@ -909,9 +927,11 @@ function displayQuestions(questionsList) {
         let qsCard = title.cloneNode(true)
         let body = qsCard.getElementsByClassName('question-body-cl')[0]
         let tags = qsCard.getElementsByClassName('qtags')
+        let seeMore = qsCard.getElementsByClassName('after-p')[0]
 
         body.textContent = question.body.slice(0, 220) + '...'
         body.href = `comment_question.html?question=${question.id}&title=${question.title}`
+        seeMore.href = `comment_question.html?question=${question.id}&title=${question.title}`
         qsCard.getElementsByClassName('up-vote')[0].addEventListener(
             'click', () => sendVote(question.id, 'upvote'))
         qsCard.getElementsByClassName('down-vote')[0].addEventListener(
