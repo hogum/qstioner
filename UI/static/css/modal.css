@@ -25,7 +25,8 @@
 }
 
 .wrapper-sign-in-mod {
-    display: none;
+    opacity: 0;
+    visibility: hidden;
     position: absolute;
     left: 40%;
     top: 60%;
@@ -36,6 +37,11 @@
     margin-right: 15%;
     align-content: center;
     z-index: 90901;
+    -webkit-transition: opacity 800ms ease-in-out, visibility 800ms ease-in-out;
+      transition: opacity 800ms ease-in-out, visibility 800ms ease-in-out;
+       -moz-transition: opacity 800ms ease-in-out, visibility 800ms ease-in-out;
+            -ms-transition: opacity 800ms ease-in-out, visibility 800ms ease-in-out;
+                -o-transition: opacity 800ms ease-in-out, visibility 800ms ease-in-out;
 }
 
 
@@ -91,7 +97,7 @@ input#email-mod {
 .sign-button:hover {
     background-color: #168000;
     cursor: pointer;
-    border-color: #147000;
+    border-color: #148000;
 
 }
 

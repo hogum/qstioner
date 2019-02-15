@@ -1,0 +1,209 @@
+.wrapper-sign-in {
+    display: none;
+    box-sizing: border-box;
+    justify-content: center;
+    width: 60%;
+    left: 60%;
+    top: 25%;
+    position: absolute;
+    margin-left: 0%;
+    margin-right: 0%;
+}
+
+.edit-qmodal {
+    top: 77%;
+    left: 55%;
+}
+
+.edit-cmodal {
+    top: 40%;
+    left: 54.2%;
+}
+
+.wrapper-sign-in-mod {
+    -webkit-transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+      transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+       -moz-transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+            -ms-transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+                -o-transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+}
+
+#container-sign-in {
+    left: -50%;
+    top: -50%;
+    position: absolute;
+    z-index: 199;
+    border-radius: 5px 5px 4px 0;
+    margin-bottom: 4em;
+}
+
+#meet-cred--warning {
+    padding-top: 5px;
+    text-align: center;
+    font-weight: 450;
+    color: #FF2D00;
+    background-color: #fff;
+    border: 1px solid #FF0000;
+}
+
+#meet-cred--warning, #meet-cred--success {
+    padding-bottom: 5px;
+    border-radius: 5px;
+    font-size: .86em;
+    display: none;
+}
+
+#bottom {
+}
+
+#sign-up-button, #cancel-edit {
+   display: inline-block;
+}
+
+#cancel-edit {
+    float: right;
+    margin-top: 1.52em;
+    border: 1px solid #888;
+    border-radius: 4px;
+    padding: 3px 9px;
+    color: #FF3000;
+    font-weight: 600;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                   transition: all .4s ease;
+    margin-right: 3em;
+    user-select: none;
+}
+
+#cancel-edit:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: #C52703;
+    border-color: #666;
+}
+
+#meet-cred--success {
+    padding: 10px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                   transition: all .7s ease;
+   border-radius: 5px;
+   background-color: #fff;
+   color: #138F08;
+   border: 1px solid #06FF00;
+   font-size: 12px;
+   text-align: center;
+   padding: 5px 0;
+   width: 99%;
+   display: none;
+}
+
+#sign-up-button {
+    color: #00369C;
+    width: 5em;
+    background-color: #fff;
+    padding: 7px 10px;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                   transition: all .4s ease;
+    margin-left: 3em;
+}
+
+#sign-up-button:hover {
+    color: #03225D;
+    border: 1px solid #0048A2;
+}
+#bottom-mod-confirm {
+    
+}
+
+.sign-button-confirm {
+    width: 5em;
+    text-align: center;
+    margin-left: 1em;
+    margin-right: 1em;
+    border-radius: 4px;
+}
+
+.sign-button-confirm:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+    .sign-button-confirm {
+        width: 5em;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+#container-sign-in-mod {
+    height: 12.5em;
+    border: 1px solid #FF8C00;
+}
+
+#sign-in-modal-button-no, #sign-in-modal-button-yes {
+    display: inline-block;
+}
+
+
+#sign-in-modal-button-no {
+    float: right;
+    border: 1px solid #07AC13;
+    color: #555;
+    background-color: #fff;
+    padding: 7px 10px;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                   transition: all .4s ease;
+    font-weight: 900;
+}
+
+#sign-in-modal-button-yes {
+    border: 1px solid #E5A70B;
+    color: #AC8E07;
+    background-color: #fff;
+    padding: 7px 10px;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                   transition: all .4s ease;
+    font-weight: 800;
+}
+
+.comment-edit-modal {
+    top: 40%;
+}
+
+#sign-in-modal-button-no:hover {
+    color: #07AC13;
+    border-color: #666;
+}
+
+#sign-in-modal-button-yes:hover {
+    color: #B23604;
+}
+
+
+footer {
+    position:  absolute;
+    bottom: -50em;
+}
+
+@media screen and (max-width: 530px) {
+    #sign-up-button {
+        margin-left: 0;
+    }
+    #cancel-edit {
+        margin-right: 0;
+    }
+}

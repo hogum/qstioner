@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 /*===================
     1. Override
 ===================== */
 
 .container-admin {
- margin-top: 0;   
+ margin-top: 0;
+ font-family: 'Open Sans', Lato, Helvetica, Arial, sans-serif;
+  
 }
 
 
@@ -33,11 +36,11 @@
 }
 
 .delete-ups p {
-    float: left;
+   display: inline-block;
     padding: 10px 30px;
 }
 
-.delete-ups p:last-child {
+.delete-ups p:nth-child(3) {
     float: right;
 }
 
@@ -46,14 +49,15 @@
     color: #544;
 }
 
-.delete-ups p:last-child a {
+#del-button {
     border: 1.2px solid #FF5733;
     border-radius: 4px;
     font-weight: 900;
     background-color: #D70000;
     color: #ff8C00;
     color: #fff;
-    padding: 7px 14px;
+    font-size: 12px;
+    padding: 6px 13px;
     -webkit-transition: all .7s ease;
         -moz-transition: all .7s ease;
             -ms-transition: all .7s ease;
@@ -61,11 +65,47 @@
                     transition: all .7s ease;
 }
 
-.delete-ups p:last-child a:hover {
+#del-button:hover {
     background-color: #79D534;
     background-color: #F82B2B;
     border-color: #000;
     color: #fff;
+    cursor: pointer;
+}
+
+.edit-meetup-item {
+    color: #fff;
+    background-color: #33A4FF;
+    border: 1px solid #33A4FF;
+    padding: 3px 8.6px;
+    margin-left: 1em;
+    font-size: 12px;
+    border-radius: 3.6px;
+    padding: 6px 15px;
+    -webkit-transition: all .7s ease;
+        -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+                -o-transition: all .7s ease;
+                    transition: all .7s ease;
+}
+
+.edit-meetup-item:hover {
+    cursor: pointer;
+    background-color: #1978B9;
+    border-color: #333;
+}
+
+.descr--meet {
+    float: none;
+    border: 1px solid #fff;
+    font-size: 11px;
+    width: 98%;
+    margin-top: 0;
+    margin-left: 1%;
+    margin-right: 1%;
+    border-radius: 4px;
+    margin-bottom: .1em;
+    background-color: #EEF3F6;
 }
 
 @media screen and (max-width: 767px) {
@@ -78,6 +118,27 @@
     .delete-ups p {
         font-size: 3vw;
     }
+}
+
+@media screen and (max-width: 428px) {
+    .del-text-display, .edit-meetup-item, #del-button {
+        float: none;
+        width: 100%;
+    }
+    #del-button {
+        padding: 3.3px 6px;
+    }
+     .edit-meetup-item {
+        padding: 3.3px 9px;
+     }
+}
+
+#edit-meetup-success-close {
+    position: absolute;
+    right: 1em;
+    font-size: 18px;
+    color: #111;
+    cursor: pointer;
 }
 
 footer {

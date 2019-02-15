@@ -7,7 +7,11 @@
     <title>Questioner Meet-up</title>
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="static/css/admin_dashboard.css">
+    <link rel="stylesheet" href="static/css/edit_meetups.css">
+    <link rel="stylesheet" href="static/css/new_meetup.css">
     <link rel="stylesheet" href="static/css/meetup_questions.css">
+    <link rel="stylesheet" href="static/css/modal.css">
+    <link rel="stylesheet" href="static/css/modal_meetup.css">
     <link rel="shortcut icon" type="image/png" href="static/images/fav.jpeg"/>
 </head>
 <body>
@@ -18,11 +22,40 @@
                     <p class="meet-link">&#47; </p>
                     <p><a href="trending.html">Meet-ups</a></p>
                     <p class="meet-link">&#47; </p>
-                    <p><a href="meetup_questions.html">Questions </a></p>
+                    <p><a href="meetup_questions.html">Questions</a></p>
                 </div>
         </div>
+        <div class="wrapper-sign-in-mod confirm-modal">
+            <div id="container-sign-in-mod">
+                <div id="close-mod"><span id="mod--close-button"></span></div>
+                <div id="action-mod">Are you sure you want to perform this action?</div>
+                <form action="" method="post" id="signin-form-modal">
+                    <label for="email"></label>
+                    <input type="hidden" id="email-mod" name="email" required="required">
+                    <div id="bottom-mod-confirm">
+                        <input class="sign-button-confirm" id="sign-in-modal-button-yes" value="Sure" readonly>
+                        <input class="sign-button-confirm" id="sign-in-modal-button-no" value="Cancel" readonly>
+                        
+                    </div>
+                </form>
+            </div>
+        </div><!--modal-->
         <div class="action-sign">
-            <h4><span class="meet-up-title">Meet-up Spam</span></h4>
+            <div class="wrapper-sign-in edit-qmodal">
+            <div id="container-sign-in">       
+                <form action="" method="post" id="meetup-question--create">
+                    <p id="meet-cred--warning"> Wrong email or Password</p>
+                    <p id="meetup-detail-error"> Err illegal detail!</p>
+                    <input type="hidden" name="question-id" value="">
+                    <label for="description"></label>
+                    <textarea type="text" id="meet-description" name="description" minlength="20" required="required" 
+                    title="Tell everyone what this meetup's about"></textarea>
+                        <input class="sign-button" id="sign-up-button" type="submit" value="Save">           
+                        <p class="bottom-right" id="cancel-edit">Cancel</p>
+                </div>
+                </form>
+            </div><!-- /wrapper-sign-in-->
+            <h4><span class="meet-up-title">Meet-up</span></h4>
         </div>
          <div id="meetup-images">
             <p id="no-images">No images for this meetup</p>
@@ -62,10 +95,13 @@
             <p class="current-rs">Current RSVP:</p>
             <p id="current-rsvp">None</p>
         </div>
+        <p id="meet-cred--success">
+                       Your changes have been saved
+                    <span id="edit-meetup-success-close">&times;</span></p>
         <div class="container-admin">
             <div id="mtags">
                 <div id="tags-buttons">    
-                    <span> <a id="mtag-inherit" class="mmtags inherited" href="#">tag</a></span>
+                    <span class="mtag-cont"><a id="mtag-inherit" class="mmtags inherited" href="#">tag</a><span id="tag-delete-button" class="tag-cross">&times;</span></span>
                     <span class="mmtags">tag</span>
                     <span class="mmtags">tag</span>
                     <span class="mmtags">tag</span>
@@ -81,10 +117,22 @@
                 <div id="no-questions-records">
                     <p>This meetup has no Questions to display</p>
                 </div>
-                
                 <div class="admin-cards inheritq" id="question-card-inherit">
                         <div class="question-card-card qinherit">
                             <div class="qcard-text">
+                                <div class="setting">
+                                    <div id="edit-ques-button" class="edit-q-item">
+                                        edit✎
+                                    </div>
+                                    <div class="pop-items">
+                                        <div id="edit-pop" class="edit-pop--cls">
+                                            edit
+                                        </div>
+                                        <div id="delete-pop" class="delete-pop--cls">
+                                            delete
+                                        </div>
+                                    </div>
+                                </div>
                                 <p><a id="question-body" class="question-body-cl" href="comment_question.html">Here is a question about asking questions. How do you start a question about asking questions. What's the limit of the question no longer being a question to a question and how to make a question to a question a question... <a class="after-p" href="#"></a></a></p>
                             </div>
                             <div class="qicons">
@@ -147,7 +195,7 @@
 <footer>
     <div class="footer-text">
         &#169; <span class="year">2019</span>
-        <p>We just discovered <a href="#">what's sweeter than cookies.</a> Come share with us</p>
+        <p>We just discovered <a href="#">what's sweeter than cookies.</a>Come share with us</p>
     </div>
 </footer>
 </html>

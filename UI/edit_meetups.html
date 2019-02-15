@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="static/css/admin_dashboard.css">
     <link rel="stylesheet" href="static/css/edit_meetups.css">
-    <link rel="shortcut icon" type="image/png" href="static/images/fav.jpeg"/>
+    <link rel="stylesheet" href="static/css/new_meetup.css">
+    <link rel="stylesheet" href="static/css/modal.css">
+    <link rel="stylesheet" href="static/css/modal_meetup.css">
+    <link rel="shortcut icon" type="imagess/png" href="static/images/fav.jpeg"/>
 </head>
 <body>
     <div class="wrapper">
@@ -17,7 +20,21 @@
                 <p><a href="admin_page.html">admin profile</a></p>
             </div>
         </div>
-
+        <div class="wrapper-sign-in-mod confirm-modal">
+            <div id="container-sign-in-mod">
+                <div id="close-mod"><span id="mod--close-button"></span></div>
+                <div id="action-mod">Are you sure you want to perform this action?</div>
+                <form action="" method="post" id="signin-form-modal">
+                    <label for="email"></label>
+                    <input type="hidden" id="email-mod" name="email" required="required">
+                    <div id="bottom-mod-confirm">
+                        <input class="sign-button-confirm" id="sign-in-modal-button-yes" value="Sure" readonly>
+                        <input class="sign-button-confirm" id="sign-in-modal-button-no" value="Cancel" readonly>
+                        
+                    </div>
+                </form>
+            </div>
+        </div><!--modal-->
         <header id="header" class="header-nav">
               <ul>
                 <div class="qlogo">
@@ -42,14 +59,49 @@
                 </div>    
             </ul>
         </header><!-- /header -->
-
+        <p id="meet-cred--success">
+                       Your changes have been saved
+                    <span id="edit-meetup-success-close">&times;</span></p>
+          <div class="wrapper-sign-in">
+            <div id="container-sign-in">       
+                <form action="" method="post" id="meetup-edit--create">
+                    <p id="meet-cred--warning"> Wrong email or Password</p>
+                    <p id="meetup-detail-error"> Err illegal detail!</p>
+                    <label for="name">Title:</label>
+                    <input type="text" id="name" name="name" minlength="4" required="required" title="Call your meet-up something cool">
+                    <label for="date">Date of Event:</label>
+                    <input type="date" id="email" name="date" required="required" 
+                    title="And what's your lucky day?">
+                    <label for="time">Time of Event:</label>
+                    <input type="time" id="username" name="time" required="required" 
+                    title="And time?">
+                    <label for="image"></label>
+                    <input type="hidden" class="imagein" id="username" name="image" placeholder="Add an event-image" title="Having a picture is always cool" accept="image/*">
+                    <label for="description">Description of Meetup:</label>
+                    <textarea type="text" id="meet-description" name="description" minlength="20" required="required" 
+                    title="Tell everyone what this meetup's about"></textarea>
+                    <label for="location">Location of Meet-up:</label>
+                    <input type="text" id="pass" name="location" required="required" placeholder="e.g Kivuli gardens, Nairobi">
+                    <label for="tag"></label>
+                    <input type="hidden" id="confirm-pass" name="tag" required="required" pattern="^[A-Za-z0-9_ ?/.,':;]+$" title="Separate tags with commas e.g Soap, Health, Fast-cars" placeholder="Use commas e.g Soap, Health">
+                    <div id="bottom">
+                        <input class="sign-button" id="sign-up-button" type="submit" value="Save">           
+                        <p class="bottom-right" id="cancel-edit">Cancel</p>
+                    </div>
+                </form>
+            </div><!-- /wrapper-sign-in-->
+        </div>
         <div class="container-admin">
             <div class="call-action-delete">
                 <h4 class="">Careful, Once it's done, it's for good</h4>
             </div>
             <div class="delete-ups">
-                    <p class="del-text-display">Meet-Up Spam</p>
-                    <p><a href="#" id="#del-button" title="Delete this item" class="del-fl">Delete</a></p>
+                    <p class="del-text-display"></p>
+                    <p><span class="edit-meetup-item">edit</span></p>
+                    <p><span id="del-button" title="Delete this item" class="del-fl">Delete</span></p>
+                    <p class="descr--meet">
+                        
+                    </p>
             </div>
         </div>
 

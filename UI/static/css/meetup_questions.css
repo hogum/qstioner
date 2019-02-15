@@ -407,7 +407,7 @@ New Question
     border-radius: 2px;
     font-size: 11px;
     color: #fff;
-    padding: 0 8px;
+    padding: 3px 8px;
     background-color: #0B82C9;
     -webkit-transition: all .4s ease;
         -moz-transition: all .4s ease;
@@ -535,12 +535,33 @@ input[type=file]:hover {
 }
 
 .mmtags {
-    display: none;
     margin: 2px;
+    display: none;
 }
 
 .inheritq {
     display: none;
+}
+
+#tag-delete-button {
+    color: #000;
+    background-color: #C5C5C5;
+    border: 1px solid #C5C5C5;
+    border-left: none;
+    border-radius: 3px;
+    padding: 0;
+    padding-right: 3px;
+    padding-left: 2px;
+    font-size: 11.7px;
+    display: none;
+}
+
+#tag-delete-button:hover {
+    cursor: pointer;
+}
+
+.mtag-cont:hover > #tag-delete-button {
+    display: inline-block;
 }
 
 #no-questions-records {
@@ -553,4 +574,75 @@ input[type=file]:hover {
 ::-webkit-scrollbar {
     width: 0px;  /* clear scrollbar space */
     background: transparent;  /* just make scrollbar invisible */
+}
+
+/*
+===========================
+    Edit Question
+============================= */
+
+.setting {
+    font-size: .8em;
+    position: absolute;
+    right: .3em;
+}
+
+.pop-items {
+    display: none;
+    border: 1px solid #888;
+    background-color: #fff;
+    color: #222;
+    margin-top: 1.6px;
+    border-radius: 3px;
+    text-align: left;
+}
+
+.pop-items div:nth-child(2) {
+    border-top: 1px solid #888;
+    background-color: #FF0000;
+    color: #fff;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                    transition: all .4s ease;
+}
+
+.pop-items div:nth-child(2):hover {
+    background-color: #C31111;
+}
+
+.pop-items > div {
+    padding: 3px 3px;
+}
+
+.pop-items > div:hover {
+    cursor: pointer;
+}
+
+#edit-ques-button {
+    user-select: none;
+    font-size: .8em;
+    padding: 3px;
+    border: 1px solid #888;
+    width: 3.5em;
+    padding: 0 4px;
+    text-align: center;
+    border-radius: 3px;
+    -webkit-transition: all .4s ease;
+        -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                    transition: all .4s ease;
+}
+
+.edit-icon {
+    font-size: 1.1em;
+}
+
+#edit-ques-button:hover {
+    border-color: #444;
+    cursor: pointer;
+    color: #3341FF;
+    background-color: #fff;
 }
